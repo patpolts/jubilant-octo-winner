@@ -1,1 +1,1 @@
-echo "web: vendor/bin/heroku-php-nginx public/" > Procfile
+web: vendor/bin/heroku-php-nginx public/

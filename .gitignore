@@ -13,5 +13,3 @@ npm-debug.log
 yarn-error.log
 
 composer.phar
-composer.lock
-package.lock

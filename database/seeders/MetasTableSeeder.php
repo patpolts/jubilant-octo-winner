@@ -21,15 +21,15 @@ class MetasTableSeeder extends Seeder
         DB::table('metas')->truncate();
         $faker = Faker::create();
 
-        for ($i=0; $i < 5; $i++) { 
+        for ($i=0; $i < 10; $i++) { 
             DB::table('metas')->insert([
             'id_rel' => $faker->randomNumber(),
             'titulo' => $faker->sentence,
             'descricao' => $faker->paragraph,
             'justificativa' => $faker->paragraph,
-            'valor_inicial' => $faker->numberBetween(0,20),
-            'valor_atual' => $faker->numberBetween(20,200),
-            'valor_final' => $faker->numberBetween(200,2000),
+            'valor_inicial' => $faker->numberBetween(0,100),
+            'valor_atual' => $faker->numberBetween(0,100),
+            'valor_final' => $faker->numberBetween(0,10),
             'regras' => json_encode([$i => ["values" => $faker->words(3)]]),
             'types' => json_encode([$i => ["values" => $faker->words(2)]]),
             'categorias' => json_encode([$i => ["values" => $faker->words(4)]]),

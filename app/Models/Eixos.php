@@ -21,22 +21,20 @@ class Eixos extends Model
     protected $fillable = [
         'titulo',
         'descricao',
-        'andamento',
+        'codigo',
+        'obs',
+        'logs',
     ];
 
     /**
      * 
      */
     protected $atributes = [
-        'id_rel' => null,
         'active' => true,
     ];
 
     protected $casts = [
-        'regras' => 'array',
-        'types' => 'array',
-        'categorias' => 'array',
-        'tags' => 'array',
+        'logs' => 'array',
     ];
     
     protected $viewTable = [

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MetasController;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,8 +16,12 @@ use App\Http\Controllers\Controller;
 |
 */
 $metasCrtl = MetasController::class;
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function (Auth $user, $view = null) {
+    if($user::check()){
+        return view('dashboard');
+    }else{
+        return view('auth.login');
+    }
 });
 
 Route::get('/dashboard', function () {

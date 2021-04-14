@@ -19,15 +19,16 @@ class Indicadores extends Model
      * @var array
      */
     protected $fillable = [
-        'rels',
-        'titulo',
+        'indicador_id',
+        'nome',
         'descricao',
         'justificativa',
-        'ano_inicial',
-        'ano_final',
-        'status_atual',
-        'status_final',
-        'status',
+        'valor_inicial',
+        'valor_atual',
+        'valor_final',
+        'data_registro',
+        'logs',
+        'active',
     ];
     
     protected $atributes = [
@@ -35,10 +36,8 @@ class Indicadores extends Model
     ];
 
     protected $casts = [
-        'rels' => 'array',
-        'types' => 'array',
-        'categorias' => 'array',
-        'tags' => 'array',
+        'logs' => 'array',
+        'data_registro' => 'datetime',
     ];
     
     public function adminViewData()

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\User as User;
 
-class Ouse extends Model
+class GrandesTemas extends Model
 {
     use HasFactory,Notifiable;
 
@@ -19,13 +19,17 @@ class Ouse extends Model
      * @var array
      */
     protected $fillable = [
-        'codigo_interno',
+        'acao_id',
+        'objetivo_id',
         'titulo',
-        'descricao',
-        'indicadores',
+        'layout',
+        'logs',
+        'active',
     ];
     
-    
+    protected $cast = [
+        'logs' => 'array',
+    ];
     public function adminViewData()
     {
         $arr = [];

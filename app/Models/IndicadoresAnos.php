@@ -8,9 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\User as User;
 
-class Acao extends Model
+class IndicadoresAnos extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory,Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -18,32 +19,25 @@ class Acao extends Model
      * @var array
      */
     protected $fillable = [
-        'titulo',
-        'descricao',
-        'justificativa',
-        'ator',
+        'indicador_id',
+        'meta_id',
         'ano',
-        'andamento',
-        'regras',
-        'types',
-        'categorias',
-        'tags',
+        'justificativa',
+        'valor',
+        'justificativa',
+        'valor_final',
+        'data_registro',
+        'logs',
         'active',
     ];
-
-    /**
-     * 
-     */
+    
     protected $atributes = [
-        'id_rel' => null,
         'active' => true,
     ];
 
     protected $casts = [
-        'regras' => 'array',
-        'types' => 'array',
-        'categorias' => 'array',
-        'tags' => 'array',
+        'logs' => 'array',
+        'data_registro' => 'datetime',
     ];
     
     public function adminViewData()

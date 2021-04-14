@@ -1,22 +1,13 @@
+{{ 
+    $title = $results["title"];
+    $grandetema = $results;
+]}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __($title) }}
         </h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item" ><a href="/metas">Metas</a></li>
-                <li class="breadcrumb-item " aria-current="page"><a href="/eixos">Eixos</a></li>
-                <li class="breadcrumb-item"><a href="/ouse">Ouse</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="/grandetema">Grande Tema</a></li>
-                <li class="breadcrumb-item " ><a href="/acao">Ação</a></li>
-                <li class="breadcrumb-item " ><a href="/indicadores">Indicadores</a></li>
-                <li class="breadcrumb-item " ><a href="#">Categorias</a></li>
-                <li class="breadcrumb-item " ><a href="#">Tags</a></li>
-                <li class="breadcrumb-item " ><a href="#">Permissões</a></li>
-                <li class="breadcrumb-item " ><a href="#">Usuarios</a></li>
-            </ol>
-        </nav>
+       @include('components.navbar.admin');
     </x-slot>
 
     <div class="py-12">
@@ -36,7 +27,6 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Titulo</th>
-                            <th scope="col">Descrição</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -45,7 +35,6 @@
                                 <tr>
                                     <th scope="row">{{$acao[$i]['id']}}</th>
                                     <td>{{$grandetema[$i]['titulo']}}</td>
-                                    <td>{{$grandetema[$i]['descricao']}}</td>
                                 </tr>
                                 @endfor
                               @else

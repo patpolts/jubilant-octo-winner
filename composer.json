@@ -60,7 +60,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "platform": {
-            "php" : "^7.3|^8.0",
+            "php" : "8.0",
             "node": "14.16",
             "npm" : "7.9"
         }

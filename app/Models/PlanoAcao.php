@@ -8,10 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\User as User;
 
-class GrandeTema extends Model
+class PlanoAcao extends Model
 {
-    use HasFactory,Notifiable;
-
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,12 +18,28 @@ class GrandeTema extends Model
      * @var array
      */
     protected $fillable = [
-        'id_rel',
-        'titulo',
+        'eixo_id',
+        'objetivo_id',
+        'justificativa',
+        'nome',
         'descricao',
-        'status',
+        'ator',
+        'desempenho',
+        'logs',
+        'active',
     ];
-    
+
+    /**
+     * 
+     */
+    protected $atributes = [
+        'id_rel' => null,
+        'active' => true,
+    ];
+
+    protected $casts = [
+        'logs' => 'array',
+    ];
     
     public function adminViewData()
     {

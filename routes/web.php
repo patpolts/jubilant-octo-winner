@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MetasController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,10 +16,9 @@ use App\Http\Controllers\Controller;
 | contains the "web" middleware group. Now create something great!
 |
 */
-$metasCrtl = MetasController::class;
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [HomeController::class,'index']);
+Route::get('sobre', [HomeController::class,'sobre']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

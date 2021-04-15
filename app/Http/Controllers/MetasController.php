@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Indicadores;
 use App\Models\User as User;
 use App\Models\Metas as Metas;
 use App\Providers\RouteServiceProvider;
@@ -9,6 +10,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -37,12 +39,29 @@ class MetasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function view()
-    {
-        return view('admin.metas', [
-            'title' => 'Metas',
-            'metas' => Metas::get()
-        ]);
+    
+    public $contentView = array();
+
+        public function getById_indicadores($id)
+        {
+            return DB::table('indicadores')->where('id','=',$id)->get();
+        }
+
+    public function view(Metas $model) {
+        $dataMetas = $model::get();
+        $results = [];
+        foreach ($dataMetas as $value) {
+            $results =  array(
+                "metas" => $value, 
+                "indicadores" => parent::getById_indicadores($value['indicador_id']));
+        }
+        
+        $this->contentView["data"] = array(
+            "title" => "Metas",
+            "results" => $results,
+        );
+        $this->contentView["header_title"] = 'Metas (view) ';
+        return view('admin.metas', $this->contentView);
     }
 
     /**

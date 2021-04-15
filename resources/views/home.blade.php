@@ -140,7 +140,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <div class="tab-content">
+                        <div class="tab-content" style="display: none">
                             @foreach ($navmenu as $key => $mn )
                                 <div class="tab-pane {{$mn['item_class']}}" id="{{$mn['tab']}}" role="{{$mn['role']}}" aria-labelledby="{{$mn['tab']}}-tab">
                                     <div class="card">

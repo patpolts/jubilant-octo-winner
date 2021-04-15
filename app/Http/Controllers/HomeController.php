@@ -50,7 +50,7 @@ class HomeController extends BaseController
                     "link" => $request->getUri(),
                     "tab" => "home",
                     "role" => "presentation",
-                    "class" => "nav-item",
+                    "class" => "nav-item ",
                     "item_class" => "active"
                     ),
                 1 => array(
@@ -91,19 +91,19 @@ class HomeController extends BaseController
             "navmenu" => array(
                 0 => array(
                     "title" => "início",
-                    "link" => $request->getUri(),
+                    "link" => getenv('APP_URL'),
                     "tab" => "home",
                     "role" => "presentation",
                     "class" => "nav-item",
-                    "item_class" => "active"
+                    "item_class" => "border-0"
                     ),
                 1 => array(
                     "title" => "sobre o pdi",
-                    "link" => $request->getUri().'sobre',
+                    "link" => '',
                     "tab" => "sobre",
                     "role" => "presentation",
                     "class" => "nav-item",
-                    "item_class" => ""
+                    "item_class" => "active border-0"
                     ),
                 2 => array(
                     "title" => "contato",
@@ -111,7 +111,7 @@ class HomeController extends BaseController
                     "tab" => "contato",
                     "role" => "presentation",
                     "class" => "nav-item",
-                    "item_class" => ""
+                    "item_class" => "border-0"
                     )
             ),
             "data" => array(

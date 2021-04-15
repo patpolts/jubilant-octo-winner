@@ -82,19 +82,30 @@ header{
     min-height: 140px;
 }
 .box-filtros .content-filters{
-    padding: 1% 0px;
+    padding: 2% 0px;
+}
+.box-filtros .content-filters .row:first-child{
+    margin-bottom: 2%;
 }
 .box-filtros .content-filters select{
     width: 70%;
-    display: inline-flex;
+    float: left;
     background-color: #ccc;
     color: #eee;
+    height: 40px;
+    font-size: 1em;
+    outline: none;
+    margin: 0px !important;
 
 }
 .box-filtros .content-filters button{
-    display: inline-flex;
+    float: left;
     background-color: #ccc;
     color: #eee;
+    border-color: #ccc;
+    height: 40px;
+    font-size: .9em;
+    margin: 0px 0px 0px 1%;
 }
 .card{
     text-align: left;
@@ -127,25 +138,32 @@ h1{
     color: #2F638B;
     text-align: left;
 }
-.sobre .card{
+.content-sobre{
     background-color: #f2f2f2;
+    padding: 2% 0px;
+}
+.content-sobre .container{
+    border-color: #ccc;
+}
+.content-sobre .card{
+    background-color: #fff;
     padding: 2%;
     margin: 0px auto 5% auto;
 }
 
-.sobre .card select{
-    width: 80%;
+.content-sobre .card select{
+    width: 100%;
     display: inline-flex;
     background-color: #ccc;
-    color: #eee;
+    color: #2F638B;
     height: 40px;
     font-size: 1em;
 
 }
-.sobre .card span{
+.content-sobre .card span{
     display: inline-flex;
 }
-.sobre .btn-group button{
+.content-sobre .btn-group button{
     width: 30%;
     display: inline-flex;
 }

@@ -44,10 +44,6 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
             "@php artisan clear:compiled"
-        ],
-        "post-install-cmd": [
-            "npm run prod"
-            
         ]
     },
     "extra": {

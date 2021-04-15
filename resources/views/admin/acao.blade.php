@@ -1,22 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __($title) }}
+            {{ __($data["title"]) }}
         </h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item" ><a href="/metas">Metas</a></li>
-                <li class="breadcrumb-item "><a href="/eixos">Eixos</a></li>
-                <li class="breadcrumb-item"><a href="#">Ouse</a></li>
-                <li class="breadcrumb-item "><a href="#">Grande Tema</a></li>
-                <li class="breadcrumb-item " aria-current="page"><a href="#">Ação</a></li>
-                <li class="breadcrumb-item " ><a href="/indicadores">Indicadores</a></li>
-                <li class="breadcrumb-item " ><a href="#">Categorias</a></li>
-                <li class="breadcrumb-item " ><a href="#">Tags</a></li>
-                <li class="breadcrumb-item " ><a href="#">Permissões</a></li>
-                <li class="breadcrumb-item " ><a href="#">Usuarios</a></li>
-            </ol>
-        </nav>
     </x-slot>
 
     <div class="py-12">
@@ -35,25 +21,29 @@
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Descrição</th>
-                            <th scope="col">Justificativa</th>
-                            <th scope="col">Ator</th>
-                            <th scope="col">Ano</th>
-                            <th scope="col">Andamento</th>
+                            <th scope="col">nome</th>
+                            <th scope="col">descrição</th>
+                            <th scope="col">ator</th>
+                            <th scope="col">eixo</th>
+                            <th scope="col">desempenho</th>
                           </tr>
                         </thead>
                         <tbody>
-                              @if (count($acao) > 1)
+                              @if (count($data["results"]["acao"]) > 1)
                                 @for ($i = 0; $i < count($acao); $i++)
                                 <tr>
                                     <th scope="row">{{$acao[$i]['id']}}</th>
-                                    <td>{{$acao[$i]['titulo']}}</td>
+                                    <td>{{$acao[$i]['nome']}}</td>
                                     <td>{{$acao[$i]['descricao']}}</td>
-                                    <td>{{$acao[$i]['justificativa']}}</td>
                                     <td>{{$acao[$i]['ator']}}</td>
-                                    <td>{{$acao[$i]['ano']}}</td>
-                                    <td>{{$acao[$i]['andamento']}}</td>
+                                    <td>
+                                    @if ($data[[""]"eixo"])
+                                        {{$acao["eixo"]}}
+                                        @else
+                                         sem eixo
+                                    @endif
+                                    </td>
+                                    <td>{{$acao[$i]['desempenho']}}</td>
                                 </tr>
                                 @endfor
                               @else

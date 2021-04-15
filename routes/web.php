@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MetasController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -15,14 +16,9 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-$metasCrtl = MetasController::class;
-Route::get('/', function (Auth $user, $view = null) {
-    if($user::check()){
-        return view('dashboard');
-    }else{
-        return view('auth.login');
-    }
-});
+
+Route::get('/', [HomeController::class,'index']);
+Route::get('/sobre', [HomeController::class,'sobre']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

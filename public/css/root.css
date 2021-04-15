@@ -1,0 +1,18 @@
+:root {
+    /*background colors*/
+    --bg-gray: #ccc;
+    --bg-gray-light: #eaeaea;
+    --bg-gray-lighter: #f6f6f6;
+    --white: #ffffff;
+    /*text colors*/
+    --txt-gray: #666;
+    --txt-gray-light: #999;
+    /*brand colors*/
+    --brown: #A44B3A;
+    --blue: #2F638B;
+    --yellow: #C9C12C;
+    --green: #215A36;
+    --lead: #5F726A;
+    /*accent color*/
+    --blue-light: #6188A7;
+}

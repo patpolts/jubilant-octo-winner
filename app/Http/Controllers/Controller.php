@@ -87,6 +87,10 @@ class Controller extends BaseController
         $this->contentView["header_title"] = "| Plano de Ações (view)"; 
         return view('admin.acao',$this->contentView);
     }
+    /** 
+     * Indicadores
+     * ------------------
+     */
     public function viewIndicadores(Indicadores $model)
     {
         $this->contentView["data"] = array(
@@ -97,6 +101,29 @@ class Controller extends BaseController
         $this->contentView["header_title"] = "| Indicadores (view)"; 
         return view('admin.indicadores', $this->contentView);
     }
+    public function statusIndicadores(Indicadores $model)
+    {
+        //hardcoded 
+        $hardcoded = array(
+            0 => [
+                "valor" => "220",
+                "legenda" => "não realizada satisfatoriamente"
+            ],
+            1 => [
+                "valor" => "120",
+                "legenda" =>  "realizada parcialmente"
+            ],
+            2 => [
+                "valor" => "088",
+                "legenda" => "plenamente realizada"
+            ]
+        );
+        return $hardcoded;
+    }
+    /** 
+     * Grande Temas
+     * ------------------
+     */
     public function viewGrandeTema(GrandesTemas $model)
     {
         $this->contentView["data"] = array(
@@ -105,10 +132,7 @@ class Controller extends BaseController
         );
 
         $this->contentView["header_title"] = "| Grandes Temas (view)"; 
-        return view('admin.grandetema', [
-            'title' => 'Grandes Temas',
-            'grandetema' => GrandesTemas::get()
-        ]);
+        return view('admin.grandetema', $this->contentView);
     }
 
     public function GetObjetivos(Request $request, Auth $user, MetasController $metas, Indicadores $indicadores, ObjetivosEstrategicos $objetivos)

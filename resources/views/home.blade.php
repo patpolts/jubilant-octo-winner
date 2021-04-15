@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <!-- Styles -->
-        <link rel="stylesheet" href="{{ $site_url}}'css/home.css'">
+        <link rel="stylesheet" href="{{asset('css/home.css')}}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
         
         {{-- unifesp--}}
@@ -50,7 +50,7 @@
                             <h1>Plano de Desenvolvimento Institucional | Unifesp</h1>
                         @endif
                         <figure>
-                            <img src="{{ $site_url}}'images/logos.png'" class="rounded mx-auto d-block" alt="PDI 2021-2025">
+                            <img src="{{asset('images/logos.png')}}" class="rounded mx-auto d-block" alt="PDI 2021-2025">
                         </figure>
                     </hgroup>
                 </div>

@@ -42,6 +42,7 @@ class HomeController extends BaseController
         $this->contentView = array(
             "header_title" => "PDI ",
             "title" => "PDI - Home",
+            "site_url" => getenv('APP_URL'),
             "mobile" => $this->isMobile,
             "navmenu" => array(
                 0 => array(

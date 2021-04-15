@@ -13,14 +13,35 @@
         
         {{-- unifesp--}}
         <link rel="stylesheet" type="text/css" href="https://webcode.unifesp.br/header-unifesp/style.css">
-
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
     <title>@yield('header_title', 'Pdi')</title>
 </head>
     <body>
     <!-- UNIFESP header  -->
         <div id="unifesp-bar"></div>
-        <div id="unesp-header"></div>
+        <div id="unesp-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2">
+                        <figure>
+                            <img src="{{asset('images/header-logo.jpeg')}}" class="rounded mx-auto d-block" alt="Unifesp">
+                        </figure>
+                    </div>
+                    <div class="col-8">
+                        <h1>SuperintendÊncia de tecnologia da informação</h1>
+                        <small>universidade federal de são paulo</small>
+                    </div>
+                    <div class="col-2">
+                        <form action="">
+                            <input type="search" name="search" class="form-control" placeholder="search">
+                            {{-- <div class="input-group-text">@</div> --}}
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     <!-- #end UNIFESP header  -->
 
 <!-- Monitor content  -->
@@ -45,14 +66,14 @@
                     <!-- #end header -->
                 </div>
                 <div class="col-12">
-                    <hgroup>
                         @if ($mobile)
+                        <hgroup>
                             <h1>Plano de Desenvolvimento Institucional | Unifesp</h1>
+                        </hgroup>
                         @endif
                         <figure>
-                            <img src="{{asset('images/logos.png')}}" class="rounded mx-auto d-block" alt="PDI 2021-2025">
+                            <img src="{{asset('images/logo.jpeg')}}" class="rounded mx-auto d-block" alt="PDI 2021-2025">
                         </figure>
-                    </hgroup>
                 </div>
             </div>
             <div class="container status-metas">

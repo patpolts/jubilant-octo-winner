@@ -46,7 +46,7 @@
             "@php artisan clear:compiled"
         ],
         "post-install-cmd": [
-            "npm prod"
+            "npm run prod"
             
         ]
     },

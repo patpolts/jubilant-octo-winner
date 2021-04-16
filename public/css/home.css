@@ -1,4 +1,23 @@
 @import 'mobile/medium.css' all and (max-width: 1024px) and (min-width: 768px);
+:root {
+    /*background colors*/
+    --bg-gray: #ccc;
+    --bg-gray-light: #eaeaea;
+    --bg-gray-lighter: #f6f6f6;
+    --white: #ffffff;
+    /*text colors*/
+    --txt-gray: #666;
+    --txt-gray-light: #999;
+    /*brand colors*/
+    --brown: #A44B3A;
+    --blue: #2F638B;
+    --yellow: #C9C12C;
+    --green: #215A36;
+    --lead: #5F726A;
+    /*accent color*/
+    --blue-light: #6188A7;
+}
+
 body{
     font-family: 'Lato', sans-serif !important;
     background-color: #f7f7f7 !important;
@@ -73,7 +92,7 @@ body{
 }
 
 .container-fluid.single > header{
-    height: 190px;
+    height: 250px;
     background: #fff;
 }
 .container-fluid.single .card{
@@ -81,7 +100,7 @@ body{
 }
 /* header */
 header{
-    background-color: #f7f7f7;
+    background-color: #fff;
     padding: 1% 0px 2% 0px;
     margin: 0px;
 
@@ -92,10 +111,16 @@ header{
         height: auto;
         margin: 0px auto 2% auto;
     }
-    header figure > img{
+    header figure  img{
         width: 100%;
         height: 100%;
         
+    }
+    header figure a,
+    header figure a:link,
+    header figure a:active,
+    header figure a:visited{
+        border: none;
     }
 
 
@@ -117,8 +142,17 @@ header{
          margin: 0px 5px 0px 0px;
          border: unset;
          text-transform: uppercase;
+         color: #2F638B;
 
      }
+     header nav .nav ul li a:active,
+        header nav .nav ul li a:visited{
+            color: #6188A7;
+        }
+
+     header nav .nav ul li a:hover{
+        color: #2F638B;}
+
      header nav .nav ul li:last-child a{
         margin: 0px;
 
@@ -270,7 +304,7 @@ header{
 .content-sobre .card .row:last-child{
     margin-bottom: 0px;
 }
-.content-sobre .card select{
+.content-sobre .card button{
     width: 100%;
     display: inline-flex;
     background-color: #F6F6F6;
@@ -279,8 +313,14 @@ header{
     height: 40px;
     font-size: 1em;
     border-radius: 4px;
+    margin: 0px 0px 1% 0px;
         
 
+}
+.content-sobre .card button > span{
+    display: inline-block;
+    width: 99%;
+    text-align: left;
 }
 .content-sobre .card span{
     display: inline-flex;
@@ -317,4 +357,4 @@ header{
 
 footer{
     min-height: 300px;
-}
+    }

@@ -61,14 +61,14 @@
                     </div>
                     <div class="col-12">
                         <div class="select-group">
-                            @for ($i=0; $i <= 10; $i++)
+                            @foreach ($dummySelect as $value)
                             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>1. Ética, integridade e respeito à coisa pública </option>
+                                <option selected>{{$value}}</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
                                 <option value="3">Three</option>
                             </select>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
                 </div>

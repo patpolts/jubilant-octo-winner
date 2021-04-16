@@ -116,6 +116,18 @@ class HomeController extends BaseController
                     "item_class" => "border-0"
                     )
             ),
+            "dummySelect" => array(
+                0 => "1. Ética, integridade e respeito à coisa pública",
+                1 => "2. Defesa da vida,  da educação pública e da dignidade humana",
+                2 => "3. Autonomia universitária",
+                3 => "4. Compromisso  público e social com a redução das desigualdades",
+                4 => "5. Democracia, transparência e equidade",
+                5 => "6. Liberdade de pensamento e de expressão",
+                6 => "7. Cooperação, solidariedade e empatia",
+                7 => "8. Qualidade e relevância no ensino, pesquisa e extensão",
+                9 => "9. Unidade na diversidade, com pluralismo científico e formação crítica",
+                9 => "10. Sustentabilidade e responsabilidade socioambiental",
+            ),
             "data" => array(
                 "status_indicadores" =>   $statusIndicadores
             )

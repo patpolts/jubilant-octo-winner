@@ -72,11 +72,15 @@ body{
     overflow-x: hidden;
 }
 
+.container-fluid.single > header{
+    height: 240px;
+}
 /* header */
 header{
     background-color: #f7f7f7;
     padding: 1% 0px 2% 0px;
     margin: 0px;
+
 
 }
     header figure{

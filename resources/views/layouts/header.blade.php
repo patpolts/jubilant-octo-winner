@@ -1,6 +1,6 @@
 
-<div class="container-fluid">
-    <header>
+<div class="container-fluid {{!$isHome ? 'single' : '' }}">
+    <header >
         <div class="row">
             <div class="col-12">
                 <!-- content header -->

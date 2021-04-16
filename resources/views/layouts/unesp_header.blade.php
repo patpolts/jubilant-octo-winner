@@ -3,16 +3,16 @@
     <div id="unesp-header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-2">
+                <div class="col col-4 col-md-2 col-xl-2">
                     <figure>
                         <img src="{{asset('images/header-logo.jpeg')}}" class="rounded mx-auto d-block" alt="Unifesp">
                     </figure>
                 </div>
-                <div class="col-8">
-                    <h1>SuperintendÊncia de tecnologia da informação</h1>
+                <div class="col col-8 col-md-8 col-xl-8">
+                    <h1 aria-label="SuperintendÊncia de tecnologia da informação" >SuperintendÊncia de tecnologia da informação</h1>
                     <small>universidade federal de são paulo</small>
                 </div>
-                <div class="col-2">
+                <div class="col col-12 col-md-2 col-xl-2">
                     <form action="">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control  w-40" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">

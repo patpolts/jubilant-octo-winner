@@ -73,7 +73,7 @@ body{
 }
 
 .container-fluid.single > header{
-    height: 190px;
+    height: 250px;
     background: #fff;
 }
 .container-fluid.single .card{
@@ -317,4 +317,4 @@ header{
 
 footer{
     min-height: 300px;
-}
+    }

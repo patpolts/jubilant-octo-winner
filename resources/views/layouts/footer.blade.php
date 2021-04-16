@@ -1,7 +1,7 @@
 <footer>
     <div>
         <div>
-            <p>powered by</p>
+           {{-- #content --}}
         </div>
     </div>
 </footer>

@@ -68,9 +68,14 @@ header{
     margin: 0px;
 
 }
+    header figure{
+        width: 25%;
+        height: auto;
+        margin: 0px auto 2% auto;
+    }
     header figure > img{
-        width: auto;
-        height: 100px;
+        width: 100%;
+        height: 100%;
         
     }
 
@@ -108,6 +113,7 @@ header{
         margin: 0px auto;
         color: #fff;
         background-color: #6c757d47;
+        border-radius: 10px;
 
      }
      .button-metas > .btn:hover{
@@ -206,36 +212,81 @@ header{
 
 }
 
-h1{
-    color: #2F638B;
+.content-sobre h1{
+    font-family: Lato;
+    font-weight: bold;
+    color: #6188A7;
     text-align: left;
+    margin: 0px 0px 1% 0px;
+    font-size: 48px;
+    line-height: 58px;
+
+}
+.content-sobre p{
+    color: #666;
+    font-family: Lato;
+    line-height: 27px;
+    font-size: 18px;
 }
 .content-sobre{
-    background-color: #f2f2f2;
-    padding: 2% 0px;
-}
-.content-sobre .container{
-    border-color: #ccc;
+    padding:0px;
+    margin: 0px auto;
 }
 .content-sobre .card{
     background-color: #fff;
-    padding: 2%;
-    margin: 0px auto 5% auto;
+    padding: 4% 6%;
+    margin: 4% auto;
+    border-color: #cccccc4a;
+    width: 98%;
 }
 
+.content-sobre .card .row{
+    margin-bottom: 2%;
+}
+.content-sobre .card .row:last-child{
+    margin-bottom: 0px;
+}
 .content-sobre .card select{
     width: 100%;
     display: inline-flex;
-    background-color: #ccc;
+    background-color: #F6F6F6;
+    border-color: #cccccc4a;
     color: #2F638B;
     height: 40px;
     font-size: 1em;
+    border-radius: 4px;
+        
 
 }
 .content-sobre .card span{
     display: inline-flex;
 }
-.content-sobre .btn-group button{
-    width: 30%;
-    display: inline-flex;
+.content-sobre .btn-primary{
+    width: 260px;
+    height: 60px;
+    display: inline-grid;
+    background: #6188A7;
+    padding: 2px 0px 0px 0px;
+    border-radius: 10px;
+    border-color: #cccccc4a;
+}
+.content-sobre .btn-primary:first-child{
+    margin-right: 1%;
+}
+.content-sobre .btn-primary span{
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-grid;
+    height: 25px;
+}
+.content-sobre .btn-primary span:nth-child(2){
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.content-sobre .card ul li{
+    font-family: Lato;
+    line-height: 27px;
+    font-size: 18px;
+    color: #666;
 }

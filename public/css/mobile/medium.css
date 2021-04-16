@@ -1,7 +1,16 @@
 
 #unesp-header h1{
-    font-size: 1em !important;
+    font-size: 1.2em !important;
+}
+#unesp-header figure{
+    margin-left: 15px !important;
+}
+#unesp-header figure > img{
+    height: 90px;
 }
 header figure{
     width: 41% !important;
+}
+.container-fluid.single > header{
+    height: 220px !important;
 }

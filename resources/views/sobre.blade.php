@@ -60,15 +60,24 @@
                         <h1>Valores</h1>
                     </div>
                     <div class="col-12">
-                        <div class="select-group">
-                            @foreach ($dummySelect as $value)
-                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>{{$value}}</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            @endforeach
+                        {{-- data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" --}}
+                        <div class="button-group"> 
+                                @foreach ($dummySelect as $value)
+                                    <button class="btn btn-secondary btn-sm sobreItens" id="open-{{$value['index']}}" data-target="#content-{{$value['index']}}" data-bs-toggle="collapse" >
+                                        <span>{{$value['item']}}</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path>
+                                        </svg>
+                                    </button>
+                                <div class="collapsed multi-collapse" id="content-{{$value['index']}}" style="display: none">
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </p>
+                                </div>
+                                @endforeach
                         </div>
                     </div>
                 </div>
@@ -97,5 +106,12 @@
     </div>
 </main> 
 <!-- #end Sobnre content  -->
+<script>
 
+//   function openTab(tab) {
+//       $("#open-"+tab).toggle(function(v){
+//         console.log(v);
+//       });
+//   }
+</script>
 @include('layouts.footer')

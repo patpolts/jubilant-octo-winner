@@ -117,16 +117,16 @@ class HomeController extends BaseController
                     )
             ),
             "dummySelect" => array(
-                0 => "1. Ética, integridade e respeito à coisa pública",
-                1 => "2. Defesa da vida,  da educação pública e da dignidade humana",
-                2 => "3. Autonomia universitária",
-                3 => "4. Compromisso  público e social com a redução das desigualdades",
-                4 => "5. Democracia, transparência e equidade",
-                5 => "6. Liberdade de pensamento e de expressão",
-                6 => "7. Cooperação, solidariedade e empatia",
-                7 => "8. Qualidade e relevância no ensino, pesquisa e extensão",
-                9 => "9. Unidade na diversidade, com pluralismo científico e formação crítica",
-                9 => "10. Sustentabilidade e responsabilidade socioambiental",
+                 array("index"=>"0","item"  => "1. Ética, integridade e respeito à coisa pública"),
+                 array("index"=>"1","item"  => "2. Defesa da vida,  da educação pública e da dignidade humana"),
+                 array("index"=>"2","item"  => "3. Autonomia universitária"),
+                 array("index"=>"3","item"  => "4. Compromisso  público e social com a redução das desigualdades"),
+                 array("index"=>"4","item"  => "5. Democracia, transparência e equidade"),
+                 array("index"=>"5","item"  => "6. Liberdade de pensamento e de expressão"),
+                 array("index"=>"6","item"  => "7. Cooperação, solidariedade e empatia"),
+                 array("index"=>"7","item"  => "8. Qualidade e relevância no ensino, pesquisa e extensão"),
+                 array("index"=>"9","item"  => "9. Unidade na diversidade, com pluralismo científico e formação crítica"),
+                 array("index"=>"10","item"  => "10. Sustentabilidade e responsabilidade socioambiental"),
             ),
             "data" => array(
                 "status_indicadores" =>   $statusIndicadores

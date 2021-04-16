@@ -21,7 +21,9 @@
             </div>
             <div class="col-12">
                 <figure aria-label="Plano de Desenvolvimento Institucional Unifesp">
-                    <img src="{{asset('images/logo.jpeg')}}" class="rounded mx-auto d-block" alt="PDI 2021-2025">
+                    <a href="{{getenv('APP_URL')}}">
+                        <img src="{{asset('images/logo.png')}}" class="rounded mx-auto d-block" alt="PDI 2021-2025">
+                    </a>
                 </figure>
             </div>
         </div>

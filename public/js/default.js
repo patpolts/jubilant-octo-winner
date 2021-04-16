@@ -1,30 +1,15 @@
 $(function(){
 
-  // $(document).ready(function () {
-  //     // console.log(1);
-  // });
-  // $(".content-notsupported").hide();
-  // notSupported()
-  // var wd = $(window).width();
-
-  // $(window).resize(function () {
-  //   wd = $(window).width(); 
-  //   notSupported();
-  // });
-
-  // function notSupported() {
-  //   if(wd < 768){
-  //     $(".container-fluid").hide();
-  //     $(".content-notsupported").show();
-      
-  //   }
-  // }
-    /**
-     * Tab menu
-     */
-    // var firstTabEl = document.querySelector('#navmenu li:last-child a');
-    // var firstTab = new bootstrap.Tab(firstTabEl);
-  
-    // firstTab.show();
+  $(document).ready(function () { 
+        $("#loaded").show(); 
+        
+  });
+var tabOpen = false;
+  $(".sobreItens").click(function (e) { 
+    e.preventDefault();
+    tabOpen = !tabOpen;
+    var open = $(this).data("target");
+    $(open).toggle();
+  });
 
   });

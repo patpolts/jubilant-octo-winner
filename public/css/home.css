@@ -72,11 +72,19 @@ body{
     overflow-x: hidden;
 }
 
+.container-fluid.single > header{
+    height: 190px;
+    background: #fff;
+}
+.container-fluid.single .card{
+    padding: 2% 6%;
+}
 /* header */
 header{
     background-color: #f7f7f7;
     padding: 1% 0px 2% 0px;
     margin: 0px;
+
 
 }
     header figure{

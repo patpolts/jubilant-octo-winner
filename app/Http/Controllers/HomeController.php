@@ -44,6 +44,7 @@ class HomeController extends BaseController
             "title" => "PDI - Home",
             "site_url" => getenv('APP_URL'),
             "mobile" => $this->isMobile,
+            "isHome" => true,
             "navmenu" => array(
                 0 => array(
                     "title" => "início",
@@ -88,6 +89,7 @@ class HomeController extends BaseController
             "header_title" => "PDI ",
             "title" => "PDI - Home",
             "mobile" => $this->isMobile,
+            "isHome" => false,
             "navmenu" => array(
                 0 => array(
                     "title" => "início",

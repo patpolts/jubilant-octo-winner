@@ -29,17 +29,19 @@
                     </figure>
             </div>
         </div>
-        <div class="container status-metas">
-            <div class="row">
-                @foreach ($data["status_indicadores"] as $key => $value )
-                    <div class="col-4">
-                        <div class="button-metas">
-                            <div class="btn btn-outline-secondary border-light">
-                                <p>{{ $value["valor"]}}</p>
-                                <p>{{ $value["legenda"]}}</p>
+        @if ($isHome)
+            <div class="container status-metas">
+                <div class="row">
+                    @foreach ($data["status_indicadores"] as $key => $value )
+                        <div class="col-4">
+                            <div class="button-metas">
+                                <div class="btn btn-outline-secondary border-light">
+                                    <p>{{ $value["valor"]}}</p>
+                                    <p>{{ $value["legenda"]}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-        </div> 
+                    @endforeach
+            </div> 
+        @endif
     </header> 

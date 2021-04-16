@@ -36,8 +36,8 @@
                         <div class="col-4">
                             <div class="button-metas">
                                 <div class="btn btn-outline-secondary border-light">
-                                    <p>{{ $value["valor"]}}</p>
-                                    <p>{{ $value["legenda"]}}</p>
+                                    <span>{{ $value["valor"]}}</span>
+                                    <span>{{ $value["legenda"]}}</span>
                                 </div>
                             </div>
                         </div>

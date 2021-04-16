@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
     <header>
         <div class="row">
@@ -19,14 +20,9 @@
                 <!-- #end header -->
             </div>
             <div class="col-12">
-                    @if ($mobile)
-                        <hgroup>
-                            <h1>Plano de Desenvolvimento Institucional | Unifesp</h1>
-                        </hgroup>
-                    @endif
-                    <figure>
-                        <img src="{{asset('images/logo.jpeg')}}" class="rounded mx-auto d-block" alt="PDI 2021-2025">
-                    </figure>
+                <figure aria-label="Plano de Desenvolvimento Institucional Unifesp">
+                    <img src="{{asset('images/logo.jpeg')}}" class="rounded mx-auto d-block" alt="PDI 2021-2025">
+                </figure>
             </div>
         </div>
         @if ($isHome)
@@ -36,8 +32,8 @@
                         <div class="col-4">
                             <div class="button-metas">
                                 <div class="btn btn-outline-secondary border-light">
-                                    <p>{{ $value["valor"]}}</p>
-                                    <p>{{ $value["legenda"]}}</p>
+                                    <span>{{ $value["valor"]}}</span>
+                                    <span>{{ $value["legenda"]}}</span>
                                 </div>
                             </div>
                         </div>

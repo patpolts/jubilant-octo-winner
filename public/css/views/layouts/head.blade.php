@@ -16,10 +16,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
 
-    <title>{{getenv('APP_NAME', $header_title)}}</title>
+    <title>{{ $header_title}}</title>
 </head>
     <body>
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+      <div id="loading" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
-        <div id="loaded">
+      <div id="loaded">

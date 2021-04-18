@@ -8,40 +8,31 @@ use App\Models\GrandesTemas;
 use App\Models\Indicadores;
 use App\Models\ObjetivosEstrategicos;
 use App\Models\PlanoAcao;
-use GuzzleHttp\Psr7\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
+    
     public $contentView = array();
 
-    public function getById_indicadores($id)
-    {
-        return DB::table('indicadores')->where('id','=',$id)->get();
-    }
 
-    public function getById_eixos($id)
+    public function viewHome(Request $request)
     {
-        return DB::table('eixos')->where('id','=',$id)->get();
-    }
+        $this->contentView = array(
+            "header_title" => config('app.name')." | Admin (dashboard)",
+            "title" => "Dashboard",
+        );
 
-    public function getById_objetivos($id)
-    {
-        return DB::table('objetivos_estrategicos')->where('id','=',$id)->get();
+       return view('dashboard',$this->contentView);
     }
-
-    public function getById_tema($id)
-    {
-        return DB::table('grandes_temas')->where('id','=',$id)->get();
-    }
-
     /**
      * Display the  view.
      *
@@ -131,7 +122,7 @@ class Controller extends BaseController
             "results" => $model::get()
         );
 
-        $this->contentView["header_title"] = "| Grandes Temas (view)"; 
+        $this->contentView["header_title"] = " Grandes Temas (view)"; 
         return view('admin.grandetema', $this->contentView);
     }
 
@@ -148,4 +139,28 @@ class Controller extends BaseController
         return $arr;
     }
     
+    /**
+     * 
+     */
+
+
+    public function getById_indicadores($id)
+    {
+        return DB::table('indicadores')->where('id','=',$id)->get();
+    }
+
+    public function getById_eixos($id)
+    {
+        return DB::table('eixos')->where('id','=',$id)->get();
+    }
+
+    public function getById_objetivos($id)
+    {
+        return DB::table('objetivos_estrategicos')->where('id','=',$id)->get();
+    }
+
+    public function getById_tema($id)
+    {
+        return DB::table('grandes_temas')->where('id','=',$id)->get();
+    }
 }

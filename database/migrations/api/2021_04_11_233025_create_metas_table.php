@@ -15,8 +15,7 @@ class CreateMetasTable extends Migration
     {
         Schema::create('metas', function (Blueprint $table) {
             $table->id();
-
-            $table->bigInteger('id_rel')->nullable();
+            $table->bigInteger('indicador_id')->nullable();
             $table->string('titulo',255)->unique();
             $table->string('descricao',2400);
             $table->string('justificativa',2400);

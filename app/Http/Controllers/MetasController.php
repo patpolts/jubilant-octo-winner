@@ -56,7 +56,8 @@ class MetasController extends Controller
                 "indicadores" => parent::getById_indicadores($value['indicador_id']));
         }
         
-        $this->contentView["data"] = array(
+        $this->contentView = array(
+            "header_title" => config('app.name')." | Admin (metas)",
             "title" => "Metas",
             "results" => $results,
         );

@@ -16,19 +16,17 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Public routes
 Route::get('/', [HomeController::class,'index']);
 Route::get('sobre', [HomeController::class,'sobre']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//Protected Routes 
+Route::get('/dashboard', [Controller::class,'viewHome'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/metas', [MetasController::class, 'view'])->middleware(['auth'])->name('metas');
 Route::get('/metas/editar', [MetasController::class, 'edit'])->middleware(['auth'])->name('metas_editar');
-
 Route::get('/eixos', [Controller::class, 'viewEixos'])->middleware(['auth'])->name('eixos');
-Route::get('/ouse', [Controller::class, 'viewOuse'])->middleware(['auth'])->name('ouse');
+Route::get('/ouse', [Controller::class, 'viewOuse'])->middleware(['auth'])->name('objetivos');
 Route::get('/indicadores', [Controller::class, 'viewIndicadores'])->middleware(['auth'])->name('indicadores');
 Route::get('/acao', [Controller::class, 'viewAcao'])->middleware(['auth'])->name('acao');
 Route::get('/grandetema', [Controller::class, 'viewGrandeTema'])->middleware(['auth'])->name('grandetema');

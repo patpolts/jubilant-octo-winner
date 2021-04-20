@@ -22,14 +22,11 @@ class ObjetivosEstrategicos extends Model
     ];
 
     protected $casts = [
-        'metas' => 'array',
-        'indicadores' => 'array',
-        'ouse' => 'array',
-        'descricao' => 'string',
-        'justificativa' => 'array',
         'logs' => 'array',
-        'data_registro' => 'datetime',
-        'active' => 'boolean',
+    ];
+
+    protected $atributes = [
+        'active' => true,
     ];
 
     public function view()

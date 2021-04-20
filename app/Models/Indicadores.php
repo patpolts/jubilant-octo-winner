@@ -20,11 +20,11 @@ class Indicadores extends Model
      */
     protected $fillable = [
         'indicador_id',
-        'nome',
+        'titulo',
         'descricao',
         'justificativa',
         'valor_inicial',
-        'valor_atual',
+        'valor',
         'valor_final',
         'data_registro',
         'logs',
@@ -37,9 +37,36 @@ class Indicadores extends Model
 
     protected $casts = [
         'logs' => 'array',
-        'data_registro' => 'datetime',
     ];
     
+public function getById($id)
+{
+   if(!is_numeric($id) || !is_integer(($id))){
+       return throw "error";
+   }
+       try {    
+          $data = self::where('id','=',$id)->get();
+          $arr = [];
+            foreach ($data as $value) {
+                $arr[] = array(
+                'indicador_id' => $value->id,
+                'titulo' => $value->titulo,
+                'descricao' => $value->descricao,
+                'justificativa' => $value->justificativa,
+                'valor_inicial' => $value->valor_inicial,
+                'valor' => $value->valor,
+                'valor_final' => $value->valor_final,
+                'data_registro' => $value->data_registro,
+                );
+            }
+          
+          return $arr;
+       } catch (\Throwable $th) {
+           return throw $th;
+       }
+
+}
+
     public function adminViewData()
     {
         $arr = [];

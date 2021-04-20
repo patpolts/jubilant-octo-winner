@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\User as User;
+use Illuminate\Support\Facades\DB;
+
 class Metas extends Model
 {
     use HasFactory, Notifiable;
@@ -17,16 +19,15 @@ class Metas extends Model
      * @var array
      */
     protected $fillable = [
+        'indicador_id',
         'titulo',
         'descricao',
         'justificativa',
-        'valor_inicial',
-        'valor_atual',
-        'valor_final',
-        'regras',
-        'types',
-        'categorias',
-        'tags',
+        'valor',
+        'data_registro',
+        'pne',
+        'ods',
+        'logs',
         'active',
     ];
 
@@ -34,26 +35,36 @@ class Metas extends Model
      * 
      */
     protected $atributes = [
-        'id_rel' => null,
         'active' => true,
     ];
 
     protected $casts = [
-        'regras' => 'array',
-        'types' => 'array',
-        'categorias' => 'array',
-        'tags' => 'array',
+        'pne' => 'array',
+        'ods' => 'array',
+        'logs' => 'array',
     ];
     
-    protected $viewTable = [
-        'id',
-        'titulo',
-        'valor_inicial',
-        'valor_atual',
-        'valor_final',
-        'active',
-    ];
-    
+    public function getMetas()
+    {
+       $metas = self::where("active",'=',true)->get();
+       $arr = [];
+       $arr2 = [];
+       foreach ($metas as $value) {
+
+            $arr[] = array(
+                'id' => $value->id,
+                'indicadores' => $this->getIndicadores($value->indicador_id),
+                'titulo' => $value->titulo,
+                'descricao' => $value->descricao,
+                'justificativa' => $value->justificativa,
+                'data_registro' => $value->data_registro,
+                'pne' => $value->pne,
+                'ods' => $value->ods,
+            );
+
+       }
+       return $arr;
+    }
     public function adminViewData()
     {
         $arr = [];
@@ -65,4 +76,28 @@ class Metas extends Model
         }
         return $arr;
     }
+
+    public function getIndicadores($id)
+    {
+        
+        $indicadores = DB::table('indicadores')->where('id','=',$id)->get();
+        $arr = [];
+        if(count($indicadores) <= 1){
+            foreach ($indicadores as $value) {
+                $arr["codigo"]        = $value->id;
+                $arr["nome"]        = $value->titulo;
+                $arr['descricao']     = $value->descricao;
+                $arr["anos"]          = $value->anos;
+                $arr["metas"]         = $value->metas;
+                $arr['valor_inicial'] = $value->valor_inicial;
+                $arr["valor"]         = $value->valor;
+                $arr["valor_final"]   = $value->valor_final;
+                $arr['data_registro'] = $value->data_registro;
+            } 
+
+        }
+        return $arr;
+
+    }
+
 }

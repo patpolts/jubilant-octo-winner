@@ -44,7 +44,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        // Auth::guard(['web','api'])->logout();
 
         $request->session()->invalidate();
 
@@ -54,6 +54,9 @@ class AuthenticatedSessionController extends Controller
     }
     public function checkPermissions()
     {
-        return User::isAdmin();
+        
+        // $request->user()->forceFill([
+        //     'user_token' => hash('sha256', $token),
+        // ])->save();
     }
 }

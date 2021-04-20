@@ -30,6 +30,12 @@ class GrandesTemas extends Model
     protected $cast = [
         'logs' => 'array',
     ];
+
+    protected $atributes = [
+        'active' => true,
+    ];
+
+    
     public function adminViewData()
     {
         $arr = [];

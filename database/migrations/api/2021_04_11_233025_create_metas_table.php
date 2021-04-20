@@ -19,16 +19,12 @@ class CreateMetasTable extends Migration
             $table->string('titulo',255)->unique();
             $table->string('descricao',2400);
             $table->string('justificativa',2400);
-            $table->integer('valor_inicial');
-            $table->integer('valor_atual');
-            $table->integer('valor_final');
-            $table->json('regras');
-            $table->json('types');
-            $table->json('categorias');
-            $table->json('tags');
-
+            $table->string('data_registro');
+            $table->integer('valor');
+            $table->json('pne');
+            $table->json('ods');
+            $table->json('logs');
             $table->boolean('active'); 
-            $table->softDeletes($column = 'deleted_at', $precision = 0);
 
             $table->timestamps();
         });

@@ -30,8 +30,24 @@ class Controller extends BaseController
             "header_title" => config('app.name')." | Admin (dashboard)",
             "title" => "Dashboard",
         );
+        return response($this->contentView,200)->header('Content-Type', 'text/json');
 
-       return view('dashboard',$this->contentView);
+    //    return view('dashboard',$this->contentView);
+    }
+    public function usersApi(Request $request)
+    {
+        # code...
+        if(isset($request->users->email)){
+            $data[] = array(
+                ["data"] => $request->user,
+                ["message"] => "sucesso",
+                ["page"] => [
+                    "header_title" => config('app.name')." | Admin (dashboard)",
+                    "title" => "Dashboard",
+                ]
+            );
+            return response(json_encode($data),200)->header('Content-Type', 'text/json');
+        }
     }
     /**
      * Display the  view.
@@ -59,25 +75,25 @@ class Controller extends BaseController
         $this->contentView["header_title"] = "| Ouse (view)"; 
         return view('admin.ouse', $this->contentView);
     }
-    public function viewAcao(PlanoAcao $model)
-    {
-        $results = [];
-        $resAcao = $model::get();
-        foreach ($resAcao as $value) {
-            $results =  array(
-                "acao" => $value, 
-                "eixo" => $this->getById_eixos($value['eixo_id']), 
-                "objetivo" => $this->getById_objetivos($value['objetivo_id']));
-        }
+    // public function viewAcao(PlanoAcao $model)
+    // {
+    //     $results = [];
+    //     $resAcao = $model::get();
+    //     foreach ($resAcao as $value) {
+    //         $results =  array(
+    //             "acao" => $value, 
+    //             "eixo" => $this->getById_eixos($value['eixo_id']), 
+    //             "objetivo" => $this->getById_objetivos($value['objetivo_id']));
+    //     }
 
-        $this->contentView["data"] = array(
-            "title" => "Plano de Ações ",
-            "results" => $results,
-        );
+    //     $this->contentView["data"] = array(
+    //         "title" => "Plano de Ações ",
+    //         "results" => $results,
+    //     );
 
-        $this->contentView["header_title"] = "| Plano de Ações (view)"; 
-        return view('admin.acao',$this->contentView);
-    }
+    //     $this->contentView["header_title"] = "| Plano de Ações (view)"; 
+    //     return view('admin.acao',$this->contentView);
+    // }
     /** 
      * Indicadores
      * ------------------
@@ -144,10 +160,10 @@ class Controller extends BaseController
      */
 
 
-    public function getById_indicadores($id)
-    {
-        return DB::table('indicadores')->where('id','=',$id)->get();
-    }
+    // public function getById_indicadores($id)
+    // {
+    //     return DB::table('indicadores')->where('id','=',$id)->get();
+    // }
 
     public function getById_eixos($id)
     {

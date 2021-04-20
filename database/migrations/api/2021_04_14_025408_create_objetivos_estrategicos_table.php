@@ -16,13 +16,10 @@ class CreateObjetivosEstrategicosTable extends Migration
         Schema::create('objetivos_estrategicos', function (Blueprint $table) {
             $table->id();
             $table->json('metas');
-            $table->json('indicadores');
-            $table->json('ouse');
-            $table->string('nome');
-            $table->string('descricao');
+            $table->string('titulo');
             $table->string('justificativa')->nullable();
             $table->string('logs');
-            $table->dateTime('data_registro');
+            $table->string('data_registro');
             $table->boolean('active')->nullable();
             
             $table->timestamps();

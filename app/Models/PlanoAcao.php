@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use App\Models\User as User;
 
 class PlanoAcao extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -20,26 +19,26 @@ class PlanoAcao extends Model
     protected $fillable = [
         'eixo_id',
         'objetivo_id',
-        'justificativa',
+        'tema_id',
         'nome',
         'descricao',
+        'justificativa',
         'ator',
         'desempenho',
+        'data_registro',
         'logs',
         'active',
     ];
-
-    /**
-     * 
-     */
-    protected $atributes = [
-        'id_rel' => null,
-        'active' => true,
-    ];
-
+    
+   
     protected $casts = [
         'logs' => 'array',
     ];
+
+    protected $atributes = [
+        'active' => true,
+    ];
+
     
     public function adminViewData()
     {

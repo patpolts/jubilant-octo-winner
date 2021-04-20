@@ -21,18 +21,12 @@ class EixosTableSeeder extends Seeder
         DB::table('eixos')->truncate();
         $faker = Faker::create();
 
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 5; $i++) { 
             DB::table('eixos')->insert([
-            'id_rel' => $faker->randomNumber(),
             'titulo' => $faker->sentence,
-            'descricao' => $faker->paragraph,
-            'andamento' =>  $faker->randomNumber(),
-            'types' => json_encode([$faker->words(2)]),
-            'categorias' => json_encode([$faker->words(4)]),
-            'tags' => json_encode([$faker->words(5)]),
+            'justificativa' => $faker->paragraph,
+            'data_registro' => $faker->date('d-M-y'),
             'active' => true,
-            'status' => true,
-            'device' => $faker->macAddress()
            ]);
         }
 

@@ -23,17 +23,15 @@ class MetasTableSeeder extends Seeder
 
         for ($i=0; $i < 10; $i++) { 
             DB::table('metas')->insert([
-            'id_rel' => $faker->randomNumber(),
+            'indicador_id' => $faker->randomNumber(1),
             'titulo' => $faker->sentence,
             'descricao' => $faker->paragraph,
             'justificativa' => $faker->paragraph,
-            'valor_inicial' => $faker->numberBetween(0,100),
-            'valor_atual' => $faker->numberBetween(0,100),
-            'valor_final' => $faker->numberBetween(0,10),
-            'regras' => json_encode([$i => ["values" => $faker->words(3)]]),
-            'types' => json_encode([$i => ["values" => $faker->words(2)]]),
-            'categorias' => json_encode([$i => ["values" => $faker->words(4)]]),
-            'tags' => json_encode([$i => ["values" => $faker->words(5)]]),
+            'valor' => $faker->numberBetween(1,100),
+            'data_registro' => $faker->date('d-M-y'),
+            'pne' => json_encode($faker->words(3)),
+            'ods' => json_encode($faker->words(2)),
+            'logs' => json_encode($faker->words(1)),
             'active' => true,
            ]);
         }

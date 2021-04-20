@@ -10,18 +10,20 @@ class CreateIndicadoresTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+     */ 
     public function up()
     {
        
         Schema::create('indicadores', function (Blueprint $table) {
             $table->id();
-            $table->integer('anos_id');
-            $table->string('nome');
             $table->string('titulo')->unique();
             $table->string('descricao');
+            $table->json('anos'); //anos relacionados
             $table->json('metas'); //json das metas que utilizam este indicador
-            $table->integer('status_atual'); 
+            $table->integer('valor_inicial'); 
+            $table->integer('valor'); 
+            $table->integer('valor_final'); 
+            $table->string('data_registro');
             $table->json('logs'); 
             $table->boolean('active'); 
 

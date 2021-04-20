@@ -18,10 +18,13 @@ class CreatePlanoAcoesTable extends Migration
             $table->id();
             $table->integer('eixo_id');
             $table->integer('objetivo_id');
+            $table->integer('tema_id');
             $table->string('nome');
             $table->string('descricao');
+            $table->string('justificativa');
             $table->string('ator'); 
             $table->integer('desempenho'); 
+            $table->string('data_registro'); 
             $table->json('logs')->nullable();
             $table->boolean('active'); 
             

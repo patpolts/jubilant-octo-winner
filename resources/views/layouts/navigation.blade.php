@@ -15,6 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('metas')" :active="request()->routeIs('metas')">
+                        {{ __('Metas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('indicadores')" :active="request()->routeIs('indicadores')">
+                        {{ __('Indicadores') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('acao')" :active="request()->routeIs('acao')">
+                        {{ __('Plano de Ações') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('objetivos')" :active="request()->routeIs('objetivos')">
+                        {{ __('Objetivos Estrategicos') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -66,6 +78,18 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-nav-link :href="route('metas')" :active="request()->routeIs('metas')">
+                {{ __('Metas') }}
+            </x-nav-link>
+            <x-nav-link :href="route('indicadores')" :active="request()->routeIs('indicadores')">
+                {{ __('Indicadores') }}
+            </x-nav-link>
+            <x-nav-link :href="route('acao')" :active="request()->routeIs('acao')">
+                {{ __('Plano de Ações') }}
+            </x-nav-link>
+            <x-nav-link :href="route('objetivos')" :active="request()->routeIs('objetivos')">
+                {{ __('Objetivos Estrategicos') }}
+            </x-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

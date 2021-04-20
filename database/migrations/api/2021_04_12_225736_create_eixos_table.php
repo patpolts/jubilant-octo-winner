@@ -20,22 +20,11 @@ class CreateEixosTable extends Migration
             $table->id();
             $table->timestamps();
 
-            //relações da meta
-            $table->bigInteger('id_rel')->index('id');
-
-            $table->string('titulo',255)->unique();
-            $table->string('descricao',2400);
-            $table->integer('andamento');
-            $table->json('types');
-            $table->json('categorias'); 
-            $table->json('tags');
-            $table->boolean('status'); 
+            $table->string('titulo')->unique();
+            $table->string('justificativa');
+            $table->string('data_registro');
 
             $table->boolean('active'); 
-            $table->macAddress('device');
-
-            $table->softDeletes($column = 'deleted_at', $precision = 0);
-            
 
         });
     }

@@ -20,12 +20,9 @@ class IndicadoresAnos extends Model
      */
     protected $fillable = [
         'indicador_id',
-        'meta_id',
         'ano',
         'justificativa',
         'valor',
-        'justificativa',
-        'valor_final',
         'data_registro',
         'logs',
         'active',
@@ -37,7 +34,6 @@ class IndicadoresAnos extends Model
 
     protected $casts = [
         'logs' => 'array',
-        'data_registro' => 'datetime',
     ];
     
     public function adminViewData()

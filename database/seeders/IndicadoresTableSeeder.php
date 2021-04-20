@@ -23,21 +23,18 @@ class IndicadoresTableSeeder extends Seeder
 
         for ($i=0; $i < 10; $i++) { 
             DB::table('indicadores')->insert([
-            'rels' => json_encode([$faker->words(3)]),
-            'titulo' => $faker->sentence,
-            'descricao' => $faker->paragraph,
-            'justificativa' => $faker->sentence,
-            'ano_inicial' => $faker->numberBetween(2019,2025),
-            'ano_final' => $faker->numberBetween(2025,2030),
-            'status_atual' => $faker->randomNumber(3),
-            'status_final' => $faker->boolean(),
-            'regras' => json_encode([$i => ["values" => $faker->words(3)]]),
-            'types' => json_encode([$i => ["values" => $faker->words(2)]]),
-            'categorias' => json_encode([$i => ["values" => $faker->words(4)]]),
-            'tags' => json_encode([$i => ["values" => $faker->words(5)]]),
+            'titulo' => $faker->sentence(4),
+            'descricao'  => $faker->sentence(),
+            'anos' => json_encode($faker->words(3)),
+            'metas' => json_encode($faker->words(3)),
+            'valor_inicial' => $faker->numberBetween(0,10),
+            'valor' => $faker->numberBetween(0,100),
+            'valor_final' => $faker->numberBetween(1,100),
+            'data_registro' => $faker->date('d/M/y'),
+            'logs' => json_encode($faker->words(3)),
             'active' => true,
-            'status' => true,
-           ]);
+            
+            ]);
         }
 
 

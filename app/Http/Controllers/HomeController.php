@@ -34,8 +34,6 @@ class HomeController extends BaseController
     }
     public function index(Request $request)
     {
-
-        // $x =  BaseController::statusIndicadores();
         
       $statusIndicadores =   $this->statusIndicadores();
 

@@ -6,13 +6,14 @@ use App\Models\Indicadores;
 use App\Models\User as User;
 use App\Models\Metas as Metas;
 use App\Providers\RouteServiceProvider;
+use Error;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use PhpParser\Node\Stmt\Throw_;
 
 class MetasController extends Controller
 {
@@ -42,26 +43,38 @@ class MetasController extends Controller
     
     public $contentView = array();
 
-        public function getById_indicadores($id)
-        {
-            return DB::table('indicadores')->where('id','=',$id)->get();
-        }
 
-    public function view(Metas $model) {
-        $dataMetas = $model::get();
-        $results = [];
-        foreach ($dataMetas as $value) {
-            $results =  array(
-                "metas" => $value, 
-                "indicadores" => parent::getById_indicadores($value['indicador_id']));
+    /**
+     * Methods
+     */
+
+
+    public function view(Metas $model,Indicadores $indicadores) {
+        try {
+            $dataMetas = $model->getMetas();
+            $results = [];
+
+                // foreach ($dataMetas as $value) {
+                //     $results[] =  array(
+                //         "metas" => $value, 
+                //         "indicadores" => $indicadores->getById($value['indicador_id'])
+                //     );
+                // }
+                // print_r('<pre>');
+                // print_r($dataMetas);
+            
+            $this->contentView = array(
+                "header_title" => config('app.name')." | Admin (metas)",
+                "title" => "Metas",
+                "content" => "view",
+                "data" => $dataMetas,
+            );
+            return view('admin.metas', $this->contentView);
+        } catch (\Throwable $th) {
+            throw $th;
+            return $th;
         }
         
-        $this->contentView["data"] = array(
-            "title" => "Metas",
-            "results" => $results,
-        );
-        $this->contentView["header_title"] = 'Metas (view) ';
-        return view('admin.metas', $this->contentView);
     }
 
     /**
@@ -71,26 +84,26 @@ class MetasController extends Controller
      */
     public function edit(Request $request)
     {
-        $metasAll = Metas::all();
-        if($request->method() == 'POST' && isset($request->metas_id)){
-            $id = $request->metas_id;
-            $update = Metas::find($id);
-            foreach ($update as $key => $value) {
-                if($value != $update->key){
-                    $update->key = $value;
-                }
-            }
-            $update->save();
-            $message = 'Atualizado com sucesso';
-            $metasAll->fresh();
-            return response($message,200)->json();
-        }else{
-            return view('admin.metas_edit', [
-                'title' => 'Metas',
-                'metas' => $metasAll,
-                'message' => ''
-            ]);
-        }
+        // $metasAll = Metas::all();
+        // if($request->method() == 'POST' && isset($request->metas_id)){
+        //     $id = $request->metas_id;
+        //     $update = Metas::find($id);
+        //     foreach ($update as $key => $value) {
+        //         if($value != $update->key){
+        //             $update->key = $value;
+        //         }
+        //     }
+        //     $update->save();
+        //     $message = 'Atualizado com sucesso';
+        //     $metasAll->fresh();
+        //     return response($message,200)->json();
+        // }else{
+        //     return view('admin.metas_edit', [
+        //         'title' => 'Metas',
+        //         'metas' => $metasAll,
+        //         'message' => ''
+        //     ]);
+        // }
     }
 
     /**
@@ -113,37 +126,37 @@ class MetasController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        $request->validate([
-            'titulo' => 'required|string|max:255',
-            'descricao' => 'string|max:2400',
-            'justificativa' => 'string|max:2400',
-            'valor_inicial' => 'integer|numeric',
-            'valor_atual' => 'integer|numeric',
-            'valor_final' => 'integer|numeric',
-            'regras' => 'array',
-            'types' => 'array',
-            'categorias' => 'array',
-            'tags' => 'array',
-        ]);
+        // $request->validate([
+        //     'titulo' => 'required|string|max:255',
+        //     'descricao' => 'string|max:2400',
+        //     'justificativa' => 'string|max:2400',
+        //     'valor_inicial' => 'integer|numeric',
+        //     'valor_atual' => 'integer|numeric',
+        //     'valor_final' => 'integer|numeric',
+        //     'regras' => 'array',
+        //     'types' => 'array',
+        //     'categorias' => 'array',
+        //     'tags' => 'array',
+        // ]);
 
-        $metas = Metas::create([
-            'titulo' => $request->titulo,
-            'descricao' => $request->descricao,
-            'justificativa' => $request->justificativa,
-            'valor_inicial' => $request->valor_inicial,
-            'valor_atual' => $request->valor_atual,
-            'valor_final' => $request->valor_final,
-            'regras' => $request->regras,
-            'types' => $request->types,
-            'categorias' => $request->categorias,
-            'tags' => $request->tags,
-        ]);
-        if($metas){
-            return response($metas,200)->json();
-        }else{
-            return response('{error: "Cadastro Metas"}',503)->json();
-        }
+        // $metas = Metas::create([
+        //     'titulo' => $request->titulo,
+        //     'descricao' => $request->descricao,
+        //     'justificativa' => $request->justificativa,
+        //     'valor_inicial' => $request->valor_inicial,
+        //     'valor_atual' => $request->valor_atual,
+        //     'valor_final' => $request->valor_final,
+        //     'regras' => $request->regras,
+        //     'types' => $request->types,
+        //     'categorias' => $request->categorias,
+        //     'tags' => $request->tags,
+        // ]);
+        // if($metas){
+        //     return response($metas,200)->json();
+        // }else{
+        //     return response('{error: "Cadastro Metas"}',503)->json();
+        // }
     }
 }

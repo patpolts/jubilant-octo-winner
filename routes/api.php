@@ -14,6 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/user', function (Request $request) {
+    $res = array(
+        "data" => array(
+            "username" => $request->user->email,
+            "name" => $request->user->name,
+            "admin" => $request->user->is_superadmin,
+        )
+    );
+    return response($res, 200)->header('Content-Type', 'text/json');
+})->middleware(['auth:api'])->name('auth_api');
+Route::get('/', function (Request $request) {
+    $res = array(
+        "data" => array(
+            "user" => $request->user->email,
+            "metas" => "",
+        ),
+    );
+    return response(
+                json_encode($res),
+                200
+            )->header('Content-Type', 'text/json');
+})->middleware(['auth'])->name('api');

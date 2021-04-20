@@ -20,10 +20,10 @@ class Eixos extends Model
      */
     protected $fillable = [
         'titulo',
-        'descricao',
-        'codigo',
-        'obs',
+        'justificativa',
+        'data_registro',
         'logs',
+        'active'
     ];
 
     /**
@@ -35,14 +35,6 @@ class Eixos extends Model
 
     protected $casts = [
         'logs' => 'array',
-    ];
-    
-    protected $viewTable = [
-        'id',
-        'id_rel',
-        'titulo',
-        'andamento',
-        'active',
     ];
     
     public function adminViewData()

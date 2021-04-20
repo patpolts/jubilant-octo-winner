@@ -8,40 +8,47 @@ use App\Models\GrandesTemas;
 use App\Models\Indicadores;
 use App\Models\ObjetivosEstrategicos;
 use App\Models\PlanoAcao;
-use GuzzleHttp\Psr7\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
+    
     public $contentView = array();
 
-    public function getById_indicadores($id)
-    {
-        return DB::table('indicadores')->where('id','=',$id)->get();
-    }
 
-    public function getById_eixos($id)
+    public function viewHome(Request $request)
     {
-        return DB::table('eixos')->where('id','=',$id)->get();
-    }
+        $this->contentView = array(
+            "header_title" => config('app.name')." | Admin (dashboard)",
+            "title" => "Dashboard",
+        );
+        return response($this->contentView,200)->header('Content-Type', 'text/json');
 
-    public function getById_objetivos($id)
+    //    return view('dashboard',$this->contentView);
+    }
+    public function usersApi(Request $request)
     {
-        return DB::table('objetivos_estrategicos')->where('id','=',$id)->get();
+        # code...
+        if(isset($request->users->email)){
+            $data[] = array(
+                ["data"] => $request->user,
+                ["message"] => "sucesso",
+                ["page"] => [
+                    "header_title" => config('app.name')." | Admin (dashboard)",
+                    "title" => "Dashboard",
+                ]
+            );
+            return response(json_encode($data),200)->header('Content-Type', 'text/json');
+        }
     }
-
-    public function getById_tema($id)
-    {
-        return DB::table('grandes_temas')->where('id','=',$id)->get();
-    }
-
     /**
      * Display the  view.
      *
@@ -68,25 +75,25 @@ class Controller extends BaseController
         $this->contentView["header_title"] = "| Ouse (view)"; 
         return view('admin.ouse', $this->contentView);
     }
-    public function viewAcao(PlanoAcao $model)
-    {
-        $results = [];
-        $resAcao = $model::get();
-        foreach ($resAcao as $value) {
-            $results =  array(
-                "acao" => $value, 
-                "eixo" => $this->getById_eixos($value['eixo_id']), 
-                "objetivo" => $this->getById_objetivos($value['objetivo_id']));
-        }
+    // public function viewAcao(PlanoAcao $model)
+    // {
+    //     $results = [];
+    //     $resAcao = $model::get();
+    //     foreach ($resAcao as $value) {
+    //         $results =  array(
+    //             "acao" => $value, 
+    //             "eixo" => $this->getById_eixos($value['eixo_id']), 
+    //             "objetivo" => $this->getById_objetivos($value['objetivo_id']));
+    //     }
 
-        $this->contentView["data"] = array(
-            "title" => "Plano de Ações ",
-            "results" => $results,
-        );
+    //     $this->contentView["data"] = array(
+    //         "title" => "Plano de Ações ",
+    //         "results" => $results,
+    //     );
 
-        $this->contentView["header_title"] = "| Plano de Ações (view)"; 
-        return view('admin.acao',$this->contentView);
-    }
+    //     $this->contentView["header_title"] = "| Plano de Ações (view)"; 
+    //     return view('admin.acao',$this->contentView);
+    // }
     /** 
      * Indicadores
      * ------------------
@@ -131,7 +138,7 @@ class Controller extends BaseController
             "results" => $model::get()
         );
 
-        $this->contentView["header_title"] = "| Grandes Temas (view)"; 
+        $this->contentView["header_title"] = " Grandes Temas (view)"; 
         return view('admin.grandetema', $this->contentView);
     }
 
@@ -148,4 +155,28 @@ class Controller extends BaseController
         return $arr;
     }
     
+    /**
+     * 
+     */
+
+
+    // public function getById_indicadores($id)
+    // {
+    //     return DB::table('indicadores')->where('id','=',$id)->get();
+    // }
+
+    public function getById_eixos($id)
+    {
+        return DB::table('eixos')->where('id','=',$id)->get();
+    }
+
+    public function getById_objetivos($id)
+    {
+        return DB::table('objetivos_estrategicos')->where('id','=',$id)->get();
+    }
+
+    public function getById_tema($id)
+    {
+        return DB::table('grandes_temas')->where('id','=',$id)->get();
+    }
 }

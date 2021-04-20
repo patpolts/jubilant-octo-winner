@@ -1,10 +1,18 @@
 $(function(){
+  var tabOpen = false;
+  var loading = true;
 
-  $(document).ready(function () { 
-        $("#loaded").show(); 
-        
-  });
-var tabOpen = false;
+
+  //when page has loaded
+    $(document).ready(function () { 
+      //changes on states
+      loading = false;
+
+      //methods
+      isLoading();
+    });
+
+  //SOBRE page
   $(".sobreItens").click(function (e) { 
     e.preventDefault();
     tabOpen = !tabOpen;
@@ -12,4 +20,14 @@ var tabOpen = false;
     $(open).toggle();
   });
 
-  });
+  function isLoading() {
+    if(loading){
+      $("#loading").show();  
+      $("#loaded").hide(); 
+    }else{
+      $("#loading").hide();  
+      $("#loaded").show(); 
+    }
+  }
+ 
+});

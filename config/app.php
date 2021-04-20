@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', $_ENV['APP_NAME']),
+    'name' => env('APP_NAME', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', $_ENV['APP_URL']),
+    'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
 

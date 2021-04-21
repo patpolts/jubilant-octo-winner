@@ -42,7 +42,7 @@ class Indicadores extends Model
 public function getById($id)
 {
    if(!is_numeric($id) || !is_integer(($id))){
-       return throw "error";
+       return "error";
    }
        try {    
           $data = self::where('id','=',$id)->get();
@@ -62,7 +62,7 @@ public function getById($id)
           
           return $arr;
        } catch (\Throwable $th) {
-           return throw $th;
+           return $th;
        }
 
 }

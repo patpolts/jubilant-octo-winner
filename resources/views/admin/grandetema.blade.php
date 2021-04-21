@@ -1,15 +1,11 @@
-{{ 
-    $title = $results["title"];
-    $grandetema = $results;
-]}}
-<x-App-Layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __($title) }}
-        </h2>
-       @include('components.navbar.admin');
-    </x-slot>
+@extends('layouts.admin')
+@section('header_title', $header_title)
 
+<h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    @section('title', $title)
+</h2>
+<!-- Content -->
+@section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -30,11 +26,11 @@
                           </tr>
                         </thead>
                         <tbody>
-                              @if (count($grandetema) > 1)
-                                @for ($i = 0; $i < count($grandetema); $i++)
+                              @if (count($results) > 1)
+                                @for ($i = 0; $i < count($results); $i++)
                                 <tr>
-                                    <th scope="row">{{$acao[$i]['id']}}</th>
-                                    <td>{{$grandetema[$i]['titulo']}}</td>
+                                    <th scope="row">{{$results[$i]['id']}}</th>
+                                    <td>{{$results[$i]['titulo']}}</td>
                                 </tr>
                                 @endfor
                               @else
@@ -53,4 +49,4 @@
         </div>
        
     </div>
-</x-App-Layout>
+@endsection

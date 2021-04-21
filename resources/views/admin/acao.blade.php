@@ -1,10 +1,11 @@
-<x-App-Layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __($data["title"]) }}
-        </h2>
-    </x-slot>
+@extends('layouts.admin')
+@section('header_title', $header_title)
 
+<h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    @section('title', $title)
+</h2>
+<!-- Content -->
+@section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -29,21 +30,21 @@
                           </tr>
                         </thead>
                         <tbody>
-                              @if (count($data["results"]["acao"]) > 1)
-                                @for ($i = 0; $i < count($acao); $i++)
+                              @if (count($results) > 1)
+                                @for ($i = 0; $i < count($results); $i++)
                                 <tr>
-                                    <th scope="row">{{$acao[$i]['id']}}</th>
-                                    <td>{{$acao[$i]['nome']}}</td>
-                                    <td>{{$acao[$i]['descricao']}}</td>
-                                    <td>{{$acao[$i]['ator']}}</td>
+                                    <th scope="row">{{$results[$i]['id']}}</th>
+                                    <td>{{$results[$i]['nome']}}</td>
+                                    <td>{{$results[$i]['descricao']}}</td>
+                                    <td>{{$results[$i]['ator']}}</td>
                                     <td>
-                                    @if ($data[[""]"eixo"])
-                                        {{$acao["eixo"]}}
+                                    @if ($results[$i]["eixo"])
+                                        {{$results["eixo"]}}
                                         @else
                                          sem eixo
                                     @endif
                                     </td>
-                                    <td>{{$acao[$i]['desempenho']}}</td>
+                                    <td>{{$results[$i]['desempenho']}}</td>
                                 </tr>
                                 @endfor
                               @else
@@ -62,4 +63,4 @@
         </div>
        
     </div>
-</x-App-Layout>
+@endsection

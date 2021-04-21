@@ -1,4 +1,4 @@
-<x-App-Layout>
+<x-app-layout>
     <!-- Head injections -->
         <x-slot name="head">
             <title>{{ $header_title }}</title>
@@ -86,4 +86,4 @@
         </div>
        
     </div>
-</x-App-Layout>
+</x-app-layout>

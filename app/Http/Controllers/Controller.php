@@ -20,8 +20,13 @@ use Illuminate\Support\Facades\App;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function __construct()
+    {
+         $contentView = array();
+        
+    }
     
-    public $contentView = array();
 
 
     public function viewHome(Request $request)
@@ -30,9 +35,9 @@ class Controller extends BaseController
             "header_title" => config('app.name')." | Admin (dashboard)",
             "title" => "Dashboard",
         );
-        return response($this->contentView,200)->header('Content-Type', 'text/json');
+        // return response($this->contentView,200)->header('Content-Type', 'text/json');
 
-    //    return view('dashboard',$this->contentView);
+       return view('dashboard',$this->contentView);
     }
     public function usersApi(Request $request)
     {
@@ -56,7 +61,7 @@ class Controller extends BaseController
      */
     public function viewEixos(Eixos $model)
     {
-        $this->contentView["data"] = array(
+        $this->contentView = array(
             "title" => "Eixos",
             "results" => $model::get()
         );
@@ -67,12 +72,12 @@ class Controller extends BaseController
     }
     public function viewOuse(ObjetivosEstrategicos $model)
     {
-        $this->contentView["data"] = array(
+        $this->contentView = array(
+            "header_title" => "Objetivos Ouse (view)",
             "title" => "Objetivos Ouse",
             "results" => $model::get()
         );
 
-        $this->contentView["header_title"] = "| Ouse (view)"; 
         return view('admin.ouse', $this->contentView);
     }
     // public function viewAcao(PlanoAcao $model)
@@ -100,7 +105,7 @@ class Controller extends BaseController
      */
     public function viewIndicadores(Indicadores $model)
     {
-        $this->contentView["data"] = array(
+        $this->contentView = array(
             "title" => "Objetivos Ouse",
             "results" => $model::get()
         );
@@ -133,13 +138,29 @@ class Controller extends BaseController
      */
     public function viewGrandeTema(GrandesTemas $model)
     {
-        $this->contentView["data"] = array(
+        $this->contentView = array(
             "title" => "Grandes Temas",
             "results" => $model::get()
         );
 
         $this->contentView["header_title"] = " Grandes Temas (view)"; 
         return view('admin.grandetema', $this->contentView);
+    }
+
+    /** 
+     * Ações
+     * ------------------
+     */
+    public function viewAcao(PlanoAcao $model)
+    {
+        $this->contentView = array(
+            "header_title" => " | Admin (Plano de Ações)",
+            "title" => "Dashboard",
+            "results" => $model::get()
+        );
+        // return response($this->contentView,200)->header('Content-Type', 'text/json');
+
+       return view('admin.acao',$this->contentView);
     }
 
     public function GetObjetivos(Request $request, Auth $user, MetasController $metas, Indicadores $indicadores, ObjetivosEstrategicos $objetivos)

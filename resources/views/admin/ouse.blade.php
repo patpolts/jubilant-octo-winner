@@ -1,24 +1,13 @@
-<x-App-Layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __($title) }}
-        </h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item" ><a href="/metas">Metas</a></li>
-                <li class="breadcrumb-item "><a href="/eixos">Eixos</a></li>
-                <li class="breadcrumb-item"><a href="#">Ouse</a></li>
-                <li class="breadcrumb-item "><a href="#">Grande Tema</a></li>
-                <li class="breadcrumb-item " aria-current="page"><a href="#">Ação</a></li>
-                <li class="breadcrumb-item " ><a href="/indicadores">Indicadores</a></li>
-                <li class="breadcrumb-item " ><a href="#">Categorias</a></li>
-                <li class="breadcrumb-item " ><a href="#">Tags</a></li>
-                <li class="breadcrumb-item " ><a href="#">Permissões</a></li>
-                <li class="breadcrumb-item " ><a href="#">Usuarios</a></li>
-            </ol>
-        </nav>
-    </x-slot>
+@extends('layouts.admin')
+@section('header_title', $header_title)
 
+<h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    @section('title', $title)
+</h2>
+        
+
+<!-- Content -->
+@section('content')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -42,14 +31,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                              @if (count($ouse) > 1)
-                                @for ($i = 0; $i < count($ouse); $i++)
+                              @if (count($results) > 1)
+                                @for ($i = 0; $i < count($results); $i++)
                                 <tr>
-                                    <th scope="row">{{$ouse[$i]['id']}}</th>
-                                    <td>{{$ouse[$i]['titulo']}}</td>
-                                    <td>{{$ouse[$i]['descricao']}}</td>
-                                    <td>{{$ouse[$i]['justificativa']}}</td>
-                                    <td>{{$ouse[$i]['indicadores']}}</td>
+                                    <th scope="row">{{$results[$i]['id']}}</th>
+                                    <td>{{$results[$i]['titulo']}}</td>
+                                    <td>{{$results[$i]['descricao']}}</td>
+                                    <td>{{$results[$i]['justificativa']}}</td>
+                                    <td>{{$results[$i]['indicadores']}}</td>
                                 </tr>
                                 @endfor
                               @else
@@ -68,4 +57,5 @@
         </div>
        
     </div>
-</x-App-Layout>
+
+@endsection

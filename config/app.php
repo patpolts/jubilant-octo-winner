@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => getenv('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'env' => getenv('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'production'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,9 +52,9 @@ return [
     |
     */
 
-    'url' => getenv('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost'),
 
-    'asset_url' => getenv('ASSET_URL', null),
+    'asset_url' => env('ASSET_URL', null),
 
     /*
     |--------------------------------------------------------------------------

@@ -25,7 +25,6 @@ Route::get('sobre', [HomeController::class,'sobre']);
 Route::get('/dashboard', [Controller::class,'viewHome'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/metas', [MetasController::class, 'view'])->middleware(['auth'])->name('metas');
-Route::get('/metas/editar', [MetasController::class, 'edit'])->middleware(['auth'])->name('metas_editar');
 Route::get('/eixos', [Controller::class, 'viewEixos'])->middleware(['auth'])->name('eixos');
 Route::get('/ouse', [Controller::class, 'viewOuse'])->middleware(['auth'])->name('objetivos');
 Route::get('/indicadores', [Controller::class, 'viewIndicadores'])->middleware(['auth'])->name('indicadores');

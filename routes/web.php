@@ -17,13 +17,18 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Public routes
+/**
+ * Views public
+ */
 Route::get('/', [HomeController::class,'index']);
 Route::get('sobre', [HomeController::class,'sobre']);
 
 //Protected Routes 
 Route::get('/dashboard', [Controller::class,'viewHome'])->middleware(['auth'])->name('dashboard');
 
+/**
+ *  Views Admin
+ */
 Route::get('/metas', [MetasController::class, 'view'])->middleware(['auth'])->name('metas');
 Route::get('/eixos', [Controller::class, 'viewEixos'])->middleware(['auth'])->name('eixos');
 Route::get('/ouse', [Controller::class, 'viewOuse'])->middleware(['auth'])->name('objetivos');
@@ -33,6 +38,9 @@ Route::get('/grandetema', [Controller::class, 'viewGrandeTema'])->middleware(['a
 
 Route::post('/metas/editar', [MetasController::class, 'edit'])->middleware(['auth'])->name('metas_editar');
 
+/**
+ * Api
+ */
 Route::get('/api', [ApiController::class,'home'])->middleware(['auth'])->name('home');
 Route::get('/api/metas', [ApiController::class,'metas'])->middleware(['auth'])->name('api_metas');
 Route::get('/api/indicadores', [ApiController::class,'indicadores'])->middleware(['auth'])->name('api_indicadores');

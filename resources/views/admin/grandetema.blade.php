@@ -2,7 +2,7 @@
     $title = $results["title"];
     $grandetema = $results;
 ]}}
-<x-app-layout>
+<x-App-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __($title) }}
@@ -53,4 +53,4 @@
         </div>
        
     </div>
-</x-app-layout>
+</x-App-layout>

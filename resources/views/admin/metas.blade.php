@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-App-layout>
     <!-- Head injections -->
         <x-slot name="head">
             <title>{{ $header_title }}</title>
@@ -52,18 +52,16 @@
                                         <th scope="row">{{$item["id"]}}</th>
                                         
                                         <td>{{$item['titulo']}}</td>
-                                        <td>{{$item["indicadores"]["codigo"]}}</td>
+                                        <td> -- </td>
                                         <td>{{$item['descricao']}}</td>
                                         <td>{{$item['justificativa']}}</td>
-                                        <td>{{$item["indicadores"]["valor"]}}</td>
+                                        <td>--</td>
                                         <td>
-                                            @foreach ($item["pne"] as $pne)
-                                                {{$pne}}
-                                            @endforeach
+                                           --
                                         </td>
-                                        <td>{{$item["ods"]}}</td>
-                                        <td>{{$item['active']}}</td>
-                                        <td>{{$item['data_registro']}}</td>
+                                        <td>--</td>
+                                        <td>--</td>
+                                        <td>--</td>
                                     </tr>
                                 @endforeach
                                 {{-- @endfor --}}
@@ -88,4 +86,4 @@
         </div>
        
     </div>
-</x-app-layout>
+</x-App-layout>

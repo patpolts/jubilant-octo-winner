@@ -1,7 +1,7 @@
 @include('layouts.head')
 @include('layouts.unesp_header')
 @include('layouts.header')
-<!-- Home content  -->
+<!-- Home content  --> 
         <main>
             <div class=" head-filtros">
                 <div class="row">

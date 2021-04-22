@@ -39,7 +39,7 @@ Route::post('/metas/editar', [MetasController::class, 'edit'])->middleware(['aut
 /**
  * Api
  */
-Route::get('/api', [ApiController::class,'home'])->middleware(['auth'])->name('home');
+Route::get('/api', [ApiController::class,'home'])->middleware(['auth'])->name('api');
 Route::get('/api/metas', [ApiController::class,'metas'])->middleware(['auth'])->name('api_metas');
 Route::get('/api/indicadores', [ApiController::class,'indicadores'])->middleware(['auth'])->name('api_indicadores');
 Route::get('/api/grandestemas', [ApiController::class,'grandestemas'])->middleware(['auth'])->name('api_grandestemas');

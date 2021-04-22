@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
          * Dummy seeds
          */
         // DB::table('users')->truncate();
-        $faker = Faker::create();
+        // $faker = Faker::create();
 
         //gera o user admin master, com todas as permissões
         $password = Hash::make(getenv('MASTER_PASS'));

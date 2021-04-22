@@ -34,8 +34,7 @@
         }
     },
     "scripts": {
-        "compile": "composer install --optimize-autoloader --no-dev",
-        "post-install-cmd": [
+        "compile": [
             "@php artisan config:cache",
             "@php artisan route:cache",
             "@php artisan view:cache"

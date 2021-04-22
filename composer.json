@@ -35,9 +35,9 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "@php artisan config:cache",
-            "@php artisan route:cache",
-            "@php artisan view:cache"
+            "@php artisan clear-compiled",
+            "@php artisan cache:clear",
+            "@php artisan config:clear"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

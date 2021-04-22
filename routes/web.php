@@ -20,15 +20,13 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Views public
  */
-Route::get('/', [HomeController::class,'index']);
+Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('sobre', [HomeController::class,'sobre']);
-
-//Protected Routes 
-Route::get('/dashboard', [Controller::class,'viewHome'])->middleware(['auth'])->name('dashboard');
 
 /**
  *  Views Admin
  */
+Route::get('/dashboard', [Controller::class,'viewHome'])->middleware(['auth'])->name('dashboard');
 Route::get('/metas', [MetasController::class, 'view'])->middleware(['auth'])->name('metas');
 Route::get('/eixos', [Controller::class, 'viewEixos'])->middleware(['auth'])->name('eixos');
 Route::get('/ouse', [Controller::class, 'viewOuse'])->middleware(['auth'])->name('objetivos');
@@ -41,7 +39,7 @@ Route::post('/metas/editar', [MetasController::class, 'edit'])->middleware(['aut
 /**
  * Api
  */
-Route::get('/api', [ApiController::class,'home'])->middleware(['auth'])->name('home');
+Route::get('/api', [ApiController::class,'home'])->middleware(['auth'])->name('api');
 Route::get('/api/metas', [ApiController::class,'metas'])->middleware(['auth'])->name('api_metas');
 Route::get('/api/indicadores', [ApiController::class,'indicadores'])->middleware(['auth'])->name('api_indicadores');
 Route::get('/api/grandestemas', [ApiController::class,'grandestemas'])->middleware(['auth'])->name('api_grandestemas');

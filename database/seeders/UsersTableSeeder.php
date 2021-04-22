@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash as Hash;
 
 class UsersTableSeeder extends Seeder
@@ -19,16 +20,19 @@ class UsersTableSeeder extends Seeder
         /**
          * Dummy seeds
          */
-        DB::table('users')->truncate();
+        // DB::table('users')->truncate();
         $faker = Faker::create();
 
         //gera o user admin master, com todas as permissões
-        $password = Hash::make(env('MASTER_PASS'));
+        $password = Hash::make(getenv('MASTER_PASS'));
+        $usertoken = Hash::make(getenv('MASTER_EMAIL'));
         DB::table('users')->insert([
-            'name' => env('MASTER_NAME'),
-            'email' => env('MASTER_EMAIL'),
+            'name' => getenv('MASTER_NAME'),
+            'email' => getenv('MASTER_EMAIL'),
             'password' => $password,
             'is_superadmin' => 0,
+            'active' => 1,
+            'token' => $usertoken
         ]);
 
     }

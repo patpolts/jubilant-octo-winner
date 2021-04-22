@@ -27,14 +27,14 @@ class UsersTableSeeder extends Seeder
         //gera o user admin master, com todas as permissões
         $password = Hash::make(getenv('MASTER_PASS'));
         $usertoken = Str::random(60);
-        
+
         DB::table('users')->insert([
             'name' => getenv('MASTER_NAME'),
             'email' => getenv('MASTER_EMAIL'),
             'password' => $password,
             'is_superadmin' => 0,
             'active' => 1,
-            'token' => $usertoken
+            'user_token' => $usertoken
         ]);
 
     }

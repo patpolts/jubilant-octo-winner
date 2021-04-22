@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash as Hash;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -25,7 +26,8 @@ class UsersTableSeeder extends Seeder
 
         //gera o user admin master, com todas as permissões
         $password = Hash::make(getenv('MASTER_PASS'));
-        $usertoken = Hash::make(getenv('MASTER_EMAIL'));
+        $usertoken = Str::random(60);
+        
         DB::table('users')->insert([
             'name' => getenv('MASTER_NAME'),
             'email' => getenv('MASTER_EMAIL'),

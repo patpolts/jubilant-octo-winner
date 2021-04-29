@@ -80,7 +80,7 @@
                                                 <div class="meta-descricao">
                                                     <div class="tema">
                                                         <small>Grande Tema Estratégico</small>
-                                                        <p>{{$metas["titulo"]}}</p>
+                                                        <p>{{$metas["indicadores"][0]["titulo"]}}</p>
                                                     </div>
                                                     <div class="objetivo">
                                                         <small>Objetivo Ouse</small>
@@ -112,7 +112,7 @@
                                                     <h5 class="card-title">{{$metas["indicadores"][0]["titulo"]}}</h5>
                                                     <div class="card-text">
                                                         <small>Ano referência</small>
-                                                        <p>{{$metas["indicadores_anos"][0]["ano"]}}</p>
+                                                        <p>2021</p>
                                                     </div>
                                                     <div class="card-text">
                                                         <small>Meta do indicador</small>
@@ -123,7 +123,7 @@
                                                         <p>{{$metas["indicadores"][0]["valor"]}}</p>
                                                     </div>
                                                     <div class="andamento">
-                                                        <span>{{$metas["indicadores_anos"][0]["valor"]}}%</span>
+                                                        <span>{{$metas["indicadores"][0]["valor_inicial"]}}%</span>
                                                         <span>Andamento geral</span>
                                                     </div>
                                                 </div>

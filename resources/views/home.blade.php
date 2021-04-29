@@ -123,7 +123,7 @@
                                                         <p>{{$metas["indicadores"][0]["valor"]}}</p>
                                                     </div>
                                                     <div class="andamento">
-                                                        <span>{{$metas["indicadores_anos"][0]["valor"]}}%</span>
+                                                        <span>{{$metas["indicadores"][0]["valor_inicial"]}}%</span>
                                                         <span>Andamento geral</span>
                                                     </div>
                                                 </div>

@@ -96,8 +96,8 @@ class Metas extends Model
                 'data_registro' => $value->data_registro,
                 'pne' => $value->pne,
                 'ods' => $value->ods,
-                'indicadores' => $arr2,
-                'indicadores_anos' => $arr3
+                'indicadores' => $arr2 ?? null,
+                'indicadores_anos' => $arr3 ?? null
             );
 
         }

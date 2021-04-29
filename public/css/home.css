@@ -237,6 +237,9 @@ header{
     font-weight: bold;
 
 }
+.tab-content .tabs{
+    margin: 2% auto;
+}
 .card{
     text-align: left;
     padding-top: 0px;
@@ -247,27 +250,149 @@ header{
     background-color: #fff;
 
 }
+
 .card .card-header .meta-id{
-    display: inline-flex;
     width: 10%;
-    border-top: 8px solid #b43a36;
+    height: 80px;
+    border-top: 10px solid #b43a36;
     color: #b43a36;
+    float: left;
 
 }
 .card .card-header .meta-id span{ 
     width: 100%;
     float: left;
+    text-align: center;
 
 }
-.card .card-header .meta-buttons{
-    display: inline-flex;
-    width: 10%;
+    .card .card-header .meta-id span:nth-child(1){
+        font-size: 1em;
+        text-transform: uppercase;
+     }
+    .card .card-header .meta-id span:nth-child(2){
+        font-size: 2em;
+        font-weight: bold;
+    }
 
+.card .card-header .meta-buttons{
+    width: 20%;
+    float: right;
+    margin: 2% 0px 0px 0px;
+
+}
+.card .card-header .meta-buttons > div{
+    float: right;
+    width: 35%;
+    height: 70px;
+}
+
+.card .card-header .meta-buttons > div span{
+    font-size: .6em;
+    display: inline-block;
+    width: 100%;
+}
+.card .card-header .meta-buttons > div:first-child{
+    margin-left: 2%;
+}
+.card .card-header .meta-buttons > div a{
+    width: 100%;
+    font-style: italic;
+    border-radius: .6em;
+}
+.card .card-header .meta-buttons > div a.btn-secondary{
+    background: #6188A7;
+    color: #fff;
+}
+.card .card-header .meta-buttons > div a.btn-primary{
+    background: #F6F6F6;
+    color: #6188A7;
+    border-color: #F6F6F6;
 }
 .card .card-header .meta-descricao{
-    display: inline-flex;
-    width: 75%;
+    width: 70%;
+    float: left;
+    padding: 0px 1%;
+    text-align: left;
 
+}
+
+
+.card.notify{
+    background: #F7F7F7;
+}
+.card.notify .card-header{
+    background: inherit;
+}
+.card.notify .card-body{
+    background: inherit;
+}
+.card.notify .card-header .meta-descricao h5{
+    color: #b43a36;
+    font-size: 2em;
+    padding: 2% 1%;
+}
+.card.notify .card-header .meta-descricao small{
+    color: #999;
+    font-size: 1.5em;
+    padding: 2% 1%;
+    font-weight: normal;
+}
+
+.card  small{
+    color: #999;
+    font-size: .8em;
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px;
+}
+.card  p{
+    color: #A44B3A;
+    font-weight: 700;
+    font-size: 1em;
+    margin: 0px;
+    padding: 0px;
+}
+.card .card-title{
+    color: #A44B3A;
+    font-weight: 700;
+    font-size: 1.5em;
+    margin: 0px;
+    padding: 0px;
+}
+.card .card-body{
+    background: #F7F7F7;
+    width: 98%;
+    margin: 2% auto;
+}
+.card .card-body .dados{
+    width: 60%;
+    float: left;
+}
+.card .card-body .grafico{
+    width: 40%;
+    float: left;
+}
+.card .card-body .card-text{
+    width: calc(100% / 3);
+    float: left;
+    margin: 1% 0px 0px 0px;
+    text-align: left;
+}
+.card .card-body .card-text p{
+    color: #666;
+    font-size: 2em;
+}
+.card .card-body .andamento{
+    float: left;
+    margin: 5% 0px 0px 0px;
+    font-weight: bold;
+}
+.card .card-body .andamento span{
+    color: #A44B3A;
+    font-size: 1.5em;
+}
+.card .card-body .andamento span:first-child{
+    font-size: 2em;
 }
 
 .content-sobre h1{

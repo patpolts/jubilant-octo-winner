@@ -11,6 +11,8 @@ use App\Http\Middleware\Authenticate;
 use App\Models\Eixos;
 use App\Models\GrandesTemas;
 use App\Models\Indicadores;
+use App\Models\IndicadoresAnos;
+use App\Models\Metas;
 use App\Models\ObjetivosEstrategicos;
 use App\Models\PlanoAcao;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -32,10 +34,11 @@ class HomeController extends BaseController
     {   
         //
     }
-    public function index(Request $request)
+    public function index(Request $request, Metas $metas, Indicadores $indicadores, IndicadoresAnos $indicadoresAnos)
     {
         
       $statusIndicadores =   $this->statusIndicadores();
+    //   $metas = 
 
         $this->contentView = array(
             "header_title" => "PDI ",
@@ -69,10 +72,13 @@ class HomeController extends BaseController
                     "item_class" => ""
                     )
             ),
-            "data" => array(
-                "status_indicadores" =>   $statusIndicadores
+            "results" => array(
+                "metas" =>   $metas->getMetas(),
+                "total" => count($metas->getMetas())
             )
         );
+        // print_r('<pre>');
+        // print_r($this->contentView);
 
         return view('home', $this->contentView);
     }

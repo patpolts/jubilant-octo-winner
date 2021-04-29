@@ -1,17 +1,11 @@
-<x-app-layout>
-    <!-- Head injections -->
-        <x-slot name="head">
-            <title>{{ $header_title }}</title>
-        </x-slot>
-    
-    <!-- Content header-->
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __($title) }}
-            </h2>
-        </x-slot>
-        
-        
+@extends('layouts.admin')
+@section('header_title', $header_title)
+
+<h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    @section('title', $title)
+</h2>
+<!-- Content -->
+@section('content')
     <!-- Content -->
     <div class="py-12">
 
@@ -38,33 +32,39 @@
                             <th scope="col">valor</th>
                             <th scope="col">pne</th>
                             <th scope="col">ods</th>
-                            <th scope="col">ativo</th>
                             <th scope="col">data</th>
                           </tr>
                         </thead>
                         <tbody>
-                              @if (count($data) >= 1) 
-                                {{-- @for ($i = 0; $i <= count($data); $i++)  --}}
-                                @foreach ($data as $item)
-                                {{-- {{ print_r('<pre>')}} 
-                                    {{ print_r($item)}}  --}}
+                              @if (count($results) >= 1) 
+                                @foreach ($results as $item)
                                     <tr>
                                         <th scope="row">{{$item["id"]}}</th>
-                                        
                                         <td>{{$item['titulo']}}</td>
-                                        <td> -- </td>
+                                        <td> {{ $item['indicadores'][0]['titulo'] }}</td>
                                         <td>{{$item['descricao']}}</td>
                                         <td>{{$item['justificativa']}}</td>
-                                        <td>--</td>
+                                        <td>{{$item['indicadores'][0]['valor'] }}</td>
                                         <td>
-                                           --
+                                            @foreach ($item['pne'] as $key => $pne)
+                                               <label for="pne">
+                                                   <input type="checkbox" name="pne" id="pne_{{$key}}" value="pne_{{$key}}" checked>
+                                                    <p>{{ $pne }}</p>
+                                            </label> 
+                                            @endforeach
                                         </td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
+                                        <td>
+                                            @foreach ($item['ods'] as $key => $ods)
+
+                                            <label for="pne">
+                                                <input type="checkbox" name="ods" id="ods_{{$key}}" value="ods_{{$key}}" checked>
+                                                <p>{{ $ods }}</p>
+                                         </label> 
+                                            @endforeach
+                                        </td>
+                                        <td>{{$item['data_registro']}}</td>
                                     </tr>
                                 @endforeach
-                                {{-- @endfor --}}
                               @else
                               <tr>
                                   <th></th>
@@ -81,9 +81,14 @@
                               @endif
                         </tbody>
                     </table>
+                    <p>
+                        @if (count($results) >= 1)
+                          {{count($results)}} registros encontrados.
+                        @endif
+                    </p>
                 </div>
             </div>
         </div>
        
     </div>
-</x-app-layout>
+@endsection

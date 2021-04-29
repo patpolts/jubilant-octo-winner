@@ -63,7 +63,7 @@ class Metas extends Model
        foreach ($metas as $value) { 
 
             $indicadores   = $this->indicador->where('id',$value->indicador_id)->get();
-
+            
             foreach ($indicadores as $idc) {
                 $arr2[] = array(
                     'id' => $idc->id,

@@ -77,8 +77,8 @@ class HomeController extends BaseController
                 "total" => count($metas->getMetas())
             )
         );
-        // print_r('<pre>');
-        // print_r($this->contentView);
+        print_r('<pre>');
+        print_r($this->contentView);
 
         return view('home', $this->contentView);
     }

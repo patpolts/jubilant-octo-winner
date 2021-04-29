@@ -47,4 +47,26 @@ class IndicadoresAnos extends Model
         }
         return $arr;
     }
+
+    public function indicadorAnos($id)
+    {
+
+        $data  = $this->where('id',$id)->get();
+
+        if(count($data) >= 1){
+            foreach ($data as $value) {
+                $arr[]  = array(
+                    "id" => $value->id,
+                    "ano" => $value->ano,
+                    "valor" => $value->valor,
+                    "justificativa" => $value->justificativa
+                );
+            }  
+
+            return $arr;
+        }else{
+            return false;
+        }  
+
+    }
 }

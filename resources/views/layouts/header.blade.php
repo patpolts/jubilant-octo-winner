@@ -27,19 +27,4 @@
                 </figure>
             </div>
         </div>
-        @if ($isHome)
-            <div class="container status-metas">
-                <div class="row">
-                    @foreach ($data["status_indicadores"] as $key => $value )
-                        <div class="col-4">
-                            <div class="button-metas">
-                                <div class="btn btn-outline-secondary border-light">
-                                    <span>{{ $value["valor"]}}</span>
-                                    <span>{{ $value["legenda"]}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-            </div> 
-        @endif
     </header> 

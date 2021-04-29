@@ -43,28 +43,77 @@ class Metas extends Model
         'ods' => 'array',
         'logs' => 'array',
     ];
+    protected $indicador, $indicadorAnos;
+
+    public function __construct()
+    {
+
+        $this->metas         = self::class;
+        $this->indicador     = DB::table('indicadores');
+        $this->indicadorAnos = DB::table('indicadores_anos');
+
+    }
     
     public function getMetas()
     {
-       $metas = self::where("active",'=',true)->get();
-       $arr = [];
-       $arr2 = [];
-       foreach ($metas as $value) {
+       $metas = self::where('active',true)->get();
+        $arr = [];  
+        $arr2 = [];  
+        $arr3 = [];  
+       foreach ($metas as $value) { 
+
+            $indicadores   = $this->indicador->where('id',$value->indicador_id)->get();
+
+            foreach ($indicadores as $idc) {
+                $arr2[] = array(
+                    'id' => $idc->id,
+                    'titulo'        => $idc->titulo,
+                    'descricao'     => $idc->descricao,
+                    'valor_inicial' => $idc->valor_inicial,
+                    'valor'         => $idc->valor,
+                    'valor_final'   => $idc->valor_final,
+                    'data_registro' => $idc->data_registro,
+                );
+
+                $indicadorAnos = $this->indicadorAnos->where('indicador_id',$idc->id)->get();
+
+                foreach ($indicadorAnos as $idca) {
+                    $arr3[] = array(
+                        "id" => $idca->id,
+                        "ano" => $idca->ano,
+                        "valor" => $idca->valor,
+                        "justificativa" => $idca->justificativa
+                    );
+                }
+
+            }
 
             $arr[] = array(
                 'id' => $value->id,
-                'indicadores' => $this->getIndicadores($value->indicador_id),
                 'titulo' => $value->titulo,
                 'descricao' => $value->descricao,
                 'justificativa' => $value->justificativa,
                 'data_registro' => $value->data_registro,
                 'pne' => $value->pne,
                 'ods' => $value->ods,
+                'indicadores' => $arr2,
+                'indicadores_anos' => $arr3
             );
 
-       }
+        }
+
+    //    print_r('<pre>');
+    //    print_r($arr);
+
        return $arr;
+
     }
+
+    // public function metas()
+    // {
+    //     return $this->where('active',true)->get();
+    // }
+
     public function adminViewData()
     {
         $arr = [];
@@ -77,27 +126,16 @@ class Metas extends Model
         return $arr;
     }
 
-    public function getIndicadores($id)
-    {
-        
-        $indicadores = DB::table('indicadores')->where('id','=',$id)->get();
-        $arr = [];
-        if(count($indicadores) <= 1){
-            foreach ($indicadores as $value) {
-                $arr["codigo"]        = $value->id;
-                $arr["nome"]        = $value->titulo;
-                $arr['descricao']     = $value->descricao;
-                $arr["anos"]          = $value->anos;
-                $arr["metas"]         = $value->metas;
-                $arr['valor_inicial'] = $value->valor_inicial;
-                $arr["valor"]         = $value->valor;
-                $arr["valor_final"]   = $value->valor_final;
-                $arr['data_registro'] = $value->data_registro;
-            } 
+    // public function indicador($id)
+    // {
+    //     $model = Indicadores::class;
+    //     return $model::indicador($id);
+    // }
 
-        }
-        return $arr;
-
-    }
+    // public function indicadorAnos($id)
+    // {
+    //     $model = IndicadoresAnos::class;
+    //     return $model::indicadorAnos($id);
+    // }
 
 }

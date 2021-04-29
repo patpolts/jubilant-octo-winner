@@ -23,12 +23,13 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Titulo</th>
-                            <th scope="col">Descrição</th>
                             <th scope="col">Justificativa</th>
-                            <th scope="col">Ano inicial</th>
-                            <th scope="col">Ano final</th>
-                            <th scope="col">Status atual</th>
-                            <th scope="col">Status final</th>
+                            <th scope="col">Ano </th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Meta</th>
+                            <th scope="col">Indicador</th>
+                            <th scope="col">Ano 5</th>
+                            <th scope="col">Data</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -37,12 +38,12 @@
                                 <tr>
                                     <th scope="row">{{$results[$i]['id']}}</th>
                                     <td>{{$results[$i]['titulo']}}</td>
-                                    <td>{{$results[$i]['descricao']}}</td>
                                     <td>{{$results[$i]['justificativa']}}</td>
-                                    <td>{{$results[$i]['ano_inicial']}}</td>
-                                    <td>{{$results[$i]['ano_final']}}</td>
-                                    <td>{{$results[$i]['status_atual']}}</td>
-                                    <td>{{$results[$i]['status_final']}}</td>
+                                    <td>{{$results[$i]['meta']}}</td>
+                                    <td>{{$results[$i]['indicador']}}</td>
+                                    <td>{{$results[$i]['ano']}}</td>
+                                    <td>{{$results[$i]['valor']}}</td>
+                                    <td>{{$results[$i]['data_registro']}}</td>
                                 </tr>
                                 @endfor
                               @else
@@ -56,6 +57,11 @@
                               @endif
                         </tbody>
                     </table>
+                    <p>
+                        @if (count($results) >= 1)
+                          {{count($results)}} registros encontrados.
+                        @endif
+                    </p>
                 </div>
             </div>
         </div>

@@ -54,21 +54,15 @@ class MetasController extends Controller
             $dataMetas = $model->getMetas();
             $results = [];
 
-                // foreach ($dataMetas as $value) {
-                //     $results[] =  array(
-                //         "metas" => $value, 
-                //         "indicadores" => $indicadores->getById($value['indicador_id'])
-                //     );
-                // }
-                // print_r('<pre>');
-                // print_r($dataMetas);
-            
             $this->contentView = array(
                 "header_title" => config('app.name')." | Admin (metas)",
                 "title" => "Metas",
                 "content" => "view",
-                "data" => $dataMetas,
+                "results" => $dataMetas,
             );
+            // print_r('<pre>');
+            // print_r($this->contentView);
+
             return view('admin.metas', $this->contentView);
         } catch (\Throwable $th) {
             throw $th;

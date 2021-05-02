@@ -66,7 +66,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        @if ($results["total"] >= 1)
+                        @if (count($results["metas"]) >= 1)
                             
                             <div class="tab-content" >
                                 @foreach ($results['metas'] as $metas )
@@ -176,7 +176,15 @@
                                     </div>
                                 @endforeach
                             </div>
-
+                        @else
+                            
+                        <div class="tab-content" >
+                                <div class="tabs tab-none" >
+                                    <div class="card noresults">
+                                        <p>Nenhum resultado encontrado</p>
+                                    </div>
+                                </div>
+                        </div>
                         @endif
                     </div>
                 </div>

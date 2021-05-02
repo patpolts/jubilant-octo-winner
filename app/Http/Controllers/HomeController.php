@@ -14,7 +14,7 @@ use App\Models\Indicadores;
 use App\Models\IndicadoresAnos;
 use App\Models\Metas;
 use App\Models\ObjetivosEstrategicos;
-use App\Models\PlanoAcao;
+use App\Models\AcoesEstrategicas as PlanoAcao;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -32,13 +32,15 @@ class HomeController extends BaseController
 
     public function __construct()
     {   
-        //
+        $this->metas = Metas::class;
     }
     public function index(Request $request, Metas $metas, Indicadores $indicadores, IndicadoresAnos $indicadoresAnos)
     {
         
       $statusIndicadores =   $this->statusIndicadores();
     //   $metas = 
+
+        $dataMetas = $metas->getMetas();
 
         $this->contentView = array(
             "header_title" => "PDI ",
@@ -73,8 +75,8 @@ class HomeController extends BaseController
                     )
             ),
             "results" => array(
-                "metas" =>   $metas->getMetas(),
-                "total" => count($metas->getMetas())
+                "metas" =>   $dataMetas ?? [],
+                "total" => $dataMetas ? count($dataMetas) : 0
             )
         );
         // print_r('<pre>');

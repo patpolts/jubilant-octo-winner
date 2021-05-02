@@ -43,6 +43,18 @@ class MetasController extends Controller
     
     public $contentView = array();
 
+    public function __construct()
+    {
+
+        // $this->metas         = self::class;
+        $this->indicador     = DB::table('indicadores');
+        $this->indicadorAnos = DB::table('indicadores_anos');
+        $this->objetivos     = DB::table('objetivos_estrategicos');
+        $this->eixos         = DB::table('eixos');
+        $this->ods           = DB::table('ods');
+        $this->pne           = DB::table('pne');
+
+    }
 
     /**
      * Methods
@@ -51,7 +63,7 @@ class MetasController extends Controller
 
     public function view(Metas $model,Indicadores $indicadores) {
         try {
-            $dataMetas = $model->getMetas();
+            $dataMetas = $model->adminViewData();
             $results = [];
 
             $this->contentView = array(
@@ -60,9 +72,6 @@ class MetasController extends Controller
                 "content" => "view",
                 "results" => $dataMetas,
             );
-            // print_r('<pre>');
-            // print_r($this->contentView);
-
             return view('admin.metas', $this->contentView);
         } catch (\Throwable $th) {
             throw $th;
@@ -76,28 +85,15 @@ class MetasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit(Request $request)
+    public function edit(Request $request, Metas $metas)
     {
-        // $metasAll = Metas::all();
-        // if($request->method() == 'POST' && isset($request->metas_id)){
-        //     $id = $request->metas_id;
-        //     $update = Metas::find($id);
-        //     foreach ($update as $key => $value) {
-        //         if($value != $update->key){
-        //             $update->key = $value;
-        //         }
-        //     }
-        //     $update->save();
-        //     $message = 'Atualizado com sucesso';
-        //     $metasAll->fresh();
-        //     return response($message,200)->json();
-        // }else{
-        //     return view('admin.metas_edit', [
-        //         'title' => 'Metas',
-        //         'metas' => $metasAll,
-        //         'message' => ''
-        //     ]);
+        // if(isset($request->method) && $request->method == 'POST'){
+        //     print_r('<pre>');
+        //     print_r($request);
+        //     print_r($request->addMetas);
         // }
+        // $dataMetas = $metas->adminEditData($request->,);
+
     }
 
     /**
@@ -105,12 +101,24 @@ class MetasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function add()
+    public function addMetas(Request $request)
     {
-        return view('admin.metas_add', [
-            'title' => 'Metas',
-            'metas' => Metas::get()
-        ]);
+        // print_r('<pre>');
+        // print_r($request);
+        // exit;
+        // if(isset($request->method) && $request->method == 'POST'){
+        //     print_r('<pre>');
+        //     print_r($request);
+        //     print_r($request->addMetas);
+        // }
+        
+        $this->contentView = array(
+            "header_title" => " | Metas (add)",
+            "title" => "Metas",
+            "content" => "add",
+            "results" => [],
+        );
+        // return view('admin.metas_add',$this->contentView);
     }
    
    

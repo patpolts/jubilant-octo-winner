@@ -15,6 +15,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page">Visualizar</li>
+                        <li class="breadcrumb-item"><a href="metas/adicionar">Adicionar</a></li>
                         <li class="breadcrumb-item"><a href="metas/editar">Editar</a></li>
                         
                         </ol>
@@ -27,12 +28,16 @@
                             <th scope="col">id</th>
                             <th scope="col">titulo</th>
                             <th scope="col">indicadores</th>
-                            <th scope="col">descricao</th>
-                            <th scope="col">justificativa</th>
-                            <th scope="col">valor</th>
-                            <th scope="col">pne</th>
+                            <th scope="col">objetivos</th>
+                            <th scope="col">eixos</th>
                             <th scope="col">ods</th>
+                            <th scope="col">pne</th>
+                            <th scope="col">valor</th>
+                            <th scope="col">valor inicial</th>
                             <th scope="col">data</th>
+                            <th scope="col">ativo</th>
+                                      
+                                      
                           </tr>
                         </thead>
                         <tbody>
@@ -41,33 +46,21 @@
                                     <tr>
                                         <th scope="row">{{$item["id"]}}</th>
                                         <td>{{$item['titulo']}}</td>
-                                        <td> {{ $item['indicadores'][0]['titulo'] }}</td>
-                                        <td>{{$item['descricao']}}</td>
-                                        <td>{{$item['justificativa']}}</td>
-                                        <td>{{$item['indicadores'][0]['valor'] }}</td>
-                                        <td>
-                                            @foreach ($item['pne'] as $key => $pne)
-                                               <label for="pne">
-                                                   <input type="checkbox" name="pne" id="pne_{{$key}}" value="pne_{{$key}}" checked>
-                                                    <p>{{ $pne }}</p>
-                                            </label> 
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach ($item['ods'] as $key => $ods)
-
-                                            <label for="pne">
-                                                <input type="checkbox" name="ods" id="ods_{{$key}}" value="ods_{{$key}}" checked>
-                                                <p>{{ $ods }}</p>
-                                         </label> 
-                                            @endforeach
-                                        </td>
-                                        <td>{{$item['data_registro']}}</td>
+                                        <td>{{$item['indicador_id']}}</td>             
+                                        <td>{{$item['objetivo_id']}}</td>              
+                                        <td>{{$item['eixo_id']}}</td>                   
+                                        <td>{{$item['ods_id']}}</td>                    
+                                        <td>{{$item['pne_id']}}</td>             
+                                        <td>{{$item['valor']}}</td>                 
+                                        <td>{{$item['valor_inicial']}}</td>                 
+                                        <td>{{$item['data_registro']}}</td>                 
+                                        <td>{{$item['active']}}</td>
                                     </tr>
                                 @endforeach
                               @else
                               <tr>
                                   <th></th>
+                                  <td></td>
                                   <td></td>
                                   <td></td>
                                   <td></td>

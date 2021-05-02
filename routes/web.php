@@ -34,13 +34,17 @@ Route::get('/indicadores', [Controller::class, 'viewIndicadores'])->middleware([
 Route::get('/acao', [Controller::class, 'viewAcao'])->middleware(['auth'])->name('acao');
 Route::get('/grandetema', [Controller::class, 'viewGrandeTema'])->middleware(['auth'])->name('grandetema');
 
-Route::post('/metas/editar', [MetasController::class, 'edit'])->middleware(['auth'])->name('metas_editar');
+Route::post('/admin/metas/adicionar', [MetasController::class, 'add'])->middleware(['auth'])->name('metasAdd');
+Route::post('/admin/metas/editar', [MetasController::class, 'edit'])->middleware(['auth'])->name('metasEdit');
 
 /**
  * Api
  */
 Route::get('/api', [ApiController::class,'home'])->middleware(['auth'])->name('api');
+
 Route::get('/api/metas', [ApiController::class,'metas'])->middleware(['auth'])->name('api_metas');
+Route::get('/api/metas/adicionar', [ApiController::class,'metasAdd'])->middleware(['auth'])->name('api_metas_add');
+
 Route::get('/api/indicadores', [ApiController::class,'indicadores'])->middleware(['auth'])->name('api_indicadores');
 Route::get('/api/grandestemas', [ApiController::class,'grandestemas'])->middleware(['auth'])->name('api_grandestemas');
 Route::get('/api/objetivos', [ApiController::class,'objetivos'])->middleware(['auth'])->name('api_objetivos');

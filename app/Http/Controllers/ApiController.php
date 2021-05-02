@@ -27,22 +27,23 @@ class ApiController extends Controller
     
     public function __construct()
     {
-        $this->metas                 = Metas                ::class;
-        $this->indicadores           = Indicadores          ::class;
-        $this->indicadoresAnos       = IndicadoresAnos      ::class;
-        $this->objetivosEstrategicos = ObjetivosEstrategicos::class;
-        $this->grandesTemas          = GrandesTemas         ::class;
-        $this->eixos                 = Eixos                ::class;
-        $this->planosAcao            = PlanoAcao::class;
+        // $this->metas                 = Metas                ::class;
+        // $this->indicadores           = Indicadores          ::class;
+        // $this->indicadoresAnos       = IndicadoresAnos      ::class;
+        // $this->objetivosEstrategicos = ObjetivosEstrategicos::class;
+        // $this->grandesTemas          = GrandesTemas         ::class;
+        // $this->eixos                 = Eixos                ::class;
+        // $this->planosAcao            = PlanoAcao::class;
     }
 
     public function authToken($request)
     {
         
-        if(!isset($request->user()->user_token)){ 
-            return false;
+        if(Auth::user()){
+            return $request->user()->user_token;
+        }else{
+            return response(array('error' => "Usuario não aitenticado"));
         }
-        return $request->user()->user_token;
 
     }
     public function home(Request $request, User $user)
@@ -68,38 +69,54 @@ class ApiController extends Controller
     }
 
 
-    public function metas(Request $request, User $user)
+    public function metas(Request $request, Metas $metas)
     {
         // $token = Str::random(60);
 
         if($this->authToken($request)){
 
-            $usertoken = Hash::make(Auth::user()->email);
-            $query = $this->metas::where('active',true)->get();
-            $data = [];
-            foreach ($query as $key => $value) {
-                $data[] = array(
-                    "indicador"  => $value->indicador_id,
-                    "titulo"        => $value->titulo,
-                    "descricao"     => $value->descricao,
-                    "justificativa" => $value->justificativa,
-                    "valor"         => $value->valor,
-                    "data_registro" => $value->data_registro,
-                    "pne"           => $value->pne,
-                    "ods"           => $value->ods,
-                    "active"        => $value->active,
-                );
+            $usertoken = $request->user()->user_token;
+            $query = $metas::where('active',1)->get();
+           
+            if(count($query) >=1 ){
+                foreach ($query as $value) {
+                    $data[] = array(
+                        'id'            => $value->id,
+                        'indicador_id'  => $value->indicador_id,                  
+                        'objetivo_id'   => $value->objetivo_id,                   
+                        'eixo_id'       => $value->eixo_id,                   
+                        'ods_id'        => $value->ods_id,                    
+                        'pne_id'        => $value->pne_id,                    
+                        'titulo'        => $value->titulo,                    
+                        'descricao'     => $value->descricao,                 
+                        'valor'         => $value->valor,                 
+                        'valor_inicial' => $value->valor_inicial,                 
+                        'data_registro' => $value->data_registro,                 
+                        'active'        => $value->active,
+                    );
+                }
+                $res = [
+                    "data" => array(
+                        "metas" => $data,
+                    ),
+                    "user" => $usertoken,
+                    "message" => "sucesso",
+                ];
+            }else{
+
+                $res = [
+                    "data" => array(
+                        "error" => "nenhum resultado encontrado",
+                    ),
+                    "user" => $usertoken,
+                    "message" => "error",
+                ];
+
             }
-            $res = [
-                "data" => array(
-                    "metas" => $data,
-                ),
-                "user" => $usertoken,
-                "message" => "sucesso",
-            ];
             // print_r('<pre>');
             // print_r($res);
             return response($res,200)->header('Content-Type', 'text/json');  
+
         }else{
 
             $res = [
@@ -111,7 +128,19 @@ class ApiController extends Controller
         }
     }
 
+    public function metasAdd(Request $request, Metas $metas)
+    {
+        print_r('<pre>');
+        print_r($request);
 
+        $res = [
+            "data" => array(
+                "user" => Auth::user()->user_token,
+            ),
+            "message" => "sucess",
+        ];
+        return response($res,200)->header('Content-Type', 'text/json');  
+    }
     public function indicadores(Request $request, User $user)
     {
         # code...

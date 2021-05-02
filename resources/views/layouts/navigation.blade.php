@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('objetivos')" :active="request()->routeIs('objetivos')">
                         {{ __('Objetivos Estrategicos') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('grandetema')" :active="request()->routeIs('grandetema')">
+                        {{ __('Grandes Temas') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -89,6 +92,9 @@
             </x-nav-link>
             <x-nav-link :href="route('objetivos')" :active="request()->routeIs('objetivos')">
                 {{ __('Objetivos Estrategicos') }}
+            </x-nav-link>
+            <x-nav-link :href="route('grandetema')" :active="request()->routeIs('grandetema')">
+                {{ __('Grandes Temas') }}
             </x-nav-link>
         </div>
 

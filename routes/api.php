@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,15 +25,10 @@ Route::get('/user', function (Request $request) {
     );
     return response($res, 200)->header('Content-Type', 'text/json');
 })->middleware(['auth:api'])->name('auth_api');
-Route::get('/', function (Request $request) {
-    $res = array(
-        "data" => array(
-            "user" => $request->user->email,
-            "metas" => "",
-        ),
-    );
-    return response(
-                json_encode($res),
-                200
-            )->header('Content-Type', 'text/json');
-})->middleware(['auth'])->name('api');
+
+
+Route::get('/', [ApiController::class,'home'])->middleware(['auth'])->name('api_metas_adicionar');
+
+Route::get('/metas', [ApiController::class,'metas'])->middleware(['auth'])->name('api_metas');
+Route::get('/metas/adicionar', [ApiController::class,'metasAdd'])->middleware(['auth'])->name('api_metas_adicionar');
+

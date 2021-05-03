@@ -240,6 +240,26 @@ header{
 .tab-content .tabs{
     margin: 2% auto;
 }
+.container.interna{
+    background: #fff;
+    margin-top: 2%;
+}
+.card.interna{
+    background: #F6F6F6;
+    text-align: center;
+    margin-bottom: 2%;
+}
+.card.interna .card-header{
+    width: auto;
+    margin: 0px auto;
+    padding: 1% 2%;
+}
+.card.interna .card-header h5{
+    font-size: 1em;    
+    color:  rgba(153, 153, 153, 1);
+    margin: 0;
+    padding: 0;
+}
 .card{
     text-align: left;
     padding-top: 0px;
@@ -258,6 +278,10 @@ header{
     color: #b43a36;
     float: left;
 
+}
+.card .card-header .meta-id a{
+    text-decoration: none;
+    color: inherit;
 }
 .card .card-header .meta-id span{ 
     width: 100%;

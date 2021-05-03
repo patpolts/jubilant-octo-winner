@@ -161,6 +161,57 @@ class HomeController extends BaseController
         );
         return $hardcoded;
     }
+
+    public function metasView(Request $request, Metas $metas)
+    {
+       if(isset($request->metasId)){
+            $id = $request->metasId;
+            $dataMetas = $metas->getTemplateData($id);
+            
+       }else{
+           $dataMetas = [];
+       }
+
+        $this->contentView = array(
+            "header_title" => "PDI ",
+            "title" => "PDI - Metas",
+            "site_url" => route('home'),
+            "mobile" => $this->isMobile,
+            "isHome" => true,
+            "navmenu" => array(
+                0 => array(
+                    "title" => "início",
+                    "link" => $request->getUri(),
+                    "tab" => "home",
+                    "role" => "presentation",
+                    "class" => "nav-item ",
+                    "item_class" => "active"
+                    ),
+                1 => array(
+                    "title" => "sobre o pdi",
+                    "link" => $request->getUri().'sobre',
+                    "tab" => "sobre",
+                    "role" => "presentation",
+                    "class" => "nav-item",
+                    "item_class" => ""
+                    ),
+                2 => array(
+                    "title" => "contato",
+                    "link" => $request->getUri(),
+                    "tab" => "contato",
+                    "role" => "presentation",
+                    "class" => "nav-item",
+                    "item_class" => ""
+                    )
+            ),
+            "results" => array(
+                "metas" =>   $dataMetas ?? [],
+                "total" => $dataMetas ? count($dataMetas) : 0
+            )
+        );
+
+        return view('meta', $this->contentView);
+    }
    /***
     * Objetivos estrategicos
     */

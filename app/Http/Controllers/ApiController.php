@@ -128,17 +128,27 @@ class ApiController extends Controller
         }
     }
 
-    public function metasAdd(Request $request, Metas $metas)
+    public function metasAdd(Request $request)
     {
-        print_r('<pre>');
-        print_r($request);
+        if($request->method() == 'POST'){
+            $res = [
+                "data" => array(
+                    "user" => Auth::user()->user_token,
+                ),
+                "message" => "sucess",
+            ];  
+        }else{
+            $res = [
+                "data" => array(
+                    "user" => Auth::user()->user_token,
+                ),
+                "message" => "sucess",
+            ];
 
-        $res = [
-            "data" => array(
-                "user" => Auth::user()->user_token,
-            ),
-            "message" => "sucess",
-        ];
+            return $request->data;
+        }
+        print_r('<pre>');
+        print_r($res);
         return response($res,200)->header('Content-Type', 'text/json');  
     }
     public function indicadores(Request $request, User $user)

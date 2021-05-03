@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Stmt\Throw_;
+use Throwable;
 
 class MetasController extends Controller
 {
@@ -59,24 +60,36 @@ class MetasController extends Controller
     /**
      * Methods
      */
-
-
+    public function validaData($msg,$param = '')
+    {
+        $this->contentView = array(
+            "header_title" => config('app.name')." | Admin (metas)",
+            "title" => "Metas",
+            "content" => "view",
+            "results" => ['error' => $msg],
+        );
+        return true;
+    }
+   
     public function view(Metas $model,Indicadores $indicadores) {
-        try {
-            $dataMetas = $model->adminViewData();
-            $results = [];
-
-            $this->contentView = array(
-                "header_title" => config('app.name')." | Admin (metas)",
-                "title" => "Metas",
-                "content" => "view",
-                "results" => $dataMetas,
-            );
-            return view('admin.metas', $this->contentView);
-        } catch (\Throwable $th) {
-            throw $th;
-            return $th;
+        
+        $dataMetas = $model->adminViewData();
+        if($dataMetas){
+            $this->contentView["results"] = $dataMetas;
+            $this->contentView["message"] = null;
+        }else{
+            $this->contentView["results"] = [];
+            $this->contentView["message"] = "Erro ao trazer metas";
         }
+
+        $this->contentView = array(
+            "header_title" => config('app.name')." | Admin (metas)",
+            "title" => "Metas",
+            "content" => "view",
+            
+        );
+        return view('admin.metas', $this->contentView);
+       
         
     }
 
@@ -87,11 +100,6 @@ class MetasController extends Controller
      */
     public function edit(Request $request, Metas $metas)
     {
-        // if(isset($request->method) && $request->method == 'POST'){
-        //     print_r('<pre>');
-        //     print_r($request);
-        //     print_r($request->addMetas);
-        // }
         // $dataMetas = $metas->adminEditData($request->,);
 
     }
@@ -101,24 +109,49 @@ class MetasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function addMetas(Request $request)
+    public function addMetas(Request $request, Metas $metas)
     {
-        // print_r('<pre>');
-        // print_r($request);
-        // exit;
-        // if(isset($request->method) && $request->method == 'POST'){
-        //     print_r('<pre>');
-        //     print_r($request);
-        //     print_r($request->addMetas);
-        // }
+        if ($request->is('metas/*')) {
+            //
+            if($request->isMethod('post') && $request->input('_token')){
+                $this->validate($request,[
+                    'titulo' => 'max:255'
+                ]);
+                $arr[] = array(                
+                    'titulo'        => $this->validaData($request->dataTitulo) ? $request->dataTitulo : null,                    
+                    'descricao'     => $this->validaData($request->dataDescricao) ? $request->dataDescricao : null, 
+                    'indicador_id'  => $this->validaData($request->dataIndicadores) ? $request->dataIndicadores : null,                  
+                    'objetivo_id'   => $this->validaData($request->dataObjetivos) ? $request->dataObjetivos : null,                   
+                    'eixo_id'       => $this->validaData($request->dataEixos) ? $request->dataEixos : null,                   
+                    'ods_id'        => $this->validaData($request->dataOds) ? $request->dataOds : null,                    
+                    'pne_id'        => $this->validaData($request->dataPne) ? $request->dataPne : null,                    
+                    'valor'         => $this->validaData($request->dataValor) ? $request->dataValor : null,                 
+                    'valor_inicial' => $this->validaData($request->dataValorInicial) ? $request->dataValorInicial : null,                 
+                    'data_registro' => $this->validaData($request->dataRegistro) ? $request->dataRegistro : null, 
+                    'active' => 1,
+                );
+
+                $updateMetas = $metas->adminAddData($arr);
+                if($updateMetas){
+                    $message = "Meta ".$updateMetas." adicionada com sucesso";
+                }
+
+            }else{
+                $message = null;
+            }
+            $this->contentView = array(
+                "header_title" => " | Metas (add)",
+                "title" => "Metas",
+                "content" => "add",
+                "results" => [],
+                "url" => $request->url(),
+                "message" => $message
+            );
+
+            return view('admin.metas_add',$this->contentView);
+
+        }
         
-        $this->contentView = array(
-            "header_title" => " | Metas (add)",
-            "title" => "Metas",
-            "content" => "add",
-            "results" => [],
-        );
-        // return view('admin.metas_add',$this->contentView);
     }
    
    

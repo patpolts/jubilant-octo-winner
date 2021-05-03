@@ -29,7 +29,51 @@ class Indicadores extends Model
         'active',
     ];
 
-    
+    public function indicadoresView()
+    {
+        $view = self::all();
+        if(count($view) >= 1){
+           foreach ($view as $value) {
+              $arr[] = [
+                'id' => $value->id,
+                'indicador_anos_id' => $value->indicador_anos_id,
+                'titulo' => $value->titulo,
+                'descricao' => $value->descricao,
+                'valor_atual' => $value->valor_atual,
+                'valor_meta' => $value->valor_meta,
+                'data_registro' => $value->data_registro,
+                'active' => $value->active,
+              ];
+           }
+           return $arr;
+        }else{
+            return false;
+        }
+    }
+
+    public function indicadoresEdit($arr,$id)
+    {
+        if(count($arr) >=1 ){
+            $data = self::where('id',$id)->update($arr);
+            if($data){
+                print_r($data);
+                return $data;
+            }
+            
+        }else{
+            return false;
+        }
+    }
+    public function adminAddIndicadores($arr)
+    {
+        $data = self::insert($arr);
+        if($data == 1){
+            return $data;
+        }else{
+            return false;
+        }
+       
+    }
 // public function getById($id)
 // {
 //    if(!is_numeric($id) || !is_integer(($id))){
@@ -106,11 +150,12 @@ class Indicadores extends Model
 
     public function getById($id)
     {
-        $view = self::where('id',$id);
-        for ($i=0; $i < count($view); $i++) { 
-            $arr[] = $view[$i];
+        $view = self::where('id',$id)->get();
+        if($view){
+            return $view;
+        }else{
+            return false;
         }
-        return $arr;
     }
 
 }

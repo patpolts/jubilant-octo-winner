@@ -107,16 +107,6 @@ class Controller extends BaseController
      * Indicadores
      * ------------------
      */
-    public function viewIndicadores(Indicadores $model)
-    {
-        $this->contentView = array(
-            "title" => "Objetivos Ouse",
-            "results" => $model::get()
-        );
-
-        $this->contentView["header_title"] = "| Indicadores (view)"; 
-        return view('admin.indicadores', $this->contentView);
-    }
     public function statusIndicadores(Indicadores $model)
     {
         //hardcoded 

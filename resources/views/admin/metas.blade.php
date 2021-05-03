@@ -14,9 +14,9 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Visualizar</li>
-                        <li class="breadcrumb-item"><a href="metas/adicionar">Adicionar</a></li>
-                        <li class="breadcrumb-item"><a href="metas/editar">Editar</a></li>
+                        <li class="breadcrumb-item active" aria-current="visualizar">Visualizar</li>
+                        <li class="breadcrumb-item"><a href="{{ route('metas_adicionar') }}">Adicionar</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('metas_editar') }}">Editar</a></li>
                         
                         </ol>
                     </nav>

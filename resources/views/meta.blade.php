@@ -3,67 +3,7 @@
 @include('layouts.header')
 <!-- Home content  --> 
         <main>
-            <div class="box-filtros">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="content-filters">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                            <option selected>Escolha o grande tema estrategico</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-
-                                        <button type="button" class="btn btn-light">filtrar</button>
-                                    </div>
-                                    <div class="col-6"> 
-                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                            <option selected>Escolha o ODS</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-
-                                        <button type="button" class="btn btn-light">filtrar</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                            <option selected>Escolha o objetivo ouse</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                        <button type="button" class="btn btn-light">filtrar</button>
-                                    </div>
-                                    <div class="col-6">
-                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                            <option selected>Escolha o ano de referência</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-
-                                        <button type="button" class="btn btn-light">filtrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-            </div>
-            <div class=" head-metas">
-                <div class="row">
-                    <div class="col-12">
-                        {{-- <small><em>Ver todas as metas</em></small> --}}
-                    </div>
-                </div>
-            </div>
-            <div class="container">
+            <div class="container interna">
                 <div class="row">
                     <div class="col">
                         @if (count($results["metas"]) >= 1)
@@ -74,10 +14,8 @@
                                         <div class="card details">
                                             <div class="card-header border-0">
                                                 <div class="meta-id" >
-                                                    <a href="{{route('public_metas_view',$metas['id'])}}">
                                                         <span>meta</span>
                                                         <span>{{$metas["id"]}}</span>
-                                                    </a>
                                                 </div>
                                                 <div class="meta-descricao">
                                                     <div class="tema">
@@ -96,14 +34,6 @@
                                                                 <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
                                                             </svg>
                                                             <span>Receber notificações</span>
-                                                        </a>
-                                                    </div>
-                                                    <div>
-                                                        <a href="#" class="btn btn-secondary" data-target="{{$loop->index}}" data-content="details">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pie-chart-fill" viewBox="0 0 16 16">
-                                                                <path d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z"/>
-                                                            </svg>
-                                                            <span>Detalhes da meta</span>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -188,6 +118,48 @@
                                 </div>
                         </div>
                         @endif
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card interna">
+                            <div class="card-header">
+                                <h5>Objetivos globais para o Desenvolvimento Sustentável</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="ods-list">
+                                    //
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card interna">
+                            <div class="card-header">
+                                <h5>Metas do PNE</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="pne-list">
+                                    //
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card interna">
+                            <div class="card-header">
+                                <h5>Serie historica</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="graficoInterna" id="{{$metas['id']}}" data-grafico="[2290,2600,3250,3620,4200]" >
+                                    <canvas id="metaChart-{{$metas['id']}}" width="100%" height="40%"></canvas>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

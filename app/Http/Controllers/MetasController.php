@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use PhpParser\Node\Stmt\Throw_;
+use Throwable;
 
 class MetasController extends Controller
 {
@@ -43,31 +44,52 @@ class MetasController extends Controller
     
     public $contentView = array();
 
+    public function __construct()
+    {
+
+        // $this->metas         = self::class;
+        $this->indicador     = DB::table('indicadores');
+        $this->indicadorAnos = DB::table('indicadores_anos');
+        $this->objetivos     = DB::table('objetivos_estrategicos');
+        $this->eixos         = DB::table('eixos');
+        $this->ods           = DB::table('ods');
+        $this->pne           = DB::table('pne');
+
+    }
 
     /**
      * Methods
      */
-
-
+    public function validaData($msg,$param = '')
+    {
+        $this->contentView = array(
+            "header_title" => config('app.name')." | Admin (metas)",
+            "title" => "Metas",
+            "content" => "view",
+            "results" => ['error' => $msg],
+        );
+        return true;
+    }
+   
     public function view(Metas $model,Indicadores $indicadores) {
-        try {
-            $dataMetas = $model->getMetas();
-            $results = [];
-
-            $this->contentView = array(
-                "header_title" => config('app.name')." | Admin (metas)",
-                "title" => "Metas",
-                "content" => "view",
-                "results" => $dataMetas,
-            );
-            // print_r('<pre>');
-            // print_r($this->contentView);
-
-            return view('admin.metas', $this->contentView);
-        } catch (\Throwable $th) {
-            throw $th;
-            return $th;
+        
+        $dataMetas = $model->adminViewData();
+        if($dataMetas){
+            $this->contentView["results"] = $dataMetas;
+            $this->contentView["message"] = null;
+        }else{
+            $this->contentView["results"] = [];
+            $this->contentView["message"] = "Erro ao trazer metas";
         }
+
+        $this->contentView = array(
+            "header_title" => config('app.name')." | Admin (metas)",
+            "title" => "Metas",
+            "content" => "view",
+            
+        );
+        return view('admin.metas', $this->contentView);
+       
         
     }
 
@@ -76,28 +98,10 @@ class MetasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit(Request $request)
+    public function edit(Request $request, Metas $metas)
     {
-        // $metasAll = Metas::all();
-        // if($request->method() == 'POST' && isset($request->metas_id)){
-        //     $id = $request->metas_id;
-        //     $update = Metas::find($id);
-        //     foreach ($update as $key => $value) {
-        //         if($value != $update->key){
-        //             $update->key = $value;
-        //         }
-        //     }
-        //     $update->save();
-        //     $message = 'Atualizado com sucesso';
-        //     $metasAll->fresh();
-        //     return response($message,200)->json();
-        // }else{
-        //     return view('admin.metas_edit', [
-        //         'title' => 'Metas',
-        //         'metas' => $metasAll,
-        //         'message' => ''
-        //     ]);
-        // }
+        // $dataMetas = $metas->adminEditData($request->,);
+
     }
 
     /**
@@ -105,12 +109,49 @@ class MetasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function add()
+    public function addMetas(Request $request, Metas $metas)
     {
-        return view('admin.metas_add', [
-            'title' => 'Metas',
-            'metas' => Metas::get()
-        ]);
+        if ($request->is('metas/*')) {
+            //
+            if($request->isMethod('post') && $request->input('_token')){
+                $this->validate($request,[
+                    'titulo' => 'max:255'
+                ]);
+                $arr[] = array(                
+                    'titulo'        => $this->validaData($request->dataTitulo) ? $request->dataTitulo : null,                    
+                    'descricao'     => $this->validaData($request->dataDescricao) ? $request->dataDescricao : null, 
+                    'indicador_id'  => $this->validaData($request->dataIndicadores) ? $request->dataIndicadores : null,                  
+                    'objetivo_id'   => $this->validaData($request->dataObjetivos) ? $request->dataObjetivos : null,                   
+                    'eixo_id'       => $this->validaData($request->dataEixos) ? $request->dataEixos : null,                   
+                    'ods_id'        => $this->validaData($request->dataOds) ? $request->dataOds : null,                    
+                    'pne_id'        => $this->validaData($request->dataPne) ? $request->dataPne : null,                    
+                    'valor'         => $this->validaData($request->dataValor) ? $request->dataValor : null,                 
+                    'valor_inicial' => $this->validaData($request->dataValorInicial) ? $request->dataValorInicial : null,                 
+                    'data_registro' => $this->validaData($request->dataRegistro) ? $request->dataRegistro : null, 
+                    'active' => 1,
+                );
+
+                $updateMetas = $metas->adminAddData($arr);
+                if($updateMetas){
+                    $message = "Meta ".$updateMetas." adicionada com sucesso";
+                }
+
+            }else{
+                $message = null;
+            }
+            $this->contentView = array(
+                "header_title" => " | Metas (add)",
+                "title" => "Metas",
+                "content" => "add",
+                "results" => [],
+                "url" => $request->url(),
+                "message" => $message
+            );
+
+            return view('admin.metas_add',$this->contentView);
+
+        }
+        
     }
    
    

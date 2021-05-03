@@ -4,29 +4,42 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
+use Illuminate\Notifications\Notifiable;
 
-class ObjetivosEstrategicos extends Model
+class AcoesEstrategicas extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable, InteractsWithDatabase;
 
-    protected $fillable = [
-        'titulo',
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [    
+        'eixo_id',
+        'objetivo_id',
+        'tema_id',          
+        'titulo',            
         'descricao',
         'justificativa',
-        'data_registro',
-        'active',
+        'objetivo_especifico',
+        'ator', //id array
+        'desempenho',             
+        'data_registro',              
+        'active', 
+    ];
+
+        /**
+     * 
+     */
+    protected $atributes = [
     ];
 
     protected $casts = [
     ];
-
-    protected $atributes = [
-    ];
-
-    public function view()
-    {
-        # code...
-    }
+    
     public function adminViewData()
     {
         $view = self::all()->toArray();
@@ -49,4 +62,5 @@ class ObjetivosEstrategicos extends Model
     {
         //
     }
+
 }

@@ -26,14 +26,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                              @if (count($results) > 1)
-                                @for ($i = 0; $i < count($results); $i++)
-                                <tr>
-                                    <th scope="row">{{$results[$i]['id']}}</th>
-                                    <td>{{$results[$i]['titulo']}}</td>
-                                </tr>
-                                @endfor
-                              @else
+                            @if (count($results) > 1)
+                              @foreach ($results as $item)
+                              <tr>
+                                  <th scope="row">{{$item['id']}}</th>
+                                  <td>{{$item['titulo']}}</td>
+                              </tr>
+                              @endforeach
+                            @else
                               <tr>
                                   <th></th>
                                   <td></td>
@@ -41,7 +41,7 @@
                                   <td>Nada Encontrado</td>
                                   <td></td>
                                 </tr>
-                              @endif
+                            @endif
                         </tbody>
                     </table>
                 </div>

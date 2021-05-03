@@ -20,10 +20,8 @@ class Eixos extends Model
      */
     protected $fillable = [
         'titulo',
-        'justificativa',
-        'data_registro',
-        'logs',
-        'active'
+        'descricao',
+        'data_registro'
     ];
 
     /**
@@ -34,7 +32,6 @@ class Eixos extends Model
     ];
 
     protected $casts = [
-        'logs' => 'array',
     ];
     
     public function adminViewData()
@@ -42,10 +39,28 @@ class Eixos extends Model
         $arr = [];
         $view = self::all();
         for ($i=0; $i < count($view); $i++) { 
-            foreach ($this->viewTable as  $key => $value) {
+            foreach ($view as  $key => $value) {
                $arr[$i] = [$key => $value];
             }
         }
         return $arr;
     }
+
+    public function getById($id)
+    {
+        $arr = [];
+        $view = self::where('id',$id);
+        for ($i=0; $i < count($view); $i++) { 
+            foreach ($view as  $key => $value) {
+               $arr[$i] = [$key => $value];
+            }
+        }
+        return $arr;
+    }
+
+    public function getRelated($id)
+    {
+        //
+    }
+
 }

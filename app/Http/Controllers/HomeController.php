@@ -14,7 +14,7 @@ use App\Models\Indicadores;
 use App\Models\IndicadoresAnos;
 use App\Models\Metas;
 use App\Models\ObjetivosEstrategicos;
-use App\Models\PlanoAcao;
+use App\Models\AcoesEstrategicas as PlanoAcao;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -32,13 +32,15 @@ class HomeController extends BaseController
 
     public function __construct()
     {   
-        //
+        $this->metas = Metas::class;
     }
     public function index(Request $request, Metas $metas, Indicadores $indicadores, IndicadoresAnos $indicadoresAnos)
     {
         
       $statusIndicadores =   $this->statusIndicadores();
     //   $metas = 
+
+        $dataMetas = $metas->getMetas();
 
         $this->contentView = array(
             "header_title" => "PDI ",
@@ -73,8 +75,8 @@ class HomeController extends BaseController
                     )
             ),
             "results" => array(
-                "metas" =>   $metas->getMetas(),
-                "total" => count($metas->getMetas())
+                "metas" =>   $dataMetas ?? [],
+                "total" => $dataMetas ? count($dataMetas) : 0
             )
         );
         // print_r('<pre>');
@@ -158,6 +160,57 @@ class HomeController extends BaseController
             ]
         );
         return $hardcoded;
+    }
+
+    public function metasView(Request $request, Metas $metas)
+    {
+       if(isset($request->metasId)){
+            $id = $request->metasId;
+            $dataMetas = $metas->getTemplateData($id);
+            
+       }else{
+           $dataMetas = [];
+       }
+
+        $this->contentView = array(
+            "header_title" => "PDI ",
+            "title" => "PDI - Metas",
+            "site_url" => route('home'),
+            "mobile" => $this->isMobile,
+            "isHome" => true,
+            "navmenu" => array(
+                0 => array(
+                    "title" => "início",
+                    "link" => $request->getUri(),
+                    "tab" => "home",
+                    "role" => "presentation",
+                    "class" => "nav-item ",
+                    "item_class" => "active"
+                    ),
+                1 => array(
+                    "title" => "sobre o pdi",
+                    "link" => $request->getUri().'sobre',
+                    "tab" => "sobre",
+                    "role" => "presentation",
+                    "class" => "nav-item",
+                    "item_class" => ""
+                    ),
+                2 => array(
+                    "title" => "contato",
+                    "link" => $request->getUri(),
+                    "tab" => "contato",
+                    "role" => "presentation",
+                    "class" => "nav-item",
+                    "item_class" => ""
+                    )
+            ),
+            "results" => array(
+                "metas" =>   $dataMetas ?? [],
+                "total" => $dataMetas ? count($dataMetas) : 0
+            )
+        );
+
+        return view('meta', $this->contentView);
     }
    /***
     * Objetivos estrategicos

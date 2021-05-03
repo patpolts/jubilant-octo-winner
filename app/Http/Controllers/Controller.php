@@ -7,7 +7,7 @@ use App\Models\Eixos;
 use App\Models\GrandesTemas;
 use App\Models\Indicadores;
 use App\Models\ObjetivosEstrategicos;
-use App\Models\PlanoAcao;
+use App\Models\AcoesEstrategicas as PlanoAcao;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -16,15 +16,19 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
+use App\Providers\AppServiceProvider;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected $grandeTemas;
+
     public function __construct()
     {
          $contentView = array();
-        
+
+        // $this->grandeTemas = GrandesTemas->get();
     }
     
 
@@ -42,17 +46,17 @@ class Controller extends BaseController
     public function usersApi(Request $request)
     {
         # code...
-        if(isset($request->users->email)){
-            $data[] = array(
-                ["data"] => $request->user,
-                ["message"] => "sucesso",
-                ["page"] => [
-                    "header_title" => config('app.name')." | Admin (dashboard)",
-                    "title" => "Dashboard",
-                ]
-            );
-            return response(json_encode($data),200)->header('Content-Type', 'text/json');
-        }
+        // if(isset($request->users->email)){
+        //     $data[] = array(
+        //         ["data"] => $request->user,
+        //         ["message"] => "sucesso",
+        //         ["page"] => [
+        //             "header_title" => config('app.name')." | Admin (dashboard)",
+        //             "title" => "Dashboard",
+        //         ]
+        //     );
+        //     return response(json_encode($data),200)->header('Content-Type', 'text/json');
+        // }
     }
     /**
      * Display the  view.
@@ -103,16 +107,6 @@ class Controller extends BaseController
      * Indicadores
      * ------------------
      */
-    public function viewIndicadores(Indicadores $model)
-    {
-        $this->contentView = array(
-            "title" => "Objetivos Ouse",
-            "results" => $model::get()
-        );
-
-        $this->contentView["header_title"] = "| Indicadores (view)"; 
-        return view('admin.indicadores', $this->contentView);
-    }
     public function statusIndicadores(Indicadores $model)
     {
         //hardcoded 
@@ -133,17 +127,17 @@ class Controller extends BaseController
         return $hardcoded;
     }
     /** 
-     * Grande Temas
+     * Grandes Temas
      * ------------------
      */
-    public function viewGrandeTema(GrandesTemas $model)
+    public function viewGrandeTema(Request $request, GrandesTemas $grandesTemas)
     {
         $this->contentView = array(
+            "header_title" => " |  Grandes Temas (view)",
             "title" => "Grandes Temas",
-            "results" => $model::get()
+            "results" => $grandesTemas->getGrandeTemasData(),
         );
-
-        $this->contentView["header_title"] = " Grandes Temas (view)"; 
+        print_r($grandesTemas->getGrandeTemasData());
         return view('admin.grandetema', $this->contentView);
     }
 

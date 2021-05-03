@@ -20,100 +20,142 @@ class Indicadores extends Model
      * @var array
      */
     protected $fillable = [
-        'indicador_id',
+        'indicador_anos_id',
         'titulo',
         'descricao',
-        'justificativa',
-        'valor_inicial',
-        'valor',
-        'valor_final',
+        'valor_atual',
+        'valor_meta',
         'data_registro',
-        'logs',
         'active',
     ];
-    
-    protected $atributes = [
-        'active' => true,
-    ];
 
-    protected $casts = [
-        'logs' => 'array',
-    ];
-    
-public function getById($id)
-{
-   if(!is_numeric($id) || !is_integer(($id))){
-       report("ERRO: parametro id não é valido");
-       return false;
-   }
-       try {    
-          $indicador = self::where('id',$id)->get();
-            foreach ($indicador as $value) {
-                $indicador_anos = DB::table('indicadores_anos')->where('indicador_id',$value->id);
-                foreach ($indicador_anos as $anos) {
-                    $arr2[] = array(
-                        'id' => $anos->id,
-                        'titulo' => $anos->titulo,
-                        'justificativa' => $anos->justificativa,
-                        'ano' => $anos->ano,
-                        'valor' => $anos->valor,
-                        'data' => $anos->data_registro
-                    );
-                }
-                $arr[] = array(
-                    'id' => $value->id,
-                    'indicador_anos'  => $arr2,
-                    'titulo'        => $value->titulo,
-                    'descricao'     => $value->descricao,
-                    'justificativa' => $value->justificativa,
-                    'valor_inicial' => $value->valor_inicial,
-                    'valor'         => $value->valor,
-                    'valor_final'   => $value->valor_final,
-                    'data_registro' => $value->data_registro,
-                );
-            }
-          
-          return json_encode($arr);
-       } catch (\Throwable $e) {
-           report($e);
-           return false;
-       }
-
-}
-
-    public function indicador($id)
+    public function indicadoresView()
     {
-        $data  = $this->where('id',$id)->get();
-        
-        if(count($data)){
-            foreach ($data as $value) {
-                $arr[] = array(
-                    "id"            => $value->id,
-                    "titulo"        => $value->titulo,
-                    "descricao"     => $value->descricao,
-                    "metas"         => $value->metas,
-                    "valor_inicial" => $value->valor_inicial,
-                    "valor"         => $value->valor,
-                    "valor_final"   => $value->valor_final,
-                    "data_registro" => $value->data_registro
-                );
-            }
-            return $arr;
+        $view = self::all();
+        if(count($view) >= 1){
+           foreach ($view as $value) {
+              $arr[] = [
+                'id' => $value->id,
+                'indicador_anos_id' => $value->indicador_anos_id,
+                'titulo' => $value->titulo,
+                'descricao' => $value->descricao,
+                'valor_atual' => $value->valor_atual,
+                'valor_meta' => $value->valor_meta,
+                'data_registro' => $value->data_registro,
+                'active' => $value->active,
+              ];
+           }
+           return $arr;
         }else{
             return false;
-        }  
+        }
+    }
 
-    } 
+    public function indicadoresEdit($arr,$id)
+    {
+        if(count($arr) >=1 ){
+            $data = self::where('id',$id)->update($arr);
+            if($data){
+                print_r($data);
+                return $data;
+            }
+            
+        }else{
+            return false;
+        }
+    }
+    public function adminAddIndicadores($arr)
+    {
+        $data = self::insert($arr);
+        if($data == 1){
+            return $data;
+        }else{
+            return false;
+        }
+       
+    }
+// public function getById($id)
+// {
+//    if(!is_numeric($id) || !is_integer(($id))){
+//        report("ERRO: parametro id não é valido");
+//        return false;
+//    }
+//        try {    
+//           $indicador = self::where('id',$id)->get();
+//             foreach ($indicador as $value) {
+//                 $indicador_anos = DB::table('indicadores_anos')->where('indicador_id',$value->id);
+//                 foreach ($indicador_anos as $anos) {
+//                     $arr2[] = array(
+//                         'id' => $anos->id,
+//                         'titulo' => $anos->titulo,
+//                         'justificativa' => $anos->justificativa,
+//                         'ano' => $anos->ano,
+//                         'valor' => $anos->valor,
+//                         'data' => $anos->data_registro
+//                     );
+//                 }
+//                 $arr[] = array(
+//                     'id' => $value->id,
+//                     'indicador_anos'  => $arr2,
+//                     'titulo'        => $value->titulo,
+//                     'descricao'     => $value->descricao,
+//                     'justificativa' => $value->justificativa,
+//                     'valor_inicial' => $value->valor_inicial,
+//                     'valor'         => $value->valor,
+//                     'valor_final'   => $value->valor_final,
+//                     'data_registro' => $value->data_registro,
+//                 );
+//             }
+          
+//           return json_encode($arr);
+//        } catch (\Throwable $e) {
+//            report($e);
+//            return false;
+//        }
+
+// }
+
+    // public function indicador($id)
+    // {
+    //     $data  = $this->where('id',$id)->get();
+        
+    //     if(count($data)){
+    //         foreach ($data as $value) {
+    //             $arr[] = array(
+    //                 "id"            => $value->id,
+    //                 "titulo"        => $value->titulo,
+    //                 "descricao"     => $value->descricao,
+    //                 "metas"         => $value->metas,
+    //                 "valor_inicial" => $value->valor_inicial,
+    //                 "valor"         => $value->valor,
+    //                 "valor_final"   => $value->valor_final,
+    //                 "data_registro" => $value->data_registro
+    //             );
+    //         }
+    //         return $arr;
+    //     }else{
+    //         return false;
+    //     }  
+
+    // } 
     
     public function adminViewData()
     {
-        $arr = [];
         $view = self::all();
         for ($i=0; $i < count($view); $i++) { 
-            foreach ($this->viewTable as  $key => $value) {
-               $arr[$i] = [$key => $value];
-            }
+            $arr[] = $view[$i];
         }
         return $arr;
     }
+
+    public function getById($id)
+    {
+        $view = self::where('id',$id)->get();
+        if($view){
+            return $view;
+        }else{
+            return false;
+        }
+    }
+
 }

@@ -22,18 +22,19 @@ class UsersTableSeeder extends Seeder
          * Dummy seeds
          */
         // DB::table('users')->truncate();
-        // $faker = Faker::create();
+        $faker = Faker::create();
 
         //gera o user admin master, com todas as permissões
         $password = Hash::make(getenv('MASTER_PASS'));
-        $usertoken = Str::random(60);
+        $usertoken = Str::random(65);
 
         DB::table('users')->insert([
             'name' => getenv('MASTER_NAME'),
             'email' => getenv('MASTER_EMAIL'),
             'password' => $password,
             'is_superadmin' => 0,
-            'active' => 1,
+            'permissoes' => 9,
+            'active' => 0,
             'user_token' => $usertoken
         ]);
 

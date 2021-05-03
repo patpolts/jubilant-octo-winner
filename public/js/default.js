@@ -12,6 +12,7 @@ $(function(){
       isLoading();
       metasButtons();
       loadGrafico();
+      loadGraficoInterna();
     });
 
   //SOBRE page
@@ -40,6 +41,19 @@ function loadGrafico() {
     let id = $(element).attr("id");
     
     renderChart(id,arr);
+    // console.log();
+    
+  }
+}
+function loadGraficoInterna() {
+  var tabs = $(".graficoInterna");
+  var total = tabs.length;
+  for (let index = 0; index < total; index++) {
+    const element = tabs[index];
+    let arr = $(element).data("grafico");
+    let id = $(element).attr("id");
+    
+    renderChart2(id,arr);
     // console.log();
     
   }
@@ -77,6 +91,40 @@ function renderChart(chartId,chartData) {
       type: 'bar',
       data: {
         labels: ['% META', '% AÇÔES'],
+        datasets: [{
+          label: '',
+          data: chartData,
+          backgroundColor: [
+              'rgba(164, 75, 58, 0.4)',
+              'rgba(195, 126, 107, 0.4)'
+          ],
+          borderColor: [
+              'rgba(164, 75, 58, 1)',
+              'rgba(195, 126, 107, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+  });
+
+}
+function renderChart2(chartId,chartData) {
+  //rgba(164, 75, 58, 1)
+  console.log(chartId);
+  var chart = "metaChart-"+chartId;
+  var ctx = document.getElementById(chart).getContext('2d');
+  chartData.push(100);
+  var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2021', '2022','2023','2024','2025'],
         datasets: [{
           label: '',
           data: chartData,

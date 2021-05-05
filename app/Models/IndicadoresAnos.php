@@ -76,4 +76,21 @@ class IndicadoresAnos extends Model
        
     }
 
+    public function getSelectData()
+    {
+        $data = self::get();
+        if(count($data) >=1 ){
+            foreach ($data as $value) {
+                $arr[] = [
+                    'id' => $value->id,
+                    'titulo' => $value->titulo
+                ];
+            }
+            return $arr;
+        }else{
+            return false;
+        }
+       
+    }
+
 }

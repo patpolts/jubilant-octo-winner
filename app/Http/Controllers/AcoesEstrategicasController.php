@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\AcoesEstrategicas;
+use App\Models\Eixos;
+use App\Models\GrandesTemas;
 use App\Models\Indicadores;
+use App\Models\ObjetivosEstrategicos;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -18,27 +21,29 @@ use Illuminate\Support\Facades\Auth;
 class AcoesEstrategicasController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public $routeTitle = 'Ações Estrategicas';
     
     public function view( AcoesEstrategicas $acoes)
     {
         $data = $acoes->adminViewData();
         if($data){
-            $indicadores = $data;
+            $resData = $data;
         }else{
-            $indicadores = [];
+            $resData = [];
         }
             $this->contentView = array(
-                "header_title" => " | Indicadores Anos(view)",
-                "title" => "Indicadores Anos",
+                "header_title" => " | ".$this->routeTitle." (view)",
+                "title" => $this->routeTitle,
                 "content" => "view",
-                "results" => $indicadores,
+                "results" => $resData,
                 "message" => null,
             );
             return view('admin.acoes', $this->contentView);
       
     }
 
-    public function add(Request $request, Indicadores $indicadores, AcoesEstrategicas $acoes)
+    public function add(Request $request, Eixos $eixos, ObjetivosEstrategicos $objetivo, GrandesTemas $temas, AcoesEstrategicas $acoes)
     {
         
          if($request->isMethod('post') && $request->input('_token')){
@@ -49,31 +54,41 @@ class AcoesEstrategicasController extends Controller
                 'valor' => 'required|integer|max:4',
             ]);
 
-            $arr[] = array(                
-                'indicador_id' => $request->dataIndicador,
-                'titulo'        => $request->dataTitulo,
-                'ano'           => $request->dataAno,
-                'valor'         => $request->dataValor,
-                'data_registro' => $request->dataRegistro,
-                'active' => 1,
+            $arr[] = array(                  
+                'eixo_id'             => $request->dataEixos,
+                'objetivo_id'         => $request->dataObjetivos,
+                'tema_id'             => $request->dataTemas,          
+                'titulo'              => $request->dataTitulo,            
+                'descricao'           => $request->dataDescricao,
+                'justificativa'       => $request->dataJustificativa,
+                'objetivo_especifico' => $request->dataObjetivoEspecifico,
+                'ator'                => $request->dataAtor,
+                'desempenho'          => $request->dataDesempenho,             
+                'data_registro'       => $request->dataRegistro,              
+                'active'              => $request->dataAtivo, 
             );
             $add = $acoes->add($arr);
 
             if($add){
                 $message = "Ação ".$add." adicionado com sucesso";
             }else{
-                $message = "Erro ao adicionar ano";
+                $message = "Erro ao adicionar ação";
             }
 
          }else{
 
-            $indicadorSelect = $indicadores->getSelectData();
+            $formInfo = array(
+                'eixoSelect'     => $eixos->getSelectData(),
+                'objetivoSelect' => $objetivo->getSelectData(),
+                'temaSelect'     => $temas->getSelectData(),
+                'atorSelect'     => [],
+            );
 
          }
 
          $this->contentView = array(
-            "header_title" => " | Indicadores -> Anos (add)",
-            "title"        => "Indicadores -> Anos",
+            "header_title" => " | ".$this->routeTitle." (add)",
+            "title"        => $this->routeTitle,
             "content"      => "edit",
             "results"      => $indicadorSelect ?? [],
             "url"          => $request->url(),

@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ods;
+use App\Models\Eixos;
 use Illuminate\Http\Request;
 
-class OdsController extends Controller
+class EixosController extends Controller
 {
+    public $routeTitle = 'Eixos';
     
-    public $routeTitle = 'Ods';
-    
-    public function view( Ods $ods)
+    public function view( Eixos $eixos)
     {
-        $data = $ods->adminViewData();
+        $data = $eixos->adminViewData();
         if($data){
             $resData = $data;
         }else{
@@ -25,11 +24,11 @@ class OdsController extends Controller
                 "results" => $resData,
                 "message" => null,
             );
-            return view('admin.ods', $this->contentView);
+            return view('admin.eixos', $this->contentView);
       
     }
 
-    public function add(Request $request, Ods $ods)
+    public function add(Request $request, Eixos $eixos)
     {
         
          if($request->isMethod('post') && $request->input('_token')){
@@ -41,17 +40,24 @@ class OdsController extends Controller
             ]);
 
             $arr[] = array(                  
-                'titulo'             => $request->dataEixos,
-                'slug'         => $request->dataObjetivos,
-                'layout'             => $request->dataTemas,                      
+                'eixo_id'             => $request->dataEixos,
+                'objetivo_id'         => $request->dataObjetivos,
+                'tema_id'             => $request->dataTemas,          
+                'titulo'              => $request->dataTitulo,            
+                'descricao'           => $request->dataDescricao,
+                'justificativa'       => $request->dataJustificativa,
+                'objetivo_especifico' => $request->dataObjetivoEspecifico,
+                'ator'                => $request->dataAtor,
+                'desempenho'          => $request->dataDesempenho,             
+                'data_registro'       => $request->dataRegistro,              
                 'active'              => $request->dataAtivo, 
             );
-            $add = $ods->add($arr);
+            $add = $eixos->add($arr);
 
             if($add){
-                $message = "Ods ".$add." adicionado com sucesso";
+                $message = "Eixo ".$add." adicionado com sucesso";
             }else{
-                $message = "Erro ao adicionar ods";
+                $message = "Erro ao adicionar eixo";
             }
 
          }else{
@@ -69,17 +75,17 @@ class OdsController extends Controller
             "message"      => $message ?? null,
         );
 
-        return view('admin.ods_add',$this->contentView);
+        return view('admin.eixos_add',$this->contentView);
     }
 
 /**
  * EDIT
  */
-    public function edit(Request $request, Ods $ods)
+    public function edit(Request $request, EixosController $acoes)
     {
-        if($request->odsId){ 
-            $id = $request->odsId;
-            $data = $ods->getById($id);
+        if($request->idcAnosId){ 
+            $id = $request->idcAnosId;
+            $data = $acoes->getById($id);
             
             if($request->isMethod('post') && $request->input('_token')){
            
@@ -95,11 +101,11 @@ class OdsController extends Controller
 
                 if(count($upData) >= 1){
                    
-                    $update = $ods->edit($upData,$id);
+                    $update = $acoes->edit($upData,$id);
                 }
 
                 if($update){
-                    $message = "Ods  ".$update." atualizada com sucesso";
+                    $message = "Ação  ".$update." atualizada com sucesso";
                 }else{
                     $message = null;
                 }
@@ -118,7 +124,7 @@ class OdsController extends Controller
                         );
                     }
                     $message = null;
-                    $resData = $arr;
+                    $indicadoresData = $arr;
                     
                 }
             }
@@ -126,12 +132,12 @@ class OdsController extends Controller
                 "header_title" => " | ".$this->routeTitle."  (edit)",
                 "title" => $this->routeTitle,
                 "content" => "edit",
-                "results" => $resData ?? [],
+                "results" => $indicadoresData ?? [],
                 "url" => $request->url(),
                 "message" => $message ?? null
             );
 
-            return view('admin.ods_edit',$this->contentView);
+            return view('admin.eixos_edit',$this->contentView);
 
         }else{
             return false;

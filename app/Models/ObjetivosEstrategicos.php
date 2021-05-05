@@ -23,14 +23,17 @@ class ObjetivosEstrategicos extends Model
     protected $atributes = [
     ];
 
+    
     public function adminViewData()
     {
         $data = self::all();
-        foreach ($data as  $value) {
-            $arr[] = $value;
+        if(count($data) >=1 ){
+            foreach ($data as  $value) {
+                $arr[] = $value;
+            }
         }
     
-        return $arr;
+        return $arr ?? [];
     }
 
     public function getById($id)
@@ -64,6 +67,23 @@ class ObjetivosEstrategicos extends Model
         $data = self::insert($arr);
         if($data){
             return $data;
+        }else{
+            return false;
+        }
+       
+    }
+
+    public function getSelectData()
+    {
+        $data = self::get();
+        if(count($data) >=1 ){
+            foreach ($data as $value) {
+                $arr[] = [
+                    'id' => $value->id,
+                    'titulo' => $value->titulo
+                ];
+            }
+            return $arr;
         }else{
             return false;
         }

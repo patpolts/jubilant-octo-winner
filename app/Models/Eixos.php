@@ -34,33 +34,71 @@ class Eixos extends Model
     protected $casts = [
     ];
     
+   
     public function adminViewData()
     {
-        $arr = [];
-        $view = self::all();
-        for ($i=0; $i < count($view); $i++) { 
-            foreach ($view as  $key => $value) {
-               $arr[$i] = [$key => $value];
+        $data = self::all();
+        if(count($data) >=1 ){
+            foreach ($data as  $value) {
+                $arr[] = $value;
             }
         }
-        return $arr;
+    
+        return $arr ?? [];
     }
 
     public function getById($id)
     {
-        $arr = [];
-        $view = self::where('id',$id);
-        for ($i=0; $i < count($view); $i++) { 
-            foreach ($view as  $key => $value) {
-               $arr[$i] = [$key => $value];
-            }
+        
+        $data = self::where('id',$id)->get();
+        if($data){
+            return $data;
+        }else{
+            return false;
         }
-        return $arr;
+       
     }
 
-    public function getRelated($id)
+
+    public function edit($arr,$id)
     {
-        //
+        if(count($arr) >=1 ){
+            $data = self::where('id',$id)->update($arr[0]);
+            if($data){
+                return $data;
+            }
+            
+        }else{
+            return false;
+        }
+    }
+
+    public function add($arr)
+    {
+        $data = self::insert($arr);
+        if($data){
+            return $data;
+        }else{
+            return false;
+        }
+       
+    }
+
+    public function getSelectData()
+    {
+        $data = self::get();
+        if(count($data) >=1 ){
+            foreach ($data as $value) {
+                $arr[] = [
+                    'id' => $value->id,
+                    'titulo' => $value->titulo
+                ];
+            }
+            return $arr;
+        }else{
+            return false;
+        }
+       
     }
 
 }

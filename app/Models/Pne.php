@@ -23,7 +23,7 @@ class Pne extends Model
             $arr[] = $value;
         }
     
-        return $arr;
+        return $arr ?? [];
     }
 
     public function getById($id)
@@ -57,6 +57,24 @@ class Pne extends Model
         $data = self::insert($arr);
         if($data){
             return $data;
+        }else{
+            return false;
+        }
+       
+    }
+
+
+    public function getSelectData()
+    {
+        $data = self::get();
+        if(count($data) >=1 ){
+            foreach ($data as $value) {
+                $arr[] = [
+                    'id' => $value->id,
+                    'titulo' => $value->titulo
+                ];
+            }
+            return $arr;
         }else{
             return false;
         }

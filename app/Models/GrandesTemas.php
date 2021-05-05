@@ -54,7 +54,7 @@ class GrandesTemas extends Model
             $arr[] = $value;
         }
     
-        return $arr;
+        return $arr ?? [];
     }
 
     public function getById($id)

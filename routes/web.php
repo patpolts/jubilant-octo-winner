@@ -1,12 +1,18 @@
 <?php
 
+use App\Http\Controllers\AcoesEstrategicasController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MetasController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EixosController;
+use App\Http\Controllers\GrandesTemasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndicadoresAnosController;
 use App\Http\Controllers\IndicadoresController;
+use App\Http\Controllers\ObjetivosEstrategicosController;
+use App\Http\Controllers\OdsController;
+use App\Http\Controllers\PneController;
 use App\Models\IndicadoresAnos;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,9 +59,42 @@ Route::get('/indicadores-anos/adicionar', [IndicadoresAnosController::class, 'ad
 Route::post('/indicadores-anos/adicionar', [IndicadoresAnosController::class, 'add'])->middleware(['auth'])->name('indicadores_anos_adicionar');
 Route::get('/indicadores-anos/editar/{idcAnosId}', [IndicadoresAnosController::class, 'edit'])->middleware(['auth'])->name('indicadores_anos_editar');
 Route::post('/indicadores-anos/editar/{idcAnosId}', [IndicadoresAnosController::class, 'edit'])->middleware(['auth'])->name('indicadores_anos_editar');
-
-Route::get('/acao', [Controller::class, 'viewAcao'])->middleware(['auth'])->name('acao');
-Route::get('/grandetema', [Controller::class, 'viewGrandeTema'])->middleware(['auth'])->name('grandetema');
+#Ações estrategicas
+Route::get('/acoes', [AcoesEstrategicasController::class, 'view'])->middleware(['auth'])->name('acao');
+Route::get('/acoes/adicionar', [AcoesEstrategicasController::class, 'add'])->middleware(['auth'])->name('acao_adicionar');
+Route::post('/acoes/adicionar', [AcoesEstrategicasController::class, 'add'])->middleware(['auth'])->name('acao_adicionar');
+Route::get('/acoes/editar/{acoesId}', [AcoesEstrategicasController::class, 'edit'])->middleware(['auth'])->name('acao_editar');
+Route::post('/acoes/editar/{acoesId}', [AcoesEstrategicasController::class, 'edit'])->middleware(['auth'])->name('acao_editar');
+#Objetivos estrategicas
+Route::get('/objetivos', [ObjetivosEstrategicosController::class, 'view'])->middleware(['auth'])->name('acao');
+Route::get('/objetivos/adicionar', [ObjetivosEstrategicosController::class, 'add'])->middleware(['auth'])->name('objetivos_adicionar');
+Route::post('/objetivos/adicionar', [ObjetivosEstrategicosController::class, 'add'])->middleware(['auth'])->name('objetivos_adicionar');
+Route::get('/objetivos/editar/{objetivosId}', [ObjetivosEstrategicosController::class, 'edit'])->middleware(['auth'])->name('objetivos_editar');
+Route::post('/objetivos/editar/{objetivosId}', [ObjetivosEstrategicosController::class, 'edit'])->middleware(['auth'])->name('objetivos_editar');
+#Grande Temas
+Route::get('/grandetema', [GrandesTemasController::class, 'view'])->middleware(['auth'])->name('grandetema');
+Route::get('/grandetema/adicionar', [GrandesTemasController::class, 'add'])->middleware(['auth'])->name('grandetema_adicionar');
+Route::post('/grandetema/adicionar', [GrandesTemasController::class, 'add'])->middleware(['auth'])->name('grandetema_adicionar');
+Route::get('/grandetema/editar/{grandeTemaId}', [GrandesTemasController::class, 'edit'])->middleware(['auth'])->name('grandetema_editar');
+Route::post('/grandetema/editar/{grandeTemaId}', [GrandesTemasController::class, 'edit'])->middleware(['auth'])->name('grandetema_editar');
+#Eixos
+Route::get('/eixos', [EixosController::class, 'view'])->middleware(['auth'])->name('eixos');
+Route::get('/eixos/adicionar', [EixosController::class, 'add'])->middleware(['auth'])->name('eixos_adicionar');
+Route::post('/eixos/adicionar', [EixosController::class, 'add'])->middleware(['auth'])->name('eixos_adicionar');
+Route::get('/eixos/editar/{grandeTemaId}', [EixosController::class, 'edit'])->middleware(['auth'])->name('eixos_editar');
+Route::post('/eixos/editar/{grandeTemaId}', [EixosController::class, 'edit'])->middleware(['auth'])->name('eixos_editar');
+#Ods
+Route::get('/ods', [OdsController::class, 'view'])->middleware(['auth'])->name('ods');
+Route::get('/ods/adicionar', [OdsController::class, 'add'])->middleware(['auth'])->name('ods_adicionar');
+Route::post('/ods/adicionar', [OdsController::class, 'add'])->middleware(['auth'])->name('ods_adicionar');
+Route::get('/ods/editar/{odsId}', [OdsController::class, 'edit'])->middleware(['auth'])->name('ods_editar');
+Route::post('/ods/editar/{odsId}', [OdsController::class, 'edit'])->middleware(['auth'])->name('ods_editar');
+#Pne
+Route::get('/pne', [PneController::class, 'view'])->middleware(['auth'])->name('pne');
+Route::get('/pne/adicionar', [PneController::class, 'add'])->middleware(['auth'])->name('pne_adicionar');
+Route::post('/pne/adicionar', [PneController::class, 'add'])->middleware(['auth'])->name('pne_adicionar');
+Route::get('/pne/editar/{pneId}', [PneController::class, 'edit'])->middleware(['auth'])->name('pne_editar');
+Route::post('/pne/editar/{pneId}', [PneController::class, 'edit'])->middleware(['auth'])->name('pne_editar');
 
 /**
  * Api

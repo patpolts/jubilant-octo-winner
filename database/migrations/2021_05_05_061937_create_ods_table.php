@@ -15,6 +15,9 @@ class CreateOdsTable extends Migration
     {
         Schema::create('ods', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->string('slug');
+            $table->string('layout');
             $table->timestamps();
         });
     }

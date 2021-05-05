@@ -25,13 +25,22 @@
                         {{ __('Indicadores Anos') }}
                     </x-nav-link>
                     <x-nav-link :href="route('acao')" :active="request()->routeIs('acao')">
-                        {{ __('Plano de Ações') }}
+                        {{ __('Ações Estrategicas') }}
                     </x-nav-link>
                     <x-nav-link :href="route('objetivos')" :active="request()->routeIs('objetivos')">
-                        {{ __('Objetivos Estrategicos') }}
+                        {{ __('Objetivos Ouse') }}
                     </x-nav-link>
                     <x-nav-link :href="route('grandetema')" :active="request()->routeIs('grandetema')">
                         {{ __('Grandes Temas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('eixos')" :active="request()->routeIs('eixos')">
+                        {{ __('Eixos') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('ods')" :active="request()->routeIs('ods')">
+                        {{ __('Ods') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('pne')" :active="request()->routeIs('pne')">
+                        {{ __('Pne') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -101,6 +110,15 @@
             </x-nav-link>
             <x-nav-link :href="route('grandetema')" :active="request()->routeIs('grandetema')">
                 {{ __('Grandes Temas') }}
+            </x-nav-link>
+            <x-nav-link :href="route('eixos')" :active="request()->routeIs('eixos')">
+                {{ __('Eixos') }}
+            </x-nav-link>
+            <x-nav-link :href="route('ods')" :active="request()->routeIs('ods')">
+                {{ __('Ods') }}
+            </x-nav-link>
+            <x-nav-link :href="route('pne')" :active="request()->routeIs('pne')">
+                {{ __('Pne') }}
             </x-nav-link>
         </div>
 

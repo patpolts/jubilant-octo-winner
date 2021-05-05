@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Illuminate\Notifications\Notifiable;
 
 class AcoesEstrategicas extends Model
 {
-    use HasFactory, Notifiable, InteractsWithDatabase;
+    use HasFactory, Notifiable;
 
 
     /**
@@ -25,38 +24,37 @@ class AcoesEstrategicas extends Model
         'descricao',
         'justificativa',
         'objetivo_especifico',
-        'ator', //id array
+        'ator', 
         'desempenho',             
         'data_registro',              
         'active', 
     ];
 
-        /**
-     * 
-     */
-    protected $atributes = [
-    ];
-
-    protected $casts = [
-    ];
     
     public function adminViewData()
     {
-        $view = self::all()->toArray();
-        for ($i=0; $i < count($view); $i++) { 
-            $arr[] = $view[$i];
+        $data = self::all();
+        if(count($data) >=1 ){
+            foreach ($data as  $value) {
+                $arr[] = $value;
+            }
         }
-        return $arr;
+    
+        return $arr ?? [];
     }
 
     public function getById($id)
     {
-        $view = self::where('id',$id);
-        for ($i=0; $i < count($view); $i++) { 
-            $arr[] = $view[$i];
+        
+        $data = self::where('id',$id)->get();
+        if($data){
+            return $data;
+        }else{
+            return false;
         }
-        return $arr;
+       
     }
+
 
     public function edit($arr,$id)
     {
@@ -73,9 +71,26 @@ class AcoesEstrategicas extends Model
 
     public function add($arr)
     {
-        $view = self::insert($arr);
-        if($view == 1){
-            return $view;
+        $data = self::insert($arr);
+        if($data){
+            return $data;
+        }else{
+            return false;
+        }
+       
+    }
+
+    public function getSelectData()
+    {
+        $data = self::get();
+        if(count($data) >=1 ){
+            foreach ($data as $value) {
+                $arr[] = [
+                    'id' => $value->id,
+                    'titulo' => $value->titulo
+                ];
+            }
+            return $arr;
         }else{
             return false;
         }

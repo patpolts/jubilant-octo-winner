@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcoesEstrategicas;
 use App\Models\Indicadores;
-use App\Models\IndicadoresAnos;
-use App\Models\User as User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -14,13 +13,15 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
 
-class IndicadoresAnosController extends Controller
+
+
+class AcoesEstrategicasController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
-    public function view( IndicadoresAnos $indicadoresAnos)
+    public function view( AcoesEstrategicas $acoes)
     {
-        $data = $indicadoresAnos->adminViewData();
+        $data = $acoes->adminViewData();
         if($data){
             $indicadores = $data;
         }else{
@@ -33,11 +34,11 @@ class IndicadoresAnosController extends Controller
                 "results" => $indicadores,
                 "message" => null,
             );
-            return view('admin.indicadores_anos', $this->contentView);
+            return view('admin.acoes', $this->contentView);
       
     }
 
-    public function add(Request $request, Indicadores $indicadores, IndicadoresAnos $indicadoresAnos)
+    public function add(Request $request, Indicadores $indicadores, AcoesEstrategicas $acoes)
     {
         
          if($request->isMethod('post') && $request->input('_token')){
@@ -56,10 +57,10 @@ class IndicadoresAnosController extends Controller
                 'data_registro' => $request->dataRegistro,
                 'active' => 1,
             );
-            $add = $indicadoresAnos->indicadoresAnosAdd($arr);
+            $add = $acoes->add($arr);
 
             if($add){
-                $message = "Ano ".$add." adicionado com sucesso";
+                $message = "Ação ".$add." adicionado com sucesso";
             }else{
                 $message = "Erro ao adicionar ano";
             }
@@ -79,17 +80,17 @@ class IndicadoresAnosController extends Controller
             "message"      => $message ?? null,
         );
 
-        return view('admin.indicadoresAnos_add',$this->contentView);
+        return view('admin.acoes_add',$this->contentView);
     }
 
 /**
  * EDIT
  */
-    public function edit(Request $request, IndicadoresAnos $indicadoresAnos)
+    public function edit(Request $request, AcoesEstrategicas $acoes)
     {
         if($request->idcAnosId){ 
             $id = $request->idcAnosId;
-            $data = $indicadoresAnos->getById($id);
+            $data = $acoes->getById($id);
             
             if($request->isMethod('post') && $request->input('_token')){
            
@@ -105,11 +106,11 @@ class IndicadoresAnosController extends Controller
 
                 if(count($upData) >= 1){
                    
-                    $update = $indicadoresAnos->edit($upData,$id);
+                    $update = $acoes->edit($upData,$id);
                 }
 
                 if($update){
-                    $message = "Indicador Ano ".$update." atualizado com sucesso";
+                    $message = "Ação  ".$update." atualizada com sucesso";
                 }else{
                     $message = null;
                 }
@@ -143,7 +144,7 @@ class IndicadoresAnosController extends Controller
                 "message" => $message ?? null
             );
 
-            return view('admin.indicadores_anos_edit',$this->contentView);
+            return view('admin.acoes_edit',$this->contentView);
 
         }else{
             return false;

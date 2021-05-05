@@ -65,7 +65,7 @@ class Controller extends BaseController
             "title" => "Grandes Temas",
             "results" => $grandesTemas->getGrandeTemasData(),
         );
-        print_r($grandesTemas->getGrandeTemasData());
+        // print_r($grandesTemas->getGrandeTemasData());
         return view('admin.grandetema', $this->contentView);
     }
 

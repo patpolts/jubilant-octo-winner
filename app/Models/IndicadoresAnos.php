@@ -41,13 +41,14 @@ class IndicadoresAnos extends Model
 
     public function getById($id)
     {
-       
-        $data = self::where('id',$id);
-        foreach ($data as   $value) {
-            $arr[] = $value;
-        }
         
-        return $arr ?? [];
+        $data = self::where('id',$id)->get();
+        if($data){
+            return $data;
+        }else{
+            return false;
+        }
+       
     }
 
 

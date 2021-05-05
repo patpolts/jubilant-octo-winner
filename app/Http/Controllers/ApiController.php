@@ -76,28 +76,28 @@ class ApiController extends Controller
         if($this->authToken($request)){
 
             $usertoken = $request->user()->user_token;
-            $query = $metas::where('active',1)->get()->toArray;
+            $query = $metas::where('active',1)->get();
            
             if(count($query) >=1 ){
-                // foreach ($query as $value) {
-                //     $data[] = array(
-                //         'id'            => $value->id,
-                //         'indicador_id'  => $value->indicador_id,                  
-                //         'objetivo_id'   => $value->objetivo_id,                   
-                //         'eixo_id'       => $value->eixo_id,                   
-                //         'ods_id'        => $value->ods_id,                    
-                //         'pne_id'        => $value->pne_id,                    
-                //         'titulo'        => $value->titulo,                    
-                //         'descricao'     => $value->descricao,                 
-                //         'valor'         => $value->valor,                 
-                //         'valor_inicial' => $value->valor_inicial,                 
-                //         'data_registro' => $value->data_registro,                 
-                //         'active'        => $value->active,
-                //     );
-                // }
+                foreach ($query as $value) {
+                    $data[] = array(
+                        'id'            => $value->id,
+                        'indicador_id'  => $value->indicador_id,                  
+                        'objetivo_id'   => $value->objetivo_id,                   
+                        'eixo_id'       => $value->eixo_id,                   
+                        'ods_id'        => $value->ods_id,                    
+                        'pne_id'        => $value->pne_id,                    
+                        'titulo'        => $value->titulo,                    
+                        'descricao'     => $value->descricao,                 
+                        'valor'         => $value->valor,                 
+                        'valor_inicial' => $value->valor_inicial,                 
+                        'data_registro' => $value->data_registro,                 
+                        'active'        => $value->active,
+                    );
+                }
                 $res = [
                     "data" => array(
-                        "metas" => json_encode($query),
+                        "metas" => json_encode($data),
                     ),
                     "user" => $usertoken,
                     "message" => "sucesso",

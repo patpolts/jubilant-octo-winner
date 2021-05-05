@@ -87,8 +87,8 @@ class IndicadoresAnosController extends Controller
  */
     public function edit(Request $request, IndicadoresAnos $indicadoresAnos)
     {
-        if($request->indicadorId){ 
-            $id = $request->indicadorId;
+        if($request->idcAnosId){ 
+            $id = $request->idcAnosId;
             $data = $indicadoresAnos->getById($id);
             
             if($request->isMethod('post') && $request->input('_token')){
@@ -140,7 +140,7 @@ class IndicadoresAnosController extends Controller
                 "content" => "edit",
                 "results" => $indicadoresData ?? [],
                 "url" => $request->url(),
-                "message" => $message
+                "message" => $message ?? null
             );
 
             return view('admin.indicadores_anos_edit',$this->contentView);

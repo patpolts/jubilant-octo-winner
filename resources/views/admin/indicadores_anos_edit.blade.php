@@ -30,7 +30,7 @@
                   @else
                       @if (count($results) >=1 )
                       <div>
-                        <form action="./editar/" method="POST" name="editIndicadorAnos">
+                        <form action="{{$url}}" method="POST" name="editIndicadorAnos">
                           @csrf
                           <div class="form-group">
                             <label for="data-titulo">Titulo</label>

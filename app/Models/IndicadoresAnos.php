@@ -36,7 +36,7 @@ class IndicadoresAnos extends Model
             $arr[] = $value;
         }
     
-        return $arr;
+        return $arr ?? [];
     }
 
     public function getById($id)

@@ -22,47 +22,21 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected $grandeTemas;
-
     public function __construct()
     {
-         $contentView = array();
-
-        // $this->grandeTemas = GrandesTemas->get();
+        $this->contentView = [];
     }
-    
 
-
-    public function viewHome(Request $request)
+    public function adminIndex(Request $request)
     {
         $this->contentView = array(
-            "header_title" => config('app.name')." | Admin (dashboard)",
+            "header_title" =>  "| Admin (home)",
             "title" => "Dashboard",
+            "content" => "view",
+            "results" => [],
         );
-        // return response($this->contentView,200)->header('Content-Type', 'text/json');
-
-       return view('dashboard',$this->contentView);
+        return view('dashboard',$this->contentView);
     }
-    public function usersApi(Request $request)
-    {
-        # code...
-        // if(isset($request->users->email)){
-        //     $data[] = array(
-        //         ["data"] => $request->user,
-        //         ["message"] => "sucesso",
-        //         ["page"] => [
-        //             "header_title" => config('app.name')." | Admin (dashboard)",
-        //             "title" => "Dashboard",
-        //         ]
-        //     );
-        //     return response(json_encode($data),200)->header('Content-Type', 'text/json');
-        // }
-    }
-    /**
-     * Display the  view.
-     *
-     * @return \Illuminate\View\View
-     */
     public function viewEixos(Eixos $model)
     {
         $this->contentView = array(
@@ -84,52 +58,6 @@ class Controller extends BaseController
 
         return view('admin.ouse', $this->contentView);
     }
-    // public function viewAcao(PlanoAcao $model)
-    // {
-    //     $results = [];
-    //     $resAcao = $model::get();
-    //     foreach ($resAcao as $value) {
-    //         $results =  array(
-    //             "acao" => $value, 
-    //             "eixo" => $this->getById_eixos($value['eixo_id']), 
-    //             "objetivo" => $this->getById_objetivos($value['objetivo_id']));
-    //     }
-
-    //     $this->contentView["data"] = array(
-    //         "title" => "Plano de Ações ",
-    //         "results" => $results,
-    //     );
-
-    //     $this->contentView["header_title"] = "| Plano de Ações (view)"; 
-    //     return view('admin.acao',$this->contentView);
-    // }
-    /** 
-     * Indicadores
-     * ------------------
-     */
-    public function statusIndicadores(Indicadores $model)
-    {
-        //hardcoded 
-        $hardcoded = array(
-            0 => [
-                "valor" => "220",
-                "legenda" => "não realizada satisfatoriamente"
-            ],
-            1 => [
-                "valor" => "120",
-                "legenda" =>  "realizada parcialmente"
-            ],
-            2 => [
-                "valor" => "088",
-                "legenda" => "plenamente realizada"
-            ]
-        );
-        return $hardcoded;
-    }
-    /** 
-     * Grandes Temas
-     * ------------------
-     */
     public function viewGrandeTema(Request $request, GrandesTemas $grandesTemas)
     {
         $this->contentView = array(
@@ -156,42 +84,32 @@ class Controller extends BaseController
 
        return view('admin.acao',$this->contentView);
     }
-
-    public function GetObjetivos(Request $request, Auth $user, MetasController $metas, Indicadores $indicadores, ObjetivosEstrategicos $objetivos)
-    {
-        # code...
-        //get all objectives
-        $arr = [];
-        $resObj = $objetivos::get();
-        foreach ($objetivos as $key => $value) {
-            $arr[] = $value;
-        }
-        // response()->sendHeaders();
-        return $arr;
-    }
     
-    /**
-     * 
-     */
-
-
-    // public function getById_indicadores($id)
-    // {
-    //     return DB::table('indicadores')->where('id','=',$id)->get();
-    // }
-
-    public function getById_eixos($id)
+    public function validaData($msg,$param = '')
     {
-        return DB::table('eixos')->where('id','=',$id)->get();
+        $this->contentView = array(
+            "header_title" =>  "| Admin (metas)",
+            "title" => "Metas",
+            "content" => "view",
+            "results" => ['error' => $msg],
+        );
+        return true;
     }
 
-    public function getById_objetivos($id)
-    {
-        return DB::table('objetivos_estrategicos')->where('id','=',$id)->get();
-    }
 
-    public function getById_tema($id)
+    function array_remove_empty($haystack)
     {
-        return DB::table('grandes_temas')->where('id','=',$id)->get();
+        foreach ($haystack as $key => $value) {
+            if (is_array($value)) {
+                $haystack[$key] = $this->array_remove_empty($haystack[$key]);
+            }
+
+            if (empty($haystack[$key])) {
+                unset($haystack[$key]);
+            }
+        }
+
+        return $haystack;
     }
+   
 }

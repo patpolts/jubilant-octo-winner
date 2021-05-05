@@ -83,8 +83,8 @@ class Metas extends Model
                         
 
             }
-            $this->setMetasData($arr);
-            return $this->getMetasData();
+            
+            return $arr;
         }
     }
     public function homeMetasData()
@@ -108,13 +108,17 @@ class Metas extends Model
         }
         return [];
     }
-/**
- * @arr = ['field' => 'value']
- */
-    public function adminEditData($arr)
+
+    public function metasEdit($arr,$id)
     {
         if(count($arr) >=1 ){
-            #
+            $data = self::where('id',$id)->update($arr[0]);
+            if($data){
+                return $data;
+            }
+            
+        }else{
+            return false;
         }
     }
     public function adminAddData($arr)
@@ -128,13 +132,18 @@ class Metas extends Model
        
     }
 
+   
+    
     public function getById($id)
     {
-        $view = self::where('id',$id);
-        for ($i=0; $i < count($view); $i++) { 
-            $arr[] = $view[$i];
+        
+        $data = self::where('id',$id)->get();
+        if($data){
+            return $data;
+        }else{
+            return false;
         }
-        return $arr;
+       
     }
 
     public function getTemplateData($id)
@@ -186,25 +195,5 @@ class Metas extends Model
     {
         //
     }
-
-    public function getMetasData()
-    {
-        return $this->metasData;
-    }
-    public function setMetasData($arr)
-    {
-        $this->metasData = $arr;
-    }
-    // public function indicador($id)
-    // {
-    //     $model = Indicadores::class;
-    //     return $model::indicador($id);
-    // }
-
-    // public function indicadorAnos($id)
-    // {
-    //     $model = IndicadoresAnos::class;
-    //     return $model::indicadorAnos($id);
-    // }
 
 }

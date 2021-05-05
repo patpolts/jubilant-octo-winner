@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\User as User;
+use Exception;
 
 class IndicadoresAnos extends Model
 {
@@ -26,50 +27,52 @@ class IndicadoresAnos extends Model
         'data_registro',
         'active',
     ];
+    protected $table = 'indicadores_anos';
 
     public function adminViewData()
     {
-        $arr = [];
         $view = self::all();
-        for ($i=0; $i < count($view); $i++) { 
-            foreach ($view as  $key => $value) {
-               $arr[$i] = [$key => $value];
-            }
+        foreach ($view as  $value) {
+            $arr[] = $value;
         }
+    
         return $arr;
     }
 
     public function getById($id)
     {
-        $arr = [];
-        $view = self::where('id',$id);
-        for ($i=0; $i < count($view); $i++) { 
-            foreach ($view as  $key => $value) {
-               $arr[$i] = [$key => $value];
-            }
+       
+        $data = self::where('id',$id);
+        foreach ($data as   $value) {
+            $arr[] = $value;
         }
-        return $arr;
+        
+        return $arr ?? [];
     }
 
-    // public function indicadorAnos($id)
-    // {
 
-    //     $data  = $this->where('id',$id)->get();
+    public function edit($arr,$id)
+    {
+        if(count($arr) >=1 ){
+            $data = self::where('id',$id)->update($arr[0]);
+            if($data){
+                return $data;
+            }
+            
+        }else{
+            return false;
+        }
+    }
 
-    //     if(count($data) >= 1){
-    //         foreach ($data as $value) {
-    //             $arr[]  = array(
-    //                 "id" => $value->id,
-    //                 "ano" => $value->ano,
-    //                 "valor" => $value->valor,
-    //                 "justificativa" => $value->justificativa
-    //             );
-    //         }  
+    public function indicadoresAnosAdd($arr)
+    {
+        $data = self::insert($arr);
+        if($data){
+            return $data;
+        }else{
+            return false;
+        }
+       
+    }
 
-    //         return $arr;
-    //     }else{
-    //         return false;
-    //     }  
-
-    // }
 }

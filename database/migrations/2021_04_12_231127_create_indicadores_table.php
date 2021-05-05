@@ -4,29 +4,27 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIndicadoresAnosTable extends Migration
+class CreateIndicadoresTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
-     */
+     */ 
     public function up()
     {
        
-        Schema::create('indicadores_anos', function (Blueprint $table) {
-            $table->id();
-            $table->integer('indicador_id');
-            $table->integer('meta_id');
-            $table->string('ano');
-            $table->string('valor');
-            $table->string('justificativa');
+        Schema::create('indicadores', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('indicador_anos_id');
+            $table->string('titulo');
+            $table->string('descricao');
+            $table->integer('valor_atual'); 
+            $table->integer('valor_meta'); 
             $table->string('data_registro');
-            $table->json('logs'); 
             $table->boolean('active'); 
 
             $table->timestamps();
-            
 
         });
     }

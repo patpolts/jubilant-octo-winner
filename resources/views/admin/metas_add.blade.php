@@ -14,20 +14,19 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                          <li class="breadcrumb-item " ><a href="{{ route('metas') }}">Visualizar</a></li>
                           <li class="breadcrumb-item active" aria-current="adicionar"><a href="{{ route('metas_adicionar') }}">Adicionar</a></li>
-                          <li class="breadcrumb-item"><a href="{{ route('metas_editar') }}">Editar</a></li>
                         
                         </ol>
                     </nav>
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
                   @if ($message)
-                      <div class="card">
-                        <div class="card-body"> 
-                          <p>{{$msg}}</p>
-                        </div>
+                    <div class="card">
+                      <div class="card-body"> 
+                        <p>{{$message}}</p>
+                        <a class="btn btn-outline" href="javascript: history.back(-1);">Voltar</a>
                       </div>
+                    </div>
                   @else
                       
                     <div>
@@ -85,11 +84,9 @@
                           <label for="data-dataRegistro">Data do Registro</label>
                           <input name="dataRegistro" type="text" class="form-control" id="data-dataRegistro" value="">
                         </div>
-                        {{-- <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div> --}}
+                     
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <a class="btn btn-outline" href="javascript: history.back(-1);">Voltar</a>
                       </form>
                     </div>
 

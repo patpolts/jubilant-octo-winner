@@ -14,7 +14,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                          <li class="breadcrumb-item active" ><a href="{{ route('indicadores_adicionar') }}">Adicionar</a></li>
+                          <li class="breadcrumb-item active" ><a href="{{ route('indicadores_anos_adicionar') }}">Adicionar</a></li>
                         
                         </ol>
                     </nav>
@@ -30,28 +30,20 @@
                   @else
                       @if (count($results) >=1 )
                       <div>
-                        <form action="{{route('indicadores_editar',$results[0]['id'])}}" method="POST" name="editIndicador">
+                        <form action="./editar/" method="POST" name="editIndicadorAnos">
                           @csrf
                           <div class="form-group">
                             <label for="data-titulo">Titulo</label>
                             <input name="dataTitulo" type="text" class="form-control" id="data-titulo" value="{{$results[0]['dataTitulo']}}">
                           </div>
                           <div class="form-group">
-                            <label for="data-descricao">Descrição</label>
-                            <input name="dataDescricao" type="text" class="form-control" id="data-descricao" value="{{$results[0]['dataDescricao']}}">
-                          </div>
-                          <div class="form-group">
-                            <label for="data-dataAnos">Indicador Ano</label>
-                            <input name="dataAnos" type="number" class="form-control" id="data-dataAnos" value="{{$results[0]['dataAnos']}}">
+                            <label for="data-indicador">Indicador Ano</label>
+                            <input name="dataIndicador" type="number" class="form-control" id="data-indicador" value="{{$results[0]['dataIndicador']}}">
                             
                           </div>
                           <div class="form-group">
-                            <label for="data-valorAtual">Valor Atual</label>
-                            <input name="dataValorAtual" type="number" class="form-control" id="data-valorAtual" value="{{$results[0]['dataValorAtual']}}">
-                          </div>
-                          <div class="form-group">
-                            <label for="data-valorMeta">Valor Meta</label>
-                            <input name="dataValorMeta" type="number" class="form-control" id="data-valorMeta" value="{{$results[0]['dataValorMeta']}}">
+                            <label for="data-valor">Valor</label>
+                            <input name="dataValor" type="number" class="form-control" id="data-valor" value="{{$results[0]['dataValor']}}">
                           </div>
                           <div class="form-group">
                             <label for="data-dataRegistro">Data do Registro</label>

@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Schema\SchemaState;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEixosTable extends Migration
+class CreateIndicadoresAnosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,24 +13,20 @@ class CreateEixosTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('eixos', function (Blueprint $table) {
-            
-            $table->id();
-            $table->timestamps();
-
-            $table->string('titulo')->unique();
-            $table->string('justificativa');
+       
+        Schema::create('indicadores_anos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('indicador_id');
+            $table->string('titulo');
+            $table->integer('ano');
+            $table->integer('valor');
             $table->string('data_registro');
-
             $table->boolean('active'); 
 
-        });
-    }
+            $table->timestamps();
+            
 
-    public function refresh(){
-        //
-        // SchemaState:
+        });
     }
 
     /**
@@ -41,6 +36,6 @@ class CreateEixosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eixos');
+        Schema::dropIfExists('indicadores_anos');
     }
 }

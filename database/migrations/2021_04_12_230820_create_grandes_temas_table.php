@@ -13,9 +13,16 @@ class CreateGrandesTemasTable extends Migration
      */
     public function up()
     {
-        Schema::create('grandes_temas', function (Blueprint $table) {
-            $table->id();
+
+        Schema::create('grande_tema', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('titulo');
+            $table->string('descricao');
+            $table->string('layout');
+            $table->boolean('active'); 
             $table->timestamps();
+            
+
         });
     }
 
@@ -26,6 +33,6 @@ class CreateGrandesTemasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('grandes_temas');
+        Schema::dropIfExists('grande_tema');
     }
 }

@@ -2,9 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\SchemaState;
 use Illuminate\Support\Facades\Schema;
 
-class CreateObjetivosEstrategicosTable extends Migration
+class CreateEixosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +14,18 @@ class CreateObjetivosEstrategicosTable extends Migration
      */
     public function up()
     {
-        Schema::create('objetivos_estrategicos', function (Blueprint $table) {
-            $table->id();
-            $table->json('metas');
-            $table->string('titulo');
-            $table->string('justificativa')->nullable();
-            $table->string('logs');
-            $table->string('data_registro');
-            $table->boolean('active')->nullable();
+
+        Schema::create('eixos', function (Blueprint $table) {
             
+            $table->bigIncrements('id');
+
+            $table->string('titulo');
+            $table->string('descricao');
+            $table->string('data_registro');
+
+            $table->boolean('active'); 
             $table->timestamps();
+
         });
     }
 
@@ -33,7 +36,6 @@ class CreateObjetivosEstrategicosTable extends Migration
      */
     public function down()
     {
-        #TODO: deletar rels
-        Schema::dropIfExists('objetivos_estrategicos');
+        Schema::dropIfExists('eixos');
     }
 }

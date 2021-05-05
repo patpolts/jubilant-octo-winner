@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MetasController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndicadoresAnosController;
 use App\Http\Controllers\IndicadoresController;
+use App\Models\IndicadoresAnos;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -22,26 +24,35 @@ use Illuminate\Support\Facades\Auth;
  * Views public
  */
 Route::get('/', [HomeController::class,'index'])->name('home');
-Route::get('/metas/{metasId}', [HomeController::class,'metasView'])->name('public_metas_view');
+Route::get('/meta/{metasId}', [HomeController::class,'metasView'])->name('public_metas_view');
 Route::get('sobre', [HomeController::class,'sobre']);
 
 /**
  *  Views Admin
  */
-Route::get('/dashboard', [Controller::class,'viewHome'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [Controller::class,'adminIndex'])->middleware(['auth'])->name('dashboard');
 
 Route::get('/metas', [MetasController::class, 'view'])->middleware(['auth'])->name('metas');
-Route::get('/metas/adicionar', [MetasController::class, 'addMetas'])->middleware(['auth'])->name('metas_adicionar');
-Route::post('/metas/adicionar', [MetasController::class, 'addMetas'])->middleware(['auth'])->name('metas_adicionar');
+Route::get('/metas/adicionar', [MetasController::class, 'add'])->middleware(['auth'])->name('metas_adicionar');
+Route::post('/metas/adicionar', [MetasController::class, 'add'])->middleware(['auth'])->name('metas_adicionar');
+Route::get('/metas/editar/{metasId}', [MetasController::class, 'edit'])->middleware(['auth'])->name('metas_editar');
+Route::post('/metas/editar/{metasId}', [MetasController::class, 'edit'])->middleware(['auth'])->name('metas_editar');
 
 Route::get('/eixos', [Controller::class, 'viewEixos'])->middleware(['auth'])->name('eixos');
 Route::get('/ouse', [Controller::class, 'viewOuse'])->middleware(['auth'])->name('objetivos');
 
-Route::get('/indicadores', [IndicadoresController::class, 'viewIndicadores'])->middleware(['auth'])->name('indicadores');
-Route::get('/indicadores/adicionar', [IndicadoresController::class, 'addIndicadores'])->middleware(['auth'])->name('indicadores_adicionar');
-Route::post('/indicadores/adicionar', [IndicadoresController::class, 'addIndicadores'])->middleware(['auth'])->name('indicadores_adicionar');
-Route::get('/indicadores/editar/{indicadorId}', [IndicadoresController::class, 'editIndicadores'])->middleware(['auth'])->name('indicadores_editar');
-Route::post('/indicadores/editar/{indicadorId}', [IndicadoresController::class, 'editIndicadores'])->middleware(['auth'])->name('indicadores_editar');
+#Indicadores
+Route::get('/indicadores', [IndicadoresController::class, 'view'])->middleware(['auth'])->name('indicadores');
+Route::get('/indicadores/adicionar', [IndicadoresController::class, 'add'])->middleware(['auth'])->name('indicadores_adicionar');
+Route::post('/indicadores/adicionar', [IndicadoresController::class, 'add'])->middleware(['auth'])->name('indicadores_adicionar');
+Route::get('/indicadores/editar/{indicadorId}', [IndicadoresController::class, 'edit'])->middleware(['auth'])->name('indicadores_editar');
+Route::post('/indicadores/editar/{indicadorId}', [IndicadoresController::class, 'edit'])->middleware(['auth'])->name('indicadores_editar');
+#indicadore anos
+Route::get('/indicadores-anos', [IndicadoresAnosController::class, 'view'])->middleware(['auth'])->name('indicadores_anos');
+Route::get('/indicadores-anos/adicionar', [IndicadoresAnosController::class, 'add'])->middleware(['auth'])->name('indicadores_anos_adicionar');
+Route::post('/indicadores-anos/adicionar', [IndicadoresAnosController::class, 'add'])->middleware(['auth'])->name('indicadores_anos_adicionar');
+Route::get('/indicadores-anos/editar/{idcAnosId}', [IndicadoresAnosController::class, 'edit'])->middleware(['auth'])->name('indicadores_anos_editar');
+Route::post('/indicadores-anos/editar/{idcAnosId}', [IndicadoresAnosController::class, 'edit'])->middleware(['auth'])->name('indicadores_anos_editar');
 
 Route::get('/acao', [Controller::class, 'viewAcao'])->middleware(['auth'])->name('acao');
 Route::get('/grandetema', [Controller::class, 'viewGrandeTema'])->middleware(['auth'])->name('grandetema');

@@ -14,7 +14,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('pne_editar') }}">Adicionar</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('objetivos_adicionar') }}">Adicionar</a></li>
                         
                         </ol>
                     </nav>
@@ -36,7 +36,7 @@
                                         <th scope="row">{{$item["id"]}}</th>
                                         <td>{{$item['titulo']}}</td>   
                                         <td>
-                                            {{-- <a href="{{route('pne_editar',$item['id'])}}"> editar </a> --}}
+                                            <a href="{{route('objetivos_editar',$item['id'])}}"> editar </a>
                                         </td>
                                     </tr>
                                 @endforeach

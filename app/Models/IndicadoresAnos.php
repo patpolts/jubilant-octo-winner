@@ -36,7 +36,7 @@ class IndicadoresAnos extends Model
             $arr[] = $value;
         }
     
-        return $arr;
+        return $arr ?? [];
     }
 
     public function getById($id)
@@ -86,7 +86,7 @@ class IndicadoresAnos extends Model
                     'titulo' => $value->titulo
                 ];
             }
-            return $arr;
+            return $arr ?? [];
         }else{
             return false;
         }

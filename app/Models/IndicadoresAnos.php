@@ -86,7 +86,7 @@ class IndicadoresAnos extends Model
                     'titulo' => $value->titulo
                 ];
             }
-            return $arr;
+            return $arr ?? [];
         }else{
             return false;
         }

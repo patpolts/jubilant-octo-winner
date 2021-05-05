@@ -66,7 +66,7 @@ Route::post('/acoes/adicionar', [AcoesEstrategicasController::class, 'add'])->mi
 Route::get('/acoes/editar/{acoesId}', [AcoesEstrategicasController::class, 'edit'])->middleware(['auth'])->name('acao_editar');
 Route::post('/acoes/editar/{acoesId}', [AcoesEstrategicasController::class, 'edit'])->middleware(['auth'])->name('acao_editar');
 #Objetivos estrategicas
-Route::get('/objetivos', [ObjetivosEstrategicosController::class, 'view'])->middleware(['auth'])->name('acao');
+Route::get('/objetivos', [ObjetivosEstrategicosController::class, 'view'])->middleware(['auth'])->name('objetivos');
 Route::get('/objetivos/adicionar', [ObjetivosEstrategicosController::class, 'add'])->middleware(['auth'])->name('objetivos_adicionar');
 Route::post('/objetivos/adicionar', [ObjetivosEstrategicosController::class, 'add'])->middleware(['auth'])->name('objetivos_adicionar');
 Route::get('/objetivos/editar/{objetivosId}', [ObjetivosEstrategicosController::class, 'edit'])->middleware(['auth'])->name('objetivos_editar');

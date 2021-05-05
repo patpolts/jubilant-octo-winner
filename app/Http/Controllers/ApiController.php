@@ -76,28 +76,28 @@ class ApiController extends Controller
         if($this->authToken($request)){
 
             $usertoken = $request->user()->user_token;
-            $query = $metas::where('active',1)->get();
+            $query = $metas::where('active',1)->get()->toArray;
            
             if(count($query) >=1 ){
-                foreach ($query as $value) {
-                    $data[] = array(
-                        'id'            => $value->id,
-                        'indicador_id'  => $value->indicador_id,                  
-                        'objetivo_id'   => $value->objetivo_id,                   
-                        'eixo_id'       => $value->eixo_id,                   
-                        'ods_id'        => $value->ods_id,                    
-                        'pne_id'        => $value->pne_id,                    
-                        'titulo'        => $value->titulo,                    
-                        'descricao'     => $value->descricao,                 
-                        'valor'         => $value->valor,                 
-                        'valor_inicial' => $value->valor_inicial,                 
-                        'data_registro' => $value->data_registro,                 
-                        'active'        => $value->active,
-                    );
-                }
+                // foreach ($query as $value) {
+                //     $data[] = array(
+                //         'id'            => $value->id,
+                //         'indicador_id'  => $value->indicador_id,                  
+                //         'objetivo_id'   => $value->objetivo_id,                   
+                //         'eixo_id'       => $value->eixo_id,                   
+                //         'ods_id'        => $value->ods_id,                    
+                //         'pne_id'        => $value->pne_id,                    
+                //         'titulo'        => $value->titulo,                    
+                //         'descricao'     => $value->descricao,                 
+                //         'valor'         => $value->valor,                 
+                //         'valor_inicial' => $value->valor_inicial,                 
+                //         'data_registro' => $value->data_registro,                 
+                //         'active'        => $value->active,
+                //     );
+                // }
                 $res = [
                     "data" => array(
-                        "metas" => $data,
+                        "metas" => json_encode($query),
                     ),
                     "user" => $usertoken,
                     "message" => "sucesso",
@@ -128,65 +128,17 @@ class ApiController extends Controller
         }
     }
 
-    public function metasAdd(Request $request)
-    {
-        if($request->method() == 'POST'){
-            $res = [
-                "data" => array(
-                    "user" => Auth::user()->user_token,
-                ),
-                "message" => "sucess",
-            ];  
-        }else{
-            $res = [
-                "data" => array(
-                    "user" => Auth::user()->user_token,
-                ),
-                "message" => "sucess",
-            ];
-
-            return $request->data;
-        }
-        print_r('<pre>');
-        print_r($res);
-        return response($res,200)->header('Content-Type', 'text/json');  
-    }
-    public function indicadores(Request $request, User $user)
+    public function indicadores(Request $request, User $user, Indicadores $indicadores)
     {
         # code...
         if($this->authToken($request)){
             $usertoken = Hash::make(Auth::user()->email);
-            $query = $this->indicadores::where('active',true)->get();
+            $query = $indicadores::where('active',true)->get()->toArray();
             $data = [];
-            foreach ($query as $key => $value) {
-                $query2 = $this->indicadoresAnos::where('indicador_id', $value->id)->get();
-                foreach ($query2 as $value2) {
-                    $arr[] = array(
-                        "id"            => $value2->id,
-                        "ano"           => $value2->ano,
-                        "justificativa" => $value2->justificativa,
-                        "valor"         => $value2->valor,
-                        "data_registro" => $value2->data_registro,
-                    );
-                }
-                $data[] = array(
-                    "id"            => $value->id,
-                    "titulo"        => $value->titulo,
-                    "descricao"     => $value->descricao,
-                    "anos"          => $value->anos,
-                    "metas"         => $value->metas,
-                    "valor_inicial" => $value->valor_inicial,
-                    "valor"         => $value->valor,
-                    "valor_final"   => $value->valor_final,
-                    "data_registro" => $value->data_registro,
-                    "anos"          => $arr,
-                    "active"        => $value->active,
-                );
-            }
             $res = [
                 "data" => array(
                     "user" => $usertoken,
-                    "indicadores" => $data,
+                    "indicadores" => json_encode($query),
                 ),
                 "message" => "sucesso",
             ];

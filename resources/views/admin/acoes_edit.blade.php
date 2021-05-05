@@ -14,88 +14,84 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                          <li class="breadcrumb-item active" aria-current="adicionar"><a href="{{ route('metas_adicionar') }}">Adicionar</a></li>
+                          <li class="breadcrumb-item active" aria-current="adicionar"><a href="{{ route('acao_adicionar') }}">Adicionar</a></li>
+                        
                         </ol>
                     </nav>
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
                   @if ($message)
-                      <div class="card">
-                        <div class="card-body"> 
-                          <p>{{$message}}</p>
-                          <a class="btn btn-outline" href="{{ route('metas') }}">Voltar</a>
-                        </div>
+                    <div class="card">
+                      <div class="card-body"> 
+                        <p>{{$message}}</p>
+                        <a class="btn btn-outline" href="javascript: history.back(-1);">Voltar</a>
                       </div>
+                    </div>
                   @else
                       
                     <div>
-                      <form action="{{$url}}" method="POST" name="editMetas">
+                      <form action="{{$url}}" method="POST" name="addMetas">
                         @csrf
                         <div class="form-group">
-                          <label for="data-titulo">Titulo</label>
-                          <input name="dataTitulo" type="text" class="form-control" id="data-titulo" value="{{$results[0]['dataTitulo']}}">
-                        </div>
-                        <div class="form-group">
-                          <label for="data-descricao">Descrição</label>
-                          <input name="dataDescricao" type="text" class="form-control" id="data-descricao" value="{{$results[0]['dataDescricao']}}">
-                        </div>
-                        <div class="form-group">
-                          <label for="data-indicadores">Indicadores</label>
-                          <select name="dataIndicadores" id="data-indicadores">
-                            @if (count($results[0]['dataIndicadores']) >=1)
-                                @foreach ($results[0]['dataIndicadores'] as $idc)
-                                  <option value="{{$idc['id']}}" @if ($idc['id'] == $results[0]['dataIndicadoresId'])
-                                      selected
-                                  @endif>{{$idc['titulo']}}</option>
-                                @endforeach
+                          <label for="data-eixos">Selecione o Eixo</label>
+                          <select name="dataEixos" id="data-eixos">
+                            @if (count(array()) >=1 )
+                              @foreach ($results["eixoSelect"] as $item)
+                                <option value="{{$item['id']}}">{{$item['titulo']}}</option>
+                              @endforeach
+                            @else
+                              <option value="0">Sem eixos cadastrado</option>
                             @endif
-                            
                           </select>
                         </div>
                         <div class="form-group">
-                          <label for="data-objetivo">Objetivos</label>
-                          <select name="dataObjetivos" id="data-objetivo">
-                            <option value="1">option</option>
+                          <label for="data-objetivoEspecifico">Objetivo Especifico</label>
+                            <select name="dataObjetivoEspecifico" id="data-objetivoEspecifico">
+                                <option value="1">Garantir o adequado funcionamento das estruturas básicas para as atividades de pesquisa e extensão.</option>
+                                <option value="2">Aprimorar os fluxos e procedimentos da área de formalização e gestão de recursos para convênios e parcerias.</option>
+                            </select>
+                       
+                        </div>
+                        <div class="form-group">
+                          <label for="data-descricao">Descrição da ação</label>
+                          <input name="dataDescricao" type="text" class="form-control" id="data-descricao">
+                        </div>
+                        <div class="form-group">
+                          <label for="data-ator">Ator</label>
+                          <select name="dataAtor" id="data-ator">
+                            @if (count($results[0]["atorSelect"]) >=1 )
+                              @foreach ($results[0]["atorSelect"] as $item)
+                                <option value="{{$item['id']}}">{{$item['titulo']}}</option>
+                              @endforeach
+                            @else
+                              <option value="0">Sem eixos cadastrado</option>
+                            @endif
                           </select>
                         </div>
                         <div class="form-group">
-                          <label for="data-eixo">Eixos</label>
-                          <select name="dataEixos" id="data-eixo">
-                            <option value="1">option</option>
-                          </select>
+                          <label for="data-titulo">Titulo</label>
+                          <input name="dataTitulo" type="text" class="form-control" id="data-titulo" aria-describedby="tituloHelp">
+                          <small id="tituloHelp">Identificação única relacionada a ação</small>
                         </div>
                         <div class="form-group">
-                          <label for="data-ods">Ods</label>
-                          <select name="dataOds" id="data-ods">
-                            <option value="1">option</option>
-                          </select>
+                          <div>
+                            <label for="data-desempenho">Desempenho</label>
+                            <input name="dataDesempenho" type="number" class="form-control" id="data-desempenho" value="">
+                          </div>
+                          <div>
+                            <label for="data-dataRegistro">Data do Registro</label>
+                            <input name="dataRegistro" type="text" class="form-control" id="data-dataRegistro" value="">
+                          </div>
+                          <div>
+                            <label for="data-justificativa">Justificativa</label>
+                            <input name="dataJustificativa" type="text" class="form-control" id="data-justificativa" >
+                          </div>
                         </div>
                         <div class="form-group">
-                          <label for="data-pne">Pne</label>
-                          <select name="dataPne" id="data-pne" >
-                            <option value="1">option</option>
-                          </select>
                         </div>
-                        <div class="form-group">
-                          <label for="data-valor">Valor</label>
-                          <input name="dataValor" type="number" class="form-control" id="data-valor" value="{{$results[0]['dataValor']}}">
-                        </div>
-                        <div class="form-group">
-                          <label for="data-valorInicial">Valor Inicial</label>
-                          <input name="dataValorInicial" type="number" class="form-control" id="data-valorInicial" value="{{$results[0]['dataValorInicial']}}">
-                        </div>
-                        <div class="form-group">
-                          <label for="data-dataRegistro">Data do Registro</label>
-                          <input name="dataRegistro" type="text" class="form-control" id="data-dataRegistro" value="{{$results[0]['dataRegistro']}}">
-                        </div>
-                        <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="data-ativo" name="dataAtivo" @if ($results[0]['dataAtivo'] == 1)
-                              checked
-                          @endif value="{{$results[0]['dataAtivo']}}">
-                          <label class="form-check-label" for="data-ativo">Ativo</label>
-                        </div>
-                        <br/>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                     
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <a class="btn btn-outline" href="javascript: history.back(-1);">Voltar</a>
                       </form>
                     </div>
 

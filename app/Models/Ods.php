@@ -4,48 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use App\Models\User as User;
-use Illuminate\Support\Facades\DB;
 
-class GrandesTemas extends Model
+class Ods extends Model
 {
-    use HasFactory,Notifiable;
+    use HasFactory;
 
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'titulo',
-        'descricao',
+        'meta_id',
+        'nome',
+        'slug',
         'layout',
-        'active',
     ];
-    
-    protected $table = 'grande_tema';
 
-    public $grandeTemasData = array();
-
-    public function buildTemas()
-    {
-        $data = self::where('active',1)->get();
-        foreach ($data as $key => $value) {
-            $arr[] = array(
-                'acao_id'     => $value->acao_id,
-                'objetivo_id' => $value->objetivo_id,
-                'titulo'      => $value->titulo,
-                'descricao'   => $value->descricao,
-                'layout'      => $value->layout,
-                'active'      => $value->active,
-            );
-        }
-
-       return $arr;
-    }
 
     public function adminViewData()
     {

@@ -23,30 +23,51 @@ class ObjetivosEstrategicos extends Model
     protected $atributes = [
     ];
 
-    public function view()
-    {
-        # code...
-    }
     public function adminViewData()
     {
-        $view = self::all()->toArray();
-        for ($i=0; $i < count($view); $i++) { 
-            $arr[] = $view[$i];
+        $data = self::all();
+        foreach ($data as  $value) {
+            $arr[] = $value;
         }
+    
         return $arr;
     }
 
     public function getById($id)
     {
-        $view = self::where('id',$id);
-        for ($i=0; $i < count($view); $i++) { 
-            $arr[] = $view[$i];
+        
+        $data = self::where('id',$id)->get();
+        if($data){
+            return $data;
+        }else{
+            return false;
         }
-        return $arr;
+       
     }
 
-    public function getRelated($id)
+
+    public function edit($arr,$id)
     {
-        //
+        if(count($arr) >=1 ){
+            $data = self::where('id',$id)->update($arr[0]);
+            if($data){
+                return $data;
+            }
+            
+        }else{
+            return false;
+        }
     }
+
+    public function add($arr)
+    {
+        $data = self::insert($arr);
+        if($data){
+            return $data;
+        }else{
+            return false;
+        }
+       
+    }
+
 }

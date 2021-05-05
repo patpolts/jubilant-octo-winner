@@ -17,21 +17,16 @@ class CreateEixosTable extends Migration
 
         Schema::create('eixos', function (Blueprint $table) {
             
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
 
-            $table->string('titulo')->unique();
-            $table->string('justificativa');
+            $table->string('titulo');
+            $table->string('descricao');
             $table->string('data_registro');
 
             $table->boolean('active'); 
+            $table->timestamps();
 
         });
-    }
-
-    public function refresh(){
-        //
-        // SchemaState:
     }
 
     /**

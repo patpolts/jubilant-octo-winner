@@ -58,9 +58,28 @@ class AcoesEstrategicas extends Model
         return $arr;
     }
 
-    public function getRelated($id)
+    public function edit($arr,$id)
     {
-        //
+        if(count($arr) >=1 ){
+            $data = self::where('id',$id)->update($arr[0]);
+            if($data){
+                return $data;
+            }
+            
+        }else{
+            return false;
+        }
+    }
+
+    public function add($arr)
+    {
+        $view = self::insert($arr);
+        if($view == 1){
+            return $view;
+        }else{
+            return false;
+        }
+       
     }
 
 }

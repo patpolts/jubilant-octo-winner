@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Indicadores;
+use App\Models\IndicadoresAnos;
 use App\Models\User as User;
 use App\Providers\RouteServiceProvider;
 use Error;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +21,7 @@ use Throwable;
 
 class IndicadoresController extends Controller
 {
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public $contentView = array();
 
@@ -25,10 +30,9 @@ class IndicadoresController extends Controller
         $this->indicadorAnos = DB::table('indicadores_anos');
     }
 
-    public function viewIndicadores( Indicadores $indicadores)
+    public function view( Indicadores $indicadores)
     {
         $data = $indicadores->indicadoresView();
-
         if($data){
             $indicadores = $data;
         }else{
@@ -51,7 +55,7 @@ class IndicadoresController extends Controller
      * @return \Illuminate\View\
      * TODO: validation
      */
-    public function addIndicadores(Request $request, Indicadores $indicadores)
+    public function add(Request $request, Indicadores $indicadores)
     {
         if ($request->is('indicadores/*')) {
             //
@@ -61,12 +65,12 @@ class IndicadoresController extends Controller
                 ]);
                 $arr[] = array(                
                     'indicador_anos_id' => $request->dataAnos ?? null,
-                    'titulo' => $request->dataTitulo ?? null,
-                    'descricao' => $request->dataDescricao ?? null,
-                    'valor_atual' => $request->dataValorAtual ?? null,
-                    'valor_meta' => $request->dataValorMeta ?? null,
-                    'data_registro' => $request->dataRegistro ?? null,
-                    'active' => 1,
+                    'titulo'            => $request->dataTitulo ?? null,
+                    'descricao'         => $request->dataDescricao ?? null,
+                    'valor_atual'       => $request->dataValorAtual ?? null,
+                    'valor_meta'        => $request->dataValorMeta ?? null,
+                    'data_registro'     => $request->dataRegistro ?? null,
+                    'active'            => 1,
                 );
 
                 $add = $indicadores->adminAddIndicadores($arr);
@@ -99,7 +103,7 @@ class IndicadoresController extends Controller
      * @return \Illuminate\View\
      * TODO: validation
      */
-    public function editIndicadores(Request $request, Indicadores $indicadores)
+    public function edit(Request $request, Indicadores $indicadores)
     {
         if($request->indicadorId){ 
             $id = $request->indicadorId;
@@ -121,6 +125,8 @@ class IndicadoresController extends Controller
                 if(count($upData) >= 1){
                    
                     $update = $indicadores->indicadoresEdit($upData,$id);
+                }else{
+                    $update = null;
                 }
 
                 if($update){
@@ -166,19 +172,5 @@ class IndicadoresController extends Controller
         }
     }
 
-    function array_remove_empty($haystack)
-    {
-        foreach ($haystack as $key => $value) {
-            if (is_array($value)) {
-                $haystack[$key] = $this->array_remove_empty($haystack[$key]);
-            }
-
-            if (empty($haystack[$key])) {
-                unset($haystack[$key]);
-            }
-        }
-
-        return $haystack;
-    }
    
 }

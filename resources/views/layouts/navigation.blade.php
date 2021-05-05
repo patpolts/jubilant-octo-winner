@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('indicadores')" :active="request()->routeIs('indicadores')">
                         {{ __('Indicadores') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('indicadores_anos')" :active="request()->routeIs('indicadores_anos')">
+                        {{ __('Indicadores Anos') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('acao')" :active="request()->routeIs('acao')">
                         {{ __('Plano de Ações') }}
                     </x-nav-link>
@@ -86,6 +89,9 @@
             </x-nav-link>
             <x-nav-link :href="route('indicadores')" :active="request()->routeIs('indicadores')">
                 {{ __('Indicadores') }}
+            </x-nav-link>
+            <x-nav-link :href="route('indicadores_anos')" :active="request()->routeIs('indicadores_anos')">
+                {{ __('Indicadores Anos') }}
             </x-nav-link>
             <x-nav-link :href="route('acao')" :active="request()->routeIs('acao')">
                 {{ __('Plano de Ações') }}

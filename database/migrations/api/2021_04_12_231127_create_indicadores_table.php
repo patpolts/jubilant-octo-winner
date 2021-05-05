@@ -15,20 +15,16 @@ class CreateIndicadoresTable extends Migration
     {
        
         Schema::create('indicadores', function (Blueprint $table) {
-            $table->id();
-            $table->string('titulo')->unique();
+            $table->bigIncrements('id');
+            $table->bigInteger('indicador_anos_id');
+            $table->string('titulo');
             $table->string('descricao');
-            $table->json('anos'); //anos relacionados
-            $table->json('metas'); //json das metas que utilizam este indicador
-            $table->integer('valor_inicial'); 
-            $table->integer('valor'); 
-            $table->integer('valor_final'); 
+            $table->integer('valor_atual'); 
+            $table->integer('valor_meta'); 
             $table->string('data_registro');
-            $table->json('logs'); 
             $table->boolean('active'); 
 
             $table->timestamps();
-            
 
         });
     }

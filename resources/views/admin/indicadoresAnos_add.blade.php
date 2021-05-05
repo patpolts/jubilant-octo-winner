@@ -28,41 +28,43 @@
                       <div class="card">
                         <div class="card-body"> 
                           <p>{{$message}}</p>
+                          <a class="btn btn-outline" href="javascript: history.back(-1);">Voltar</a>
                         </div>
                       </div>
                   @else
                       
                     <div>
-                      <form action="{{$url}}" method="POST" name="addMetas">
+                      <form action="./adicionar" method="POST" name="addIndicadorAnos" enctype="application/x-www-form-urlencoded">
                         @csrf
                         <div class="form-group">
                           <label for="data-titulo">Titulo</label>
                           <input name="dataTitulo" type="text" class="form-control" id="data-titulo" aria-describedby="tituloHelp">
-                          <small id="tituloHelp">Identificação única relacionada a meta</small>
+                          <small id="tituloHelp">Identificação única relacionada ao ano, visível apenas ao administrador</small>
                         </div>
                         <div class="form-group">
-                          <label for="data-descricao">Descrição</label>
-                          <input name="dataDescricao" type="text" class="form-control" id="data-descricao" aria-describedby="tituloHelp">
-                          <small id="tituloHelp">Descrição ou observação da meta</small>
+                          <label for="data-indicador">Indicador</label>
+                          <select name="dataIndicador" id="data-indicador">
+                              @if (count($results) >=1 )
+                                  @foreach ($results as $item)
+                                    <option value="{{$item['id']}}">{{$item['id']}}. {{$item['titulo']}}</option>
+                                  @endforeach
+                              @endif
+                          </select>
                         </div>
                         <div class="form-group">
-                          <label for="data-dataAnos">Indicador Ano</label>
-                          <input name="dataAnos" type="number" class="form-control" id="data-dataAnos" value="1">
-                          
+                          <label for="data-ano">Ano</label>
+                          <input name="dataAno" type="number" class="form-control" id="data-ano" value="">
                         </div>
                         <div class="form-group">
-                          <label for="data-valorAtual">Valor Atual</label>
-                          <input name="dataValorAtual" type="number" class="form-control" id="data-valorAtual" value="">
-                        </div>
-                        <div class="form-group">
-                          <label for="data-valorMeta">Valor Meta</label>
-                          <input name="dataValorMeta" type="number" class="form-control" id="data-valorMeta" value="">
+                          <label for="data-valor">Valor</label>
+                          <input name="dataValor" type="number" class="form-control" id="data-valor" value="">
                         </div>
                         <div class="form-group">
                           <label for="data-dataRegistro">Data do Registro</label>
                           <input name="dataRegistro" type="text" class="form-control" id="data-dataRegistro" value="">
                         </div>
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        {{-- <a class="btn btn-outline-primary" href="javascript: history.back(-1);">Voltar</a> --}}
                       </form>
                     </div>
 

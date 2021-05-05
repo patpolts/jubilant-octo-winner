@@ -12,7 +12,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item "><a href="{{ route('indicadores_adicionar') }}">Adicionar</a></li>
+                            <li class="breadcrumb-item "><a href="{{ route('indicadores_anos_adicionar') }}">Adicionar</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -22,10 +22,8 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Titulo</th>
-                            <th scope="col">descrição</th>
                             <th scope="col">Ano</th>
-                            <th scope="col">Valor Atual</th>
-                            <th scope="col">Valor Meta</th>
+                            <th scope="col">Valor</th>
                             <th scope="col">Data </th>
                             <th scope="col">Actions</th>
                           </tr>
@@ -33,16 +31,14 @@
                         <tbody>
                               @if (count($results) >= 1)
                                 @foreach ($results as $item)
-                                <tr >
+                                <tr>
                                     <th scope="row">{{$item['id']}}</th>
                                     <td>{{$item['titulo']}}</td>
-                                    <td>{{$item['descricao']}}</td>
-                                    <td>{{$item['anos']}}</td>
-                                    <td>{{$item['valor_atual']}}</td>
-                                    <td>{{$item['valor_meta']}}</td>
+                                    <td>{{$item['ano']}}</td>
+                                    <td>{{$item['valor']}}</td>
                                     <td>{{$item['data_registro']}}</td>
                                     <td>
-                                        <a href="{{route('indicadores_editar',$item['id'])}}"> editar</a>
+                                        <a href="{{route('indicadores_anos_editar',$item['id'])}}"> editar</a>
                                     </td>
                                 </tr>
                                 @endforeach

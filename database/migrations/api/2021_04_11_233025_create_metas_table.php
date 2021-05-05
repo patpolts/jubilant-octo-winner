@@ -14,16 +14,17 @@ class CreateMetasTable extends Migration
     public function up()
     {
         Schema::create('metas', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('indicador_id')->nullable();
-            $table->string('titulo',255)->unique();
-            $table->string('descricao',2400);
-            $table->string('justificativa',2400);
-            $table->string('data_registro');
+            $table->bigIncrements('id');
+            $table->bigInteger('indicador_id');
+            $table->bigInteger('objetivo_id');
+            $table->bigInteger('eixo_id');
+            $table->integer('ods_id');
+            $table->integer('pne_id');
+            $table->string('titulo');
+            $table->string('descricao');
             $table->integer('valor');
-            $table->json('pne');
-            $table->json('ods');
-            $table->json('logs');
+            $table->integer('valor_inicial');
+            $table->string('data_registro');
             $table->boolean('active'); 
 
             $table->timestamps();

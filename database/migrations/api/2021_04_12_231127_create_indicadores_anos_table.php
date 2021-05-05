@@ -15,14 +15,12 @@ class CreateIndicadoresAnosTable extends Migration
     {
        
         Schema::create('indicadores_anos', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->integer('indicador_id');
-            $table->integer('meta_id');
-            $table->string('ano');
-            $table->string('valor');
-            $table->string('justificativa');
+            $table->string('titulo');
+            $table->integer('ano');
+            $table->integer('valor');
             $table->string('data_registro');
-            $table->json('logs'); 
             $table->boolean('active'); 
 
             $table->timestamps();
@@ -38,6 +36,6 @@ class CreateIndicadoresAnosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('indicadores');
+        Schema::dropIfExists('indicadores_anos');
     }
 }

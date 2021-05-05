@@ -15,14 +15,12 @@ class CreateGrandesTemasTable extends Migration
     {
 
         Schema::create('grande_tema', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->integer('acao_id');
-            $table->integer('objetivo_id');
-            $table->string('titulo')->unique();
+            $table->bigIncrements('id');
+            $table->string('titulo');
+            $table->string('descricao');
             $table->string('layout');
-            $table->json('logs');
             $table->boolean('active'); 
+            $table->timestamps();
             
 
         });

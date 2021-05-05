@@ -14,9 +14,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="visualizar">Visualizar</li>
                         <li class="breadcrumb-item"><a href="{{ route('metas_adicionar') }}">Adicionar</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('metas_editar') }}">Editar</a></li>
                         
                         </ol>
                     </nav>
@@ -36,6 +34,7 @@
                             <th scope="col">valor inicial</th>
                             <th scope="col">data</th>
                             <th scope="col">ativo</th>
+                            <th scope="col">actions</th>
                                       
                                       
                           </tr>
@@ -54,7 +53,10 @@
                                         <td>{{$item['valor']}}</td>                 
                                         <td>{{$item['valor_inicial']}}</td>                 
                                         <td>{{$item['data_registro']}}</td>                 
-                                        <td>{{$item['active']}}</td>
+                                        <td>{{$item['active']}}</td>      
+                                        <td>
+                                            <a href="{{route('metas_editar',$item['id'])}}"> editar </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                               @else

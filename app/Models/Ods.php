@@ -27,6 +27,13 @@ class Ods extends Model
         return $arr ?? [];
     }
 
+
+    public function templateView()
+    {
+        $data = self::get();
+        return $data ?? [];
+    }
+
     public function getById($id)
     {
         

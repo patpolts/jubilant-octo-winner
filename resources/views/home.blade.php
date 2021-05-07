@@ -12,9 +12,7 @@
                                     <div class="col-6">
                                         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                             <option selected>Escolha o grande tema estrategico</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        
                                         </select>
 
                                         <button type="button" class="btn btn-light">filtrar</button>
@@ -151,6 +149,8 @@
                                                             <span>Receber notificações</span>
                                                         </a>
                                                     </div>
+
+                                                    
                                                     <div>
                                                         <a href="#" class="btn btn-secondary" data-target="{{$loop->index}}" data-content="details">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pie-chart-fill" viewBox="0 0 16 16">

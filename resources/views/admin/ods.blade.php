@@ -24,7 +24,8 @@
                         <thead>
                           <tr>
                             <th scope="col">id</th>      
-                            <th scope="col">titulo</th>       
+                            <th scope="col">titulo</th>     
+                            <th scope="col">slug</th>     
                                       
                                       
                           </tr>
@@ -35,6 +36,7 @@
                                     <tr>
                                         <th scope="row">{{$item["id"]}}</th>
                                         <td>{{$item['titulo']}}</td>   
+                                        <td>{{$item['slug']}}</td>   
                                         <td>
                                             <a href="{{route('ods_editar',$item['id'])}}"> editar </a>
                                         </td>

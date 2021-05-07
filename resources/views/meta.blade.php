@@ -128,7 +128,18 @@
                             </div>
                             <div class="card-body">
                                 <div class="ods-list">
-                                    <p>sem registros</p>
+                                    @if (count($ods) >=1 )
+                                        @foreach ($ods as $key =>$item)
+                                            @if($loop->index >= 6) 
+                                                
+                                            @else
+                                                <span><img src="{{asset('images/'.$item->id.'-icon.png')}}" alt="{{$item->titulo}}"></span> 
+                                            @endif
+                                        @endforeach
+                                        </ul>
+                                    @else
+                                        <p>sem registros</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -142,7 +153,15 @@
                             </div>
                             <div class="card-body">
                                 <div class="pne-list">
-                                    <p>sem registros</p>
+                                    @if (count($pne) >=1 )
+                                        @foreach ($pne as $key =>$item)
+                                            <span>{{$item['id']}}. {{$item['titulo']}}</span> 
+                                           
+                                        @endforeach
+                                        </ul>
+                                    @else
+                                        <p>sem registros</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -157,6 +176,35 @@
                             <div class="card-body">
                                 <div class="graficoInterna" id="{{$metas['id']}}" data-grafico="[2290,2600,3250,3620,4200]" >
                                     <canvas id="metaChart-{{$metas['id']}}" width="100%" height="40%"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card interna">
+                            <div class="card-header">
+                                <h5>AÇÔES</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="pne-list">
+                                    <div class="col">
+                                    <div class="list-group" id="list-tab" role="tablist">
+                                        <ul>
+                                            @for ($i = 0; $i < 5; $i++)
+                                                
+                                            <li class="{{($i + 1) == 1 ? 'active' : ''}}" id="list-{{$i + 1}}-list" data-toggle="list" role="tab" aria-controls="tab">Eixo {{$i + 1}}</li>
+
+                                            @endfor
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">...</div>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                         </div>

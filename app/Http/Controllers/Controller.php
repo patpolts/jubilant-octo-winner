@@ -111,5 +111,11 @@ class Controller extends BaseController
 
         return $haystack;
     }
-   
+
+    public function string_to_slug($var)
+    {
+        $str = strtolower(str_replace(['ã','Ã','á','Á','ç','Ç','é','É','ê','Ê'],['a','A','a','A','c','C','e','E','e','E'], str_replace(' ','-',$var)));
+
+        return $str;
+    }
 }

@@ -15,6 +15,7 @@ use App\Models\IndicadoresAnos;
 use App\Models\Metas;
 use App\Models\ObjetivosEstrategicos;
 use App\Models\AcoesEstrategicas as PlanoAcao;
+use App\Models\Ods;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -162,12 +163,14 @@ class HomeController extends BaseController
         return $hardcoded;
     }
 
-    public function metasView(Request $request, Metas $metas)
+    public function metasView(Request $request, Metas $metas, Ods $ods)
     {
        if(isset($request->metasId)){
             $id = $request->metasId;
             $dataMetas = $metas->getTemplateData($id);
-            
+            $dataOds = $ods->templateView();
+            // print_r($dataOds);
+
        }else{
            $dataMetas = [];
        }
@@ -204,9 +207,20 @@ class HomeController extends BaseController
                     "item_class" => ""
                     )
             ),
+            "ods" => $dataOds ?? '',
+            "pne" => [
+                ['id' => 11,
+                'titulo' => 'Educação Profissional'],
+                ['id' => 12,
+                'titulo' => 'Educação Superior'],
+                ['id' => 14,
+                'titulo' => 'Pós-graduação'],
+                ['id' => 19,
+                'titulo' => 'Gestão democrática'],
+            ],
             "results" => array(
                 "metas" =>   $dataMetas ?? [],
-                "total" => $dataMetas ? count($dataMetas) : 0
+                "total" => $dataMetas ? count($dataMetas) : 0,
             )
         );
 

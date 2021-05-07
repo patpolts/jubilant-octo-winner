@@ -28,23 +28,22 @@ class OdsController extends Controller
             return view('admin.ods', $this->contentView);
       
     }
+  
 
     public function add(Request $request, Ods $ods)
     {
         
          if($request->isMethod('post') && $request->input('_token')){
 
-            $this->validate($request,[
-                'titulo' => 'max:255|required|string',
-                'ano' => 'required|integer|max:4',
-                'valor' => 'required|integer|max:4',
-            ]);
+            // $this->validate($request,[
+            //     'titulo' => 'max:255|required|string',
+            //     'ano' => 'required|integer|max:4',
+            //     'valor' => 'required|integer|max:4',
+            // ]);
 
-            $arr[] = array(                  
-                'titulo'             => $request->dataEixos,
-                'slug'         => $request->dataObjetivos,
-                'layout'             => $request->dataTemas,                      
-                'active'              => $request->dataAtivo, 
+            $arr[]       =  array(                  
+                'titulo' => $request->dataTitulo,
+                'slug'   => $request->dataSlug ?? $this->string_to_slug($request->dataTitulo),          
             );
             $add = $ods->add($arr);
 
@@ -84,12 +83,8 @@ class OdsController extends Controller
             if($request->isMethod('post') && $request->input('_token')){
            
                 $arr[] = array(                
-                    'indicador_id'      => $request->dataIndicador != $data[0]->indicador_id ? $request->dataIndicador : null,
-                    'ano'               => $request->dataAnos != $data[0]->ano ? $request->dataAnos : null,
-                    'titulo'            => $request->dataTitulo != $data[0]->titulo ? $request->dataTitulo : null,
-                    'valor'             => $request->dataValor != $data[0]->valor ? $request->dataValor : null,
-                    'data_registro'     => $request->dataRegistro != $data[0]->data_registro ? $request->dataRegistro : null,
-                    'active'            => $request->dataAtivo != $data[0]->active ? $request->dataAtivo : null,
+                    'titulo'     => $request->dataTitulo != $data[0]->titulo ? $request->dataIndicador : null,
+                    'slug'       => $request->dataSlug != $data[0]->slug ? $request->dataAnos : null,
                 );
                 $upData = $this->array_remove_empty($arr);
 
@@ -108,13 +103,9 @@ class OdsController extends Controller
                 if(count($data) >= 1){
                     foreach ($data as $value) {
                         $arr[] = array(               
-                            'id'            => $value->id, 
-                            'dataIndicador' => $value->indicador_id ?? null,
-                            'dataAnos'      => $value->ano ?? null,
-                            'dataTitulo'    => $value->titulo ?? null,
-                            'dataValor'     => $value->valor ?? null,
-                            'dataRegistro'  => $value->data_registro ?? null,
-                            'dataAtivo'     => $value->active ?? null,
+                            'id'     => $value->id,        
+                            'titulo' => $value->titulo,
+                            'slug'   => $value->slug,         
                         );
                     }
                     $message = null;
@@ -122,6 +113,7 @@ class OdsController extends Controller
                     
                 }
             }
+
             $this->contentView = array(
                 "header_title" => " | ".$this->routeTitle."  (edit)",
                 "title" => $this->routeTitle,

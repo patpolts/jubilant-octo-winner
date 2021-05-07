@@ -47,7 +47,9 @@
                         <div class="form-group">
                           <label for="data-objetivoEspecifico">Objetivo Especifico</label>
                             <select name="dataObjetivoEspecifico" id="data-objetivoEspecifico">
-                                <option value="1">Garantir o adequado funcionamento das estruturas básicas para as atividades de pesquisa e extensão.</option>
+                                <option value="1" @if ($results[1][''])
+                                    
+                                @endif>Garantir o adequado funcionamento das estruturas básicas para as atividades de pesquisa e extensão.</option>
                                 <option value="2">Aprimorar os fluxos e procedimentos da área de formalização e gestão de recursos para convênios e parcerias.</option>
                             </select>
                        

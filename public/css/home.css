@@ -507,3 +507,50 @@ header{
 footer{
     min-height: 300px;
     }
+
+.ods-list span{
+    display: inline-block;
+    width: 7%;
+    height: auto;
+    margin: 0 2% 0 0;
+}
+    .ods-list span img{
+        width: 100%;
+        border-radius: 10%;
+    }
+
+.pne-list span{
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin: 0 2% 0 0;
+    padding: .2em;
+    background: #ccc;
+    border-radius: 7%;
+    font-size: .8em;
+    font-weight: bold;
+}
+
+.pne-list ul{
+    border-bottom: 1px solid #ccc !important;
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+}
+.pne-list ul li.active{
+    color: #A44B3A !important;
+    border-bottom: 2px solid #A44B3A !important;
+}
+.pne-list ul li{
+    float: left;
+    background-color: unset !important;
+    color: #ccc !important;
+    font-weight: bold;
+    width: calc(100% / 5 );
+    list-style: none;
+    text-align: left;
+    border-top: unset;
+    border-left: unset;
+    border-right: unset;
+    padding-left: 1%;
+}

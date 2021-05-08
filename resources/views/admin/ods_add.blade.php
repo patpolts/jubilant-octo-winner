@@ -23,7 +23,7 @@
                   @if ($message)
                     <div class="card">
                       <div class="card-body"> 
-                        <p>{{$message}}</p>
+                        <p>{{$message}}</p> 
                         <a class="btn btn-outline" href="{{route('ods')}}">visualizar</a>
                       </div>
                     </div>

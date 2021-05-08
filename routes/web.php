@@ -33,6 +33,7 @@ Route::get('/', [HomeController::class,'index'])->name('home');
 Route::get('/meta/{metasId}', [HomeController::class,'metasView'])->name('public_metas_view');
 Route::get('sobre', [HomeController::class,'sobre']);
 
+
 /**
  *  Views Admin
  */

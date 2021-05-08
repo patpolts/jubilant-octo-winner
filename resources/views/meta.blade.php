@@ -129,7 +129,7 @@
                             <div class="card-body">
                                 <div class="ods-list">
                                     @if (count($ods) >=1 )
-                                        @foreach ($ods as $key =>$item)
+                                        @foreach ($ods as $key => $item)
                                             @if($loop->index >= 6) 
                                                 
                                             @else
@@ -184,30 +184,360 @@
                 <div class="row">
                     <div class="col">
                         <div class="card interna">
+
                             <div class="card-header">
                                 <h5>AÇÔES</h5>
                             </div>
-                            <div class="card-body">
-                                <div class="pne-list">
-                                    <div class="col">
-                                    <div class="list-group" id="list-tab" role="tablist">
-                                        <ul>
-                                            @for ($i = 0; $i < 5; $i++)
-                                                
-                                            <li class="{{($i + 1) == 1 ? 'active' : ''}}" id="list-{{$i + 1}}-list" data-toggle="list" role="tab" aria-controls="tab">Eixo {{$i + 1}}</li>
 
-                                            @endfor
-                                        </ul>
+                            <div class="card-body pne-list">
+                                <div class="list-group" id="eixoList" role="tablist">
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-action active" >
+                                            <a class="eixos-mn" data-toggle="list" href="#eixo-1" role="tab">Eixo 1</a>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action " >
+                                            <a class="eixos-mn" data-toggle="list" href="#eixo-2" role="tab">Eixo 2</a>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action " data-toggle="list" role="tab">
+                                            <a class="eixos-mn"  href="#eixo-3">Eixo 3</a>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action " >
+                                            <a class="eixos-mn" data-toggle="list" href="#eixo-4">Eixo 4</a>
+                                        </li>
+                                        <li class="list-group-item list-group-item-action " >
+                                            <a class="eixos-mn" data-toggle="list" href="#eixo-5">Eixo 5</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content acoes-box">
+                                    <div class="tab-pane active" id="eixo-1" role="tabpanel">
+                                        <h3>Modernização administrativa e eficiência na gestão de recursos financeiros</h3>
+
+                                        <div class="acao-list table-responsive">
+                                            <div class="objetivos">
+                                                <small>Objetivo específico</small>
+                                                <p>1. Garantir o adequado funcionamento das estruturas básicas para as atividades de pesquisa e extensão.</p>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Ação</th>
+                                                        <th scope="col">Ator envolvido</th>
+                                                        <th scope="col">2021</th>
+                                                        <th scope="col">2022</th>
+                                                        <th scope="col">2023</th>
+                                                        <th scope="col">2024</th>
+                                                        <th scope="col">2025</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Abertura de vestibular para dois novos cursos</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Aumentar número de vagas para 300</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Criar o portal de egressos</th>
+                                                        <td>STI</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="acao-list table-responsive">
+                                            <div class="objetivos">
+                                                <small>Objetivo específico</small>
+                                                <p>2. Aprimorar os fluxos e procedimentos da área de formalização e gestão de recursos para convênios e parcerias.</p>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Ação</th>
+                                                        <th scope="col">Ator envolvido</th>
+                                                        <th scope="col">2021</th>
+                                                        <th scope="col">2022</th>
+                                                        <th scope="col">2023</th>
+                                                        <th scope="col">2024</th>
+                                                        <th scope="col">2025</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Abertura de vestibular para dois novos cursos</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Aumentar número de vagas para 300</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Criar o portal de egressos</th>
+                                                        <td>STI</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">...</div>
+                                    
+                                    <div class="tab-pane" id="eixo-2" role="tabpanel">
+                                        <h3>Modernização administrativa e eficiência na gestão de recursos financeiros</h3>
+                                        
+                                        <div class="acao-list table-responsive">
+                                            <div class="objetivos">
+                                                <small>Objetivo específico</small>
+                                                <p>2. Aprimorar os fluxos e procedimentos da área de formalização e gestão de recursos para convênios e parcerias.</p>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Ação</th>
+                                                        <th scope="col">Ator envolvido</th>
+                                                        <th scope="col">2021</th>
+                                                        <th scope="col">2022</th>
+                                                        <th scope="col">2023</th>
+                                                        <th scope="col">2024</th>
+                                                        <th scope="col">2025</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Abertura de vestibular para dois novos cursos</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Aumentar número de vagas para 300</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Criar o portal de egressos</th>
+                                                        <td>STI</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
                                     </div>
+
+                                    <div class="tab-pane" id="eixo-3" role="tabpanel">
+                                        <h3>Modernização administrativa e eficiência na gestão de recursos financeiros</h3>
+                                        
+                                        <div class="acao-list table-responsive">
+                                            <div class="objetivos">
+                                                <small>Objetivo específico</small>
+                                                <p>2. Aprimorar os fluxos e procedimentos da área de formalização e gestão de recursos para convênios e parcerias.</p>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Ação</th>
+                                                        <th scope="col">Ator envolvido</th>
+                                                        <th scope="col">2021</th>
+                                                        <th scope="col">2022</th>
+                                                        <th scope="col">2023</th>
+                                                        <th scope="col">2024</th>
+                                                        <th scope="col">2025</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Abertura de vestibular para dois novos cursos</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Aumentar número de vagas para 300</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Criar o portal de egressos</th>
+                                                        <td>STI</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="tab-pane" id="eixo-4" role="tabpanel">
+                                        <h3>Modernização administrativa e eficiência na gestão de recursos financeiros</h3>
+                                        
+
+                                        <div class="acao-list table-responsive">
+                                            <div class="objetivos">
+                                                <small>Objetivo específico</small>
+                                                <p>1. Aprimorar os fluxos e procedimentos da área de formalização e gestão de recursos para convênios e parcerias.</p>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Ação</th>
+                                                        <th scope="col">Ator envolvido</th>
+                                                        <th scope="col">2021</th>
+                                                        <th scope="col">2022</th>
+                                                        <th scope="col">2023</th>
+                                                        <th scope="col">2024</th>
+                                                        <th scope="col">2025</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Abertura de vestibular para dois novos cursos</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Aumentar número de vagas para 300</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Criar o portal de egressos</th>
+                                                        <td>STI</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="tab-pane" id="eixo-5" role="tabpanel">
+                                        <h3>Modernização administrativa e eficiência na gestão de recursos financeiros</h3>
+                                        
+
+                                        <div class="acao-list table-responsive">
+                                            <div class="objetivos">
+                                                <small>Objetivo específico</small>
+                                                <p>1. Aprimorar os fluxos e procedimentos da área de formalização e gestão de recursos para convênios e parcerias.</p>
+                                            </div>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Ação</th>
+                                                        <th scope="col">Ator envolvido</th>
+                                                        <th scope="col">2021</th>
+                                                        <th scope="col">2022</th>
+                                                        <th scope="col">2023</th>
+                                                        <th scope="col">2024</th>
+                                                        <th scope="col">2025</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">Abertura de vestibular para dois novos cursos</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Aumentar número de vagas para 300</th>
+                                                        <td>PROGRAD</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">Criar o portal de egressos</th>
+                                                        <td>STI</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                        <td>100%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                    </div>
+
                                 </div>
-                                </div>
+
+
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>

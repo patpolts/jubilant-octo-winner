@@ -386,7 +386,7 @@ header{
 .card .card-body{
     background: #F7F7F7;
     width: 98%;
-    margin: 2% auto;
+    margin: 0px auto;
 }
 .card .card-body .dados{
     width: 60%;
@@ -531,18 +531,28 @@ footer{
     font-weight: bold;
 }
 
-.pne-list ul{
-    border-bottom: 1px solid #ccc !important;
-    width: 90%;
+
+#eixoList ul{
+    width: 100%;
     margin: 0 auto;
     padding: 0;
 }
-.pne-list ul li.active{
+#eixoList .list-group{
+    display: inline-block !important;
+}
+#eixoList {
+    float: left;
+    display: block;
+    width: 100%;
+    margin: 1% 0px;
+}
+#eixoList  .list-group .list-group-item.active{
     color: #A44B3A !important;
     border-bottom: 2px solid #A44B3A !important;
 }
-.pne-list ul li{
+#eixoList .list-group .list-group-item{
     float: left;
+    cursor: pointer;
     background-color: unset !important;
     color: #ccc !important;
     font-weight: bold;
@@ -553,4 +563,42 @@ footer{
     border-left: unset;
     border-right: unset;
     padding-left: 1%;
+    transition: cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#eixoList .list-group .list-group-item a{
+    color: inherit;
+}
+.tab-content.acoes-box small{
+    margin-top: 2%;
+}
+.tab-content.acoes-box p{
+    color: #999;
+    font-weight: normal;
+    font-size: 1.3em;
+}
+.tab-content.acoes-box h3{
+    color: rgba(102, 102, 102, 1);
+    font-size: calc(1.3rem + .2vw);
+    text-align: left;
+    margin-top: 1%;
+
+}
+.acao-list table{
+    text-align: left;
+    font-size: smaller;
+    font-weight: normal;
+    color: #999;
+}
+.acao-list table thead th{
+    color: rgba(153, 153, 153, 1);
+    font-size: .9em;
+
+}
+.acao-list table tbody th,
+.acao-list table tbody td{
+    font-weight: normal;
+    font-size: 1.2em;
+    color: rgba(102, 102, 102, 1);
+;
 }

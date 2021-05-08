@@ -13,6 +13,7 @@ $(function(){
       metasButtons();
       loadGrafico();
       loadGraficoInterna();
+      eixosMenu();
     });
 
   //SOBRE page
@@ -32,6 +33,24 @@ $(function(){
       $("#loaded").show(); 
     }
   }
+
+  function eixosMenu() { 
+    $(".eixos-mn").on("click",function(e){
+      e.preventDefault();
+      const tab     = $(this).data("href");
+      const tabList = $(".list-group-item-action");
+      const total   = tabList.length;
+
+      for (let i = 0; i <= total; i++) {
+        $(tabList[i]+" a").removeClass("active");
+      }
+
+      $(tab+" a").addClass("active");
+      // $(".tab-pane"+tab).addClass("active");
+
+    });
+  }
+
 function loadGrafico() {
   var tabs = $(".grafico");
   var total = tabs.length;

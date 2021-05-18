@@ -37,7 +37,7 @@ class IndicadoresAnosController extends Controller
             }
         }
 
-            $data["indicadores"] = $idcSelect;
+            $data["indicadores"] = $idcSelect ?? array();
             $data["indicadores_anos"] = $arr;
             $this->contentView = array(
                 "header_title" => " | Indicadores Anos(view)",

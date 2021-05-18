@@ -58,7 +58,8 @@ class Metas extends Model
                 $eixos           = $this->getMetaEixo($value->eixo_id);
                 $ods             = $this->getMetaOds($value->ods_id);
                 $pne             = $this->getMetaPne($value->pne_id);
-                // }
+                $final = $indicadores["valor_meta"] ?? 4200;
+                $inicial = $indicadoresAnos["valor"] ?? 3200;
                 $arr[] = array(
                     'id' => $value->id,
                     'indicadores' => $indicadores,    
@@ -73,7 +74,7 @@ class Metas extends Model
                     'valor_inicial' => $value->valor_inicial,                 
                     'data_registro' => $value->data_registro,                 
                     'active' => $value->active,               
-                    'desempenho' => ($indicadores["valor_meta"] - $indicadoresAnos["valor"])/$indicadoresAnos["valor"] * 100,            
+                    'desempenho' => $this->getDesempenho($final,$inicial),            
                 );
                         
 
@@ -81,6 +82,10 @@ class Metas extends Model
             
             return $arr;
         }
+    }
+    public function getDesempenho($final,$inicial)
+    {
+        return ($final - $inicial) / $inicial * 100;
     }
     public function homeMetasData()
     {

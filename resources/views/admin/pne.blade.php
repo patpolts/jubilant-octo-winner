@@ -24,7 +24,7 @@
                         <thead>
                           <tr>
                             <th scope="col">id</th>      
-                            <th scope="col">titulo</th>       
+                            <th scope="col">titulo</th> 
                                       
                                       
                           </tr>
@@ -34,7 +34,7 @@
                                 @foreach ($results as $item)
                                     <tr>
                                         <th scope="row">{{$item["id"]}}</th>
-                                        <td>{{$item['titulo']}}</td>   
+                                        <td>{{$item['titulo']}}</td>    
                                         <td>
                                             <a href="{{route('pne_editar',$item['id'])}}"> editar </a>
                                         </td>

@@ -120,6 +120,7 @@ class IndicadoresController extends Controller
                     'data_registro'     => $request->dataRegistro != $data[0]->data_registro ? $request->dataRegistro : null,
                     'active'            => $request->dataAtivo != $data[0]->active ? $request->dataAtivo : null,
                 );
+                
                 $upData = $this->array_remove_empty($arr);
 
                 if(count($upData) >= 1){

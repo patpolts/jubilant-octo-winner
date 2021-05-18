@@ -1,53 +1,67 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __($data["title"]) }}
-        </h2>
-        @include('components.navbar.admin');
-    </x-slot>
+@extends('layouts.admin')
+@section('header_title', $header_title)
 
+<h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    @section('title', $title)
+</h2>
+<!-- Content -->
+@section('content')
+    <!-- Content -->
     <div class="py-12">
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">Visualizar</li>
-                        <li class="breadcrumb-item"><a href="#">Editar</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('eixos_adicionar') }}">Adicionar</a></li>
+                        
                         </ol>
+                    </nav>
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
                     <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th scope="col">#id</th>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Descrição</th>
+                            <th scope="col">id</th>      
+                            <th scope="col">titulo</th>       
+                            <th scope="col">descrição</th>     
+                            <th scope="col">data</th>  
+                            <th scope="col">ações</th>  
+                                      
+                                      
                           </tr>
                         </thead>
                         <tbody>
-                              @if (count($data["results"]) >= 1)
-                              {{ $item = $data["results"] }}
-                                @for ($i = 0; $i < count($item  ); $i++)
-                                <tr>
-                                    <th scope="row">{{$item[$i]['id']}}</th>
-                                    <td>{{$item[$i]['titulo']}}</td>
-                                    <td>{{$item[$i]['descricao']}}</td>
-                                </tr>
-                                @endfor
+                              @if (count($results) >= 1) 
+                                @foreach ($results as $item)
+                                    <tr>
+                                        <th scope="row">{{$item["id"]}}</th>
+                                        <td>{{$item['titulo']}}</td>   
+                                        <td>{{$item['descricao']}}</td>     
+                                        <td>{{$item['data_registro']}}</td>  
+                                        <td>
+                                            <a href="{{route('eixos_editar',$item['id'])}}"> editar </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                               @else
                               <tr>
                                   <th></th>
-                                  <td></td>
-                                  <td></td>
                                   <td>Nada Encontrado</td>
                                   <td></td>
                                 </tr>
                               @endif
                         </tbody>
                     </table>
+                    <p>
+                        @if (count($results) >= 1)
+                          {{count($results)}} registros encontrados.
+                        @endif
+                    </p>
                 </div>
             </div>
         </div>
        
     </div>
-</x-app-layout>
+@endsection

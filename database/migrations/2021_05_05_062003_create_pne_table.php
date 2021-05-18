@@ -13,7 +13,7 @@ class CreatePneTable extends Migration
      */
     public function up()
     {
-        Schema::create('pne', function (Blueprint $table) {
+        Schema::create('pnes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('meta_id');
             $table->string('nome');
@@ -30,6 +30,6 @@ class CreatePneTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pne');
+        Schema::dropIfExists('pnes');
     }
 }

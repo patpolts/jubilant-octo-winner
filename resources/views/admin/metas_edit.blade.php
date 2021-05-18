@@ -55,25 +55,49 @@
                         <div class="form-group">
                           <label for="data-objetivo">Objetivos</label>
                           <select name="dataObjetivos" id="data-objetivo">
-                            <option value="1">option</option>
+                            @if (count($results[0]['dataObjetivos']) >=1)
+                                @foreach ($results[0]['dataObjetivos'] as $obj)
+                                  <option value="{{$obj['id']}}" @if ($obj['id'] == $results[0]['dataObjetivosId'])
+                                      selected
+                                  @endif>{{$obj['titulo']}}</option>
+                                @endforeach
+                            @endif
                           </select>
                         </div>
                         <div class="form-group">
                           <label for="data-eixo">Eixos</label>
                           <select name="dataEixos" id="data-eixo">
-                            <option value="1">option</option>
+                            @if (count($results[0]['dataEixos']) >=1)
+                                @foreach ($results[0]['dataEixos'] as $eixo)
+                                  <option value="{{$eixo['id']}}" @if ($eixo['id'] == $results[0]['dataEixosId'])
+                                      selected
+                                  @endif>{{$eixo['titulo']}}</option>
+                                @endforeach
+                            @endif
                           </select>
                         </div>
                         <div class="form-group">
                           <label for="data-ods">Ods</label>
                           <select name="dataOds" id="data-ods">
-                            <option value="1">option</option>
+                            @if (count($results[0]['dataOds']) >=1)
+                                @foreach ($results[0]['dataOds'] as $ods)
+                                  <option value="{{$ods['id']}}" @if ($ods['id'] == $results[0]['dataOdsId'])
+                                      selected
+                                  @endif>{{$ods['titulo']}}</option>
+                                @endforeach
+                            @endif
                           </select>
                         </div>
                         <div class="form-group">
                           <label for="data-pne">Pne</label>
                           <select name="dataPne" id="data-pne" >
-                            <option value="1">option</option>
+                            @if (count($results[0]['dataPne']) >=1)
+                                @foreach ($results[0]['dataPne'] as $pne)
+                                  <option value="{{$pne['id']}}" @if ($pne['id'] == $results[0]['dataPneId'])
+                                      selected
+                                  @endif>{{$pne['titulo']}}</option>
+                                @endforeach
+                            @endif
                           </select>
                         </div>
                         <div class="form-group">

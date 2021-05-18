@@ -96,10 +96,23 @@ class Indicadores extends Model
 
     public function getById($id)
     {
-        
+        if(!$id){
+            ddd("Id inválido");
+        }
         $data = self::where('id',$id)->get();
-        if($data){
-            return $data;
+        if(count($data) >=1 ){
+            foreach ($data as $key => $value) {
+                $arr[] = [
+                    'id' => $value->id,
+                    'titulo' => $value->titulo,
+                    'indicador_anos_id' => $value->indicador_anos_id,
+                    'valor_atual' => $value->valor_atual,
+                    'valor_meta' => $value->valor_meta,
+                    'data_registro' => $value->data_registro,
+                    'active' => $value->active
+                ];
+            }
+            return $arr[0];
         }else{
             return false;
         }

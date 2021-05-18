@@ -22,6 +22,7 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Titulo</th>
+                            <th scope="col">Indicador</th>
                             <th scope="col">Ano</th>
                             <th scope="col">Valor</th>
                             <th scope="col">Data </th>
@@ -29,11 +30,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                              @if (count($results) >= 1)
-                                @foreach ($results as $item)
+                              @if (count($results["indicadores_anos"]) >= 1)
+                                @foreach ($results["indicadores_anos"] as $item)
                                 <tr>
                                     <th scope="row">{{$item['id']}}</th>
                                     <td>{{$item['titulo']}}</td>
+                                    <td>
+                                       {{$item['indicador'] ?? '--'}}
+                                    </td>
                                     <td>{{$item['ano']}}</td>
                                     <td>{{$item['valor']}}</td>
                                     <td>{{$item['data_registro']}}</td>

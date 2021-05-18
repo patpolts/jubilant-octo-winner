@@ -50,13 +50,24 @@ class Eixos extends Model
     public function getById($id)
     {
         
+        if(!$id){
+            ddd("Id inválido");
+        }
         $data = self::where('id',$id)->get();
-        if($data){
-            return $data;
+        if(count($data) >=1 ){
+            foreach ($data as $key => $value) {
+                $arr[] = [
+                    'id' => $value->id,
+                    'titulo' => $value->titulo,
+                    'descricao' => $value->descricao,
+                    'data_registro' => $value->data_registro,
+                    'active' => $value->active
+                ];
+            }
+            return $arr[0];
         }else{
             return false;
         }
-       
     }
 
 

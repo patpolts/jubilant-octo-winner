@@ -85,15 +85,32 @@ class Controller extends BaseController
        return view('admin.acao',$this->contentView);
     }
     
-    public function validaData($msg,$param = '')
+    public function validaData($data, $param = '')
     {
-        $this->contentView = array(
-            "header_title" =>  "| Admin (metas)",
-            "title" => "Metas",
-            "content" => "view",
-            "results" => ['error' => $msg],
-        );
-        return true;
+        $pattern = "\/=+%$@!#()[]";
+        switch ($param) {
+            case 'string':
+                if(empty($data)){
+                    dd("Erro campo ".$param." inválido");
+                }else{
+                    $res =  trim($data,$pattern);
+                }
+                break;
+            case 'integer':
+                    $res =  $data;
+                break;
+            case 'date':
+                    $res =  $data;
+                break;
+            case 'ano':
+                    $res =  $data;
+                break;
+            
+            default:
+                dd("Erro campo ".$param." inválido");
+                break;
+        }
+       return $res;
     }
 
 

@@ -28,119 +28,114 @@ class EixosController extends Controller
       
     }
 
+   /**
+     * Add View.
+     *
+     * @return \Illuminate\View\View
+     */
     public function add(Request $request, Eixos $eixos)
     {
-        
-         if($request->isMethod('post') && $request->input('_token')){
+        if ($request->is('eixos/*')) {
+           
+            if($request->isMethod('post') && $request->input('_token')){
+                $this->validate($request,[
+                    'dataTitulo' => 'max:255'
+                ]);
+                $arr[] = array(                
+                    'titulo'        => $this->validaData($request->dataTitulo,"string"),                    
+                    'descricao'     => $this->validaData($request->dataDescricao,"string"),                        
+                    'data_registro' => $this->validaData($request->dataRegistro,"date"), 
+                    'active' => 1, //#hardcoded
+                );
 
-            $this->validate($request,[
-                'titulo' => 'max:255|required|string',
-                'ano' => 'required|integer|max:4',
-                'valor' => 'required|integer|max:4',
-            ]);
+                $data = $eixos->add($arr);
+                if($data){
+                    $message = "Eixos ".$data." adicionada com sucesso";
+                }
 
-            $arr[] = array(                  
-                'eixo_id'             => $request->dataEixos,
-                'objetivo_id'         => $request->dataObjetivos,
-                'tema_id'             => $request->dataTemas,          
-                'titulo'              => $request->dataTitulo,            
-                'descricao'           => $request->dataDescricao,
-                'justificativa'       => $request->dataJustificativa,
-                'objetivo_especifico' => $request->dataObjetivoEspecifico,
-                'ator'                => $request->dataAtor,
-                'desempenho'          => $request->dataDesempenho,             
-                'data_registro'       => $request->dataRegistro,              
-                'active'              => $request->dataAtivo, 
-            );
-            $add = $eixos->add($arr);
-
-            if($add){
-                $message = "Eixo ".$add." adicionado com sucesso";
             }else{
-                $message = "Erro ao adicionar eixo";
+                $message = null;
             }
 
-         }else{
+            $this->contentView = array(
+                "header_title" => " | Objetivo Ouse (add)",
+                "title" => "Objetivo Ouse",
+                "content" => "add",
+                "results" => $data ?? array(),
+                "url" => $request->url(),
+                "message" => $message
+            );
 
-            $formInfo = array();
+            return view('admin.eixos_add',$this->contentView);
 
-         }
+        }
+        
+    }   
+   
 
-         $this->contentView = array(
-            "header_title" => " | ".$this->routeTitle." (add)",
-            "title"        => $this->routeTitle,
-            "content"      => "edit",
-            "results"      => $indicadorSelect ?? [],
-            "url"          => $request->url(),
-            "message"      => $message ?? null,
-        );
-
-        return view('admin.eixos_add',$this->contentView);
-    }
 
 /**
  * EDIT
  */
-    public function edit(Request $request, EixosController $acoes)
+    public function edit(Request $request, Eixos $eixos)
     {
-        if($request->idcAnosId){ 
-            $id = $request->idcAnosId;
-            $data = $acoes->getById($id);
+        
+        if($request->eixosId){ 
+            $id = $request->eixosId;
+            $data = $eixos->getById($id);
             
             if($request->isMethod('post') && $request->input('_token')){
-           
-                $arr[] = array(                
-                    'indicador_id'      => $request->dataIndicador != $data[0]->indicador_id ? $request->dataIndicador : null,
-                    'ano'               => $request->dataAnos != $data[0]->ano ? $request->dataAnos : null,
-                    'titulo'            => $request->dataTitulo != $data[0]->titulo ? $request->dataTitulo : null,
-                    'valor'             => $request->dataValor != $data[0]->valor ? $request->dataValor : null,
-                    'data_registro'     => $request->dataRegistro != $data[0]->data_registro ? $request->dataRegistro : null,
-                    'active'            => $request->dataAtivo != $data[0]->active ? $request->dataAtivo : null,
+
+                // print_r($request->dataTitulo);
+                // exit;
+                $this->validate($request,[
+                    'dataTitulo' => 'max:255'
+                ]);
+                $arr[] = array(                            
+                    'titulo'        => $request->dataTitulo != $data['titulo'] ? $request->dataTitulo : null,                    
+                    'descricao'     => $request->dataDescricao != $data['descricao'] ? $request->dataDescricao : null,               
+                    'data_registro' => $request->dataRegistro != $data['data_registro'] ? $request->dataRegistro : null, 
+                    'active'        => $request->dataAtivo != $data['active'] ? $request->dataAtivo : null
                 );
+
                 $upData = $this->array_remove_empty($arr);
 
                 if(count($upData) >= 1){
-                   
-                    $update = $acoes->edit($upData,$id);
-                }
-
-                if($update){
-                    $message = "Ação  ".$update." atualizada com sucesso";
+                    $update = $eixos->edit($upData,$id);
+                    $message = $update ? "Objetivo ".$update." atualizado com sucesso" : null;
                 }else{
-                    $message = null;
+                    $message = "Nada a ser atualizado!";
                 }
 
             }else{
+
                 if(count($data) >= 1){
-                    foreach ($data as $value) {
-                        $arr[] = array(               
-                            'id'            => $value->id, 
-                            'dataIndicador' => $value->indicador_id ?? null,
-                            'dataAnos'      => $value->ano ?? null,
-                            'dataTitulo'    => $value->titulo ?? null,
-                            'dataValor'     => $value->valor ?? null,
-                            'dataRegistro'  => $value->data_registro ?? null,
-                            'dataAtivo'     => $value->active ?? null,
-                        );
-                    }
-                    $message = null;
-                    $indicadoresData = $arr;
+                    $arr[] = array(               
+                        'dataTitulo'        => $data['titulo'] ,                    
+                        'dataDescricao'     => $data['descricao'],                    
+                        'dataRegistro'      => $data['data_registro'] , 
+                        'dataAtivo'         => $data['active']
+                    );
                     
+                    $message = null;
+                    $resData = $arr[0];
                 }
+
             }
+            
             $this->contentView = array(
-                "header_title" => " | ".$this->routeTitle."  (edit)",
-                "title" => $this->routeTitle,
-                "content" => "edit",
-                "results" => $indicadoresData ?? [],
-                "url" => $request->url(),
-                "message" => $message ?? null
+                "header_title" => $this->routeTitle." (edit)",
+                "title"        => $this->routeTitle,
+                "content"      => "edit",
+                "results"      => $resData ?? [],
+                "url"          => $request->url(),
+                "message"      => $message
             );
 
             return view('admin.eixos_edit',$this->contentView);
 
         }else{
-            return false;
+            dd("Id não definido");
         }
     }
 }

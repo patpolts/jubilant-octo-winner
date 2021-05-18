@@ -44,9 +44,16 @@
                         </div>
                         <div class="form-group">
                           <label for="data-indicadores">Indicadores</label>
-                          <select name="dataIndicadores" id="data-indicadores">
-                            <option value="1">option</option>
-                          </select>
+                          @if (count($results['indicadores']) >=1)
+                              
+                            <select name="dataIndicadores" id="data-indicadores">
+                            @foreach ($results['indicadores'] as $idc)
+                                <option value="{{$idc['id']}}">{{$idc['titulo']}}</option>
+                            @endforeach
+                          @else
+                                <option value="0">sem indicador</option>
+                          @endif
+                            </select>
                         </div>
                         <div class="form-group">
                           <label for="data-objetivo">Objetivos</label>

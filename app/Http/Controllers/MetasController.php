@@ -152,13 +152,14 @@ class MetasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function add(Request $request, Metas $metas)
+    public function add(Request $request, Metas $metas, Indicadores $indicadores)
     {
         if ($request->is('metas/*')) {
-            //
+            $idcSelect = $indicadores->getSelectData();
+           
             if($request->isMethod('post') && $request->input('_token')){
                 $this->validate($request,[
-                    'titulo' => 'max:255'
+                    'dataTitulo' => 'max:255'
                 ]);
                 $arr[] = array(                
                     'titulo'        => $this->validaData($request->dataTitulo) ? $request->dataTitulo : null,                    
@@ -174,19 +175,22 @@ class MetasController extends Controller
                     'active' => 1,
                 );
 
-                $updateMetas = $metas->adminAddData($arr);
-                if($updateMetas){
-                    $message = "Meta ".$updateMetas." adicionada com sucesso";
+                $data = $metas->adminAddData($arr);
+                if($data){
+                    $message = "Meta ".$data." adicionada com sucesso";
                 }
 
             }else{
                 $message = null;
             }
+
+            $data["indicadores"] = $idcSelect;
+
             $this->contentView = array(
                 "header_title" => " | Metas (add)",
                 "title" => "Metas",
                 "content" => "add",
-                "results" => [],
+                "results" => $data,
                 "url" => $request->url(),
                 "message" => $message
             );

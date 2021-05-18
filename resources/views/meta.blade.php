@@ -192,20 +192,20 @@
                             <div class="card-body pne-list">
                                 <div class="list-group" id="eixoList" role="tablist">
                                     <ul class="list-group">
-                                        <li class="list-group-item list-group-item-action active" >
+                                        <li class="list-group-item list-group-item-action active" data-target="#eixo-1"">
                                             <a class="eixos-mn" data-toggle="list" href="#eixo-1" role="tab">Eixo 1</a>
                                         </li>
-                                        <li class="list-group-item list-group-item-action " >
+                                        <li class="list-group-item list-group-item-action "  data-target="#eixo-2"">
                                             <a class="eixos-mn" data-toggle="list" href="#eixo-2" role="tab">Eixo 2</a>
                                         </li>
-                                        <li class="list-group-item list-group-item-action " data-toggle="list" role="tab">
-                                            <a class="eixos-mn"  href="#eixo-3">Eixo 3</a>
+                                        <li class="list-group-item list-group-item-action " data-target="#eixo-3"">
+                                            <a class="eixos-mn"  href="#eixo-3" data-toggle="list" role="tab">Eixo 3</a>
                                         </li>
-                                        <li class="list-group-item list-group-item-action " >
-                                            <a class="eixos-mn" data-toggle="list" href="#eixo-4">Eixo 4</a>
+                                        <li class="list-group-item list-group-item-action " data-target="#eixo-4"">
+                                            <a class="eixos-mn" data-toggle="list" href="#eixo-4" role="tab">Eixo 4</a>
                                         </li>
-                                        <li class="list-group-item list-group-item-action " >
-                                            <a class="eixos-mn" data-toggle="list" href="#eixo-5">Eixo 5</a>
+                                        <li class="list-group-item list-group-item-action " data-target="#eixo-5"" >
+                                            <a class="eixos-mn" data-toggle="list" href="#eixo-5" role="tab">Eixo 5</a>
                                         </li>
                                     </ul>
                                 </div>

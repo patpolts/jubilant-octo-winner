@@ -37,17 +37,15 @@ $(function(){
   function eixosMenu() { 
     $(".eixos-mn").on("click",function(e){
       e.preventDefault();
-      const tab     = $(this).data("href");
+      const tab     = $(this).attr("href");
       const tabList = $(".list-group-item-action");
       const total   = tabList.length;
 
-      for (let i = 0; i <= total; i++) {
-        $(tabList[i]+" a").removeClass("active");
-      }
-
-      $(tab+" a").addClass("active");
-      // $(".tab-pane"+tab).addClass("active");
-
+          for (let i = 0; i <= total; i++) {
+            let index = (i + 1);
+            $(tabList[i]).removeClass("active");
+          }
+          $(tab).addClass("active");
     });
   }
 

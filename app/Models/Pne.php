@@ -10,10 +10,8 @@ class Pne extends Model
     use HasFactory;
 
     protected $fillable = [
-        'meta_id',
-        'nome',
+        'titulo',
         'slug',
-        'layout',
     ];
 
     public function adminViewData()
@@ -29,9 +27,19 @@ class Pne extends Model
     public function getById($id)
     {
         
+        if(!$id){
+            ddd("Id inválido");
+        }
         $data = self::where('id',$id)->get();
-        if($data){
-            return $data;
+        if(count($data) >=1 ){
+            foreach ($data as $key => $value) {
+                $arr[] = [
+                    'id' => $value->id,
+                    'titulo' => $value->titulo,
+                    'active' => $value->active
+                ];
+            }
+            return $arr[0];
         }else{
             return false;
         }

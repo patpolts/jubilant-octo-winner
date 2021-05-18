@@ -14,52 +14,46 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                          <li class="breadcrumb-item " ><a href="{{ route('indicadores_anos') }}">Visualizar</a></li>
+                          <li class="breadcrumb-item active" aria-current="adicionar"><a href="{{ route('metas_adicionar') }}">Adicionar</a></li>
                         
                         </ol>
                     </nav>
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
                   @if ($message)
-                      <div class="card">
-                        <div class="card-body"> 
-                          <p>{{$message}}</p>
-                        </div>
+                    <div class="card">
+                      <div class="card-body"> 
+                        <p>{{$message}}</p>
+                        <a class="btn btn-outline" href="{{route('objetivos')}}">visualizar</a>
                       </div>
+                    </div>
                   @else
                       
                     <div>
-                      <form action="{{$url}}" method="POST" name="addIndicadorAnos">
+                      <form action="{{$url}}" method="POST" name="addMetas">
                         @csrf
                         <div class="form-group">
                           <label for="data-titulo">Titulo</label>
                           <input name="dataTitulo" type="text" class="form-control" id="data-titulo" aria-describedby="tituloHelp">
-                          <small id="tituloHelp">Identificação única relacionada ao ano, visível apenas ao administrador</small>
+                          <small id="tituloHelp">Identificação única relacionada a meta</small>
                         </div>
                         <div class="form-group">
-                          <label for="data-indicador">Indicador</label>
-                          <select name="dataIndicador" id="data-indicador">
-                              @if (count($results["indicadores"]) >=1 )
-                                  @foreach ($results["indicadores"] as $item)
-                                    <option value="{{$item['id']}}">{{$item['id']}}. {{$item['titulo']}}</option>
-                                  @endforeach
-                              @endif
-                          </select>
+                          <label for="data-descricao">Descrição</label>
+                          <textarea name="dataDescricao" id="data-descricao" cols="30" rows="5" class="form-control" aria-describedby="tituloHelp"></textarea>
+                          <small id="tituloHelp">Descrição ou observação do objetivo</small>
                         </div>
                         <div class="form-group">
-                          <label for="data-ano">Ano</label>
-                          <input name="dataAno" type="number" class="form-control" id="data-ano" value="">
-                        </div>
-                        <div class="form-group">
-                          <label for="data-valor">Valor</label>
-                          <input name="dataValor" type="number" class="form-control" id="data-valor" value="">
+                          <label for="data-justificacao">Justificativa</label>
+                          <textarea name="dataJustificativa" id="data-justificacao" cols="30" rows="5" class="form-control" aria-describedby="tituloHelp"></textarea>
+                          <small id="tituloHelp">Justificativa do objetivo</small>
                         </div>
                         <div class="form-group">
                           <label for="data-dataRegistro">Data do Registro</label>
                           <input name="dataRegistro" type="text" class="form-control" id="data-dataRegistro" value="">
                         </div>
-                        <button type="submit" class="btn btn-primary">Salvar Ano</button>
-                        <a class="btn btn-outline-primary" href="javascript: history.back();">Voltar</a>
+                     
+                        <button type="submit" class="btn btn-primary">Salvar Objetivo</button>
+                        <a class="btn btn-outline" href="javascript: history.back(-1);">Voltar</a>
                       </form>
                     </div>
 

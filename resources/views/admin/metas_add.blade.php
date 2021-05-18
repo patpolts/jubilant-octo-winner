@@ -44,32 +44,63 @@
                         </div>
                         <div class="form-group">
                           <label for="data-indicadores">Indicadores</label>
-                          <select name="dataIndicadores" id="data-indicadores">
-                            <option value="1">option</option>
-                          </select>
+                              <select name="dataIndicadores" id="data-indicadores">
+                            @if (count($results['indicadores']) >=1)
+                                
+                              @foreach ($results['indicadores'] as $idc)
+                                  <option value="{{$idc['id']}}">{{$idc['titulo']}}</option>
+                              @endforeach
+                            @else
+                                  <option value="0">sem indicador</option>
+                            @endif
+                              </select>
                         </div>
                         <div class="form-group">
                           <label for="data-objetivo">Objetivos</label>
-                          <select name="dataObjetivos" id="data-objetivo">
-                            <option value="1">option</option>
-                          </select>
+                            <select name="dataObjetivos" id="data-objetivo">
+                              @if (count($results['objetivos']) >=1)
+                                @foreach ($results['objetivos'] as $obj)
+                                    <option value="{{$obj['id']}}">{{$obj['titulo']}}</option>
+                                @endforeach
+                              @else
+                                    <option value="0">sem objetivo</option>
+                              @endif
+                            </select>
                         </div>
                         <div class="form-group">
                           <label for="data-eixo">Eixos</label>
                           <select name="dataEixos" id="data-eixo">
-                            <option value="1">option</option>
+                              @if (count($results['eixos']) >=1)
+                                @foreach ($results['eixos'] as $eixo)
+                                  <option value="{{$eixo['id']}}">{{$eixo['titulo']}}</option>
+                                @endforeach
+                              @else
+                                  <option value="0">sem eixo</option>
+                              @endif
                           </select>
                         </div>
                         <div class="form-group">
                           <label for="data-ods">Ods</label>
                           <select name="dataOds" id="data-ods">
-                            <option value="1">option</option>
+                              @if (count($results['ods']) >=1)
+                                @foreach ($results['ods'] as $ods)
+                                  <option value="{{$ods['id']}}">{{$ods['titulo']}}</option>
+                                @endforeach
+                              @else
+                                  <option value="0">sem ods</option>
+                              @endif
                           </select>
                         </div>
                         <div class="form-group">
                           <label for="data-pne">Pne</label>
                           <select name="dataPne" id="data-pne" >
-                            <option value="1">option</option>
+                              @if (count($results['pne']) >=1)
+                                @foreach ($results['pne'] as $pne)
+                                  <option value="{{$pne['id']}}">{{$pne['titulo']}}</option>
+                                @endforeach
+                              @else
+                                  <option value="0">sem pne</option>
+                              @endif
                           </select>
                         </div>
                         <div class="form-group">

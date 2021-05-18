@@ -28,112 +28,117 @@ class ObjetivosEstrategicosController extends Controller
       
     }
 
-    public function add(Request $request, ObjetivosEstrategicos $objetivos)
+   /**
+     * Add View.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function add(Request $request, ObjetivosEstrategicos $objetivosOuse)
     {
-        
-         if($request->isMethod('post') && $request->input('_token')){
+        if ($request->is('objetivos/*')) {
+           
+            if($request->isMethod('post') && $request->input('_token')){
+                $this->validate($request,[
+                    'dataTitulo' => 'max:255'
+                ]);
+                $arr[] = array(                
+                    'titulo'        => $this->validaData($request->dataTitulo,"string"),                    
+                    'descricao'     => $this->validaData($request->dataDescricao,"string"),                
+                    'justificativa'     => $this->validaData($request->dataJustificativa,"string"),                 
+                    'data_registro' => $this->validaData($request->dataRegistro,"date"), 
+                    'active' => 1, //#hardcoded
+                );
 
-            $this->validate($request,[
-                'titulo' => 'max:255|required|string',
-                'ano' => 'required|integer|max:4',
-                'valor' => 'required|integer|max:4',
-            ]);
+                $data = $objetivosOuse->add($arr);
+                if($data){
+                    $message = "Objetivo ".$data." adicionada com sucesso";
+                }
 
-            $arr[] = array(                  
-                'titulo'             => $request->dataEixos,
-                'slug'         => $request->dataObjetivos,
-                'layout'             => $request->dataTemas,                      
-                'active'              => $request->dataAtivo, 
-            );
-            $add = $objetivos->add($arr);
-
-            if($add){
-                $message = "Objetivos ".$add." adicionado com sucesso";
             }else{
-                $message = "Erro ao adicionar objetivos";
+                $message = null;
             }
 
-         }else{
+            $this->contentView = array(
+                "header_title" => " | ".$this->routeTitle." (add)",
+                "title" => $this->routeTitle,
+                "content" => "add",
+                "results" => $data ?? array(),
+                "url" => $request->url(),
+                "message" => $message
+            );
 
-            $formInfo = array();
+            return view('admin.objetivo_ouse_add',$this->contentView);
 
-         }
+        }
+        
+    }   
+   
 
-         $this->contentView = array(
-            "header_title" => " | ".$this->routeTitle." (add)",
-            "title"        => $this->routeTitle,
-            "content"      => "edit",
-            "results"      => $indicadorSelect ?? [],
-            "url"          => $request->url(),
-            "message"      => $message ?? null,
-        );
-
-        return view('admin.objetivos_add',$this->contentView);
-    }
 
 /**
  * EDIT
  */
     public function edit(Request $request, ObjetivosEstrategicos $objetivos)
     {
+        
         if($request->objetivosId){ 
             $id = $request->objetivosId;
             $data = $objetivos->getById($id);
             
             if($request->isMethod('post') && $request->input('_token')){
-           
-                $arr[] = array(                
-                    'indicador_id'      => $request->dataIndicador != $data[0]->indicador_id ? $request->dataIndicador : null,
-                    'ano'               => $request->dataAnos != $data[0]->ano ? $request->dataAnos : null,
-                    'titulo'            => $request->dataTitulo != $data[0]->titulo ? $request->dataTitulo : null,
-                    'valor'             => $request->dataValor != $data[0]->valor ? $request->dataValor : null,
-                    'data_registro'     => $request->dataRegistro != $data[0]->data_registro ? $request->dataRegistro : null,
-                    'active'            => $request->dataAtivo != $data[0]->active ? $request->dataAtivo : null,
+
+                // print_r($request->dataTitulo);
+                // exit;
+                $this->validate($request,[
+                    'dataTitulo' => 'max:255'
+                ]);
+                $arr[] = array(                            
+                    'titulo'        => $request->dataTitulo != $data['titulo'] ? $request->dataTitulo : null,                    
+                    'descricao'     => $request->dataDescricao != $data['descricao'] ? $request->dataDescricao : null, 
+                    'justificativa'  => $request->dataJustificativa !=$data['justificativa'] ? $request->dataJustificativa : null,                  
+                    'data_registro' => $request->dataRegistro != $data['data_registro'] ? $request->dataRegistro : null, 
+                    'active'        => $request->dataAtivo != $data['active'] ? $request->dataAtivo : null
                 );
+
                 $upData = $this->array_remove_empty($arr);
 
                 if(count($upData) >= 1){
-                   
                     $update = $objetivos->edit($upData,$id);
-                }
-
-                if($update){
-                    $message = "Objetivo  ".$update." atualizada com sucesso";
+                    $message = $update ? "Objetivo ".$update." atualizado com sucesso" : null;
                 }else{
-                    $message = null;
+                    $message = "Nada a ser atualizado!";
                 }
 
             }else{
+
                 if(count($data) >= 1){
-                    foreach ($data as $value) {
-                        $arr[] = array(               
-                            'id'            => $value->id, 
-                            'dataIndicador' => $value->indicador_id ?? null,
-                            'dataAnos'      => $value->ano ?? null,
-                            'dataTitulo'    => $value->titulo ?? null,
-                            'dataValor'     => $value->valor ?? null,
-                            'dataRegistro'  => $value->data_registro ?? null,
-                            'dataAtivo'     => $value->active ?? null,
-                        );
-                    }
-                    $message = null;
-                    $resData = $arr;
+                    $arr[] = array(               
+                        'dataTitulo'        => $data['titulo'] ,                    
+                        'dataDescricao'     => $data['descricao'],               
+                        'dataJustificativa' => $data['justificativa'],                     
+                        'dataRegistro'      => $data['data_registro'] , 
+                        'dataAtivo'         => $data['active']
+                    );
                     
+                    $message = null;
+                    $resData = $arr[0];
                 }
+
             }
+            
             $this->contentView = array(
-                "header_title" => " | ".$this->routeTitle."  (edit)",
+                "header_title" => " | ".$this->routeTitle." (edit)",
                 "title" => $this->routeTitle,
-                "content" => "edit",
-                "results" => $resData ?? [],
-                "url" => $request->url(),
-                "message" => $message ?? null
+                "content"      => "edit",
+                "results"      => $resData ?? [],
+                "url"          => $request->url(),
+                "message"      => $message
             );
 
-            return view('admin.objetivos_edit',$this->contentView);
+            return view('admin.objetivo_ouse_edit',$this->contentView);
 
         }else{
-            return false;
+            dd("Id não definido");
         }
     }
 }

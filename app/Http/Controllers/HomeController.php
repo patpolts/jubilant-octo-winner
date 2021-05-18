@@ -35,14 +35,16 @@ class HomeController extends BaseController
     {   
         $this->metas = Metas::class;
     }
-    public function index(Request $request, Metas $metas, Indicadores $indicadores, IndicadoresAnos $indicadoresAnos)
+    public function index(Request $request, Metas $metas, Indicadores $indicadores, IndicadoresAnos $indicadoresAnos,ObjetivosEstrategicos $objetivos, Ods $ods)
     {
         
       $statusIndicadores =   $this->statusIndicadores();
     //   $metas = 
 
         $dataMetas = $metas->getMetas();
-
+        // print_r('<pre>');
+        // print_r($dataMetas);
+        // exit;
         $this->contentView = array(
             "header_title" => "PDI ",
             "title" => "PDI - Home",
@@ -76,7 +78,10 @@ class HomeController extends BaseController
                     )
             ),
             "results" => array(
-                "metas" =>   $dataMetas ?? [],
+                "metas" =>   $dataMetas ?? array(),
+                "objetivos" =>   $objetivos->getSelectData() ?? array(),
+                "ods" =>   $ods->getSelectData() ?? array(),
+                "anos" =>   $indicadoresAnos->getSelectData() ?? array(),
                 "total" => $dataMetas ? count($dataMetas) : 0
             )
         );

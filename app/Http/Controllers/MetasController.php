@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Eixos;
 use App\Models\Indicadores;
 use App\Models\User as User;
 use App\Models\Metas as Metas;
+use App\Models\ObjetivosEstrategicos;
+use App\Models\Ods;
+use App\Models\Pne;
 use App\Providers\RouteServiceProvider;
 use Error;
 use Illuminate\Auth\Events\Registered;
@@ -71,11 +75,16 @@ class MetasController extends Controller
      * @return \Illuminate\View\View
      */
    
-    public function edit(Request $request, Metas $metas, Indicadores $indicadores)
+    public function edit(Request $request, Metas $metas, Indicadores $indicadores, ObjetivosEstrategicos $objetivos, Eixos $eixos, Ods $ods, Pne $pne)
     {
         if($request->metasId){ 
             $id = $request->metasId;
             $data = $metas->getById($id);
+            $idcSelect = $indicadores->getSelectData();
+            $objSelect = $objetivos->getSelectData();
+            $eixoSelect = $eixos->getSelectData();
+            $odsSelect = $ods->getSelectData();
+            $pneSelect = $pne->getSelectData() ? $pne->getSelectData()  : [];
             
             if($request->isMethod('post') && $request->input('_token')){
 
@@ -108,17 +117,20 @@ class MetasController extends Controller
             }else{
 
                 if(count($data) >= 1){
-                    $idc = $indicadores->getSelectData();
                     foreach ($data as $value) {
                         $arr[] = array(               
                             'dataTitulo'        => $value->titulo,                    
                             'dataDescricao'     => $value->descricao, 
-                            'dataIndicadores'   => $idc,
+                            'dataIndicadores'   => $idcSelect,
                             'dataIndicadoresId' => $value->indicador_id,                  
-                            'dataObjetivos'     => $value->objetivo_id,                   
-                            'dataEixos'         => $value->eixo_id,                   
-                            'dataOds'           => $value->ods_id,                    
-                            'dataPne'           => $value->pne_id,                    
+                            'dataObjetivos'     => $objSelect,                  
+                            'dataObjetivosId'   => $value->objetivo_id,                   
+                            'dataEixos'         => $eixoSelect,                      
+                            'dataEixosId'       => $value->eixo_id,                  
+                            'dataOds'           => $odsSelect,                   
+                            'dataOdsId'         => $value->ods_id,                  
+                            'dataPne'           => $pneSelect,                      
+                            'dataPneId'         => $value->pne_id,                    
                             'dataValor'         => $value->valor,                 
                             'dataValorInicial'  => $value->valor_inicial,                 
                             'dataRegistro'      => $value->data_registro, 
@@ -152,41 +164,53 @@ class MetasController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function add(Request $request, Metas $metas)
+    public function add(Request $request, Metas $metas, Indicadores $indicadores, ObjetivosEstrategicos $objetivos, Eixos $eixos, Ods $ods, Pne $pne)
     {
         if ($request->is('metas/*')) {
-            //
+            $idcSelect = $indicadores->getSelectData();
+            $objSelect = $objetivos->getSelectData();
+            $eixoSelect = $eixos->getSelectData();
+            $odsSelect = $ods->getSelectData();
+            $pneSelect = $pne->getSelectData() ? $pne->getSelectData()  : [];
+           
             if($request->isMethod('post') && $request->input('_token')){
                 $this->validate($request,[
-                    'titulo' => 'max:255'
+                    'dataTitulo' => 'max:255'
                 ]);
-                $arr[] = array(                
-                    'titulo'        => $this->validaData($request->dataTitulo) ? $request->dataTitulo : null,                    
-                    'descricao'     => $this->validaData($request->dataDescricao) ? $request->dataDescricao : null, 
-                    'indicador_id'  => $this->validaData($request->dataIndicadores) ? $request->dataIndicadores : null,                  
-                    'objetivo_id'   => $this->validaData($request->dataObjetivos) ? $request->dataObjetivos : null,                   
-                    'eixo_id'       => $this->validaData($request->dataEixos) ? $request->dataEixos : null,                   
-                    'ods_id'        => $this->validaData($request->dataOds) ? $request->dataOds : null,                    
-                    'pne_id'        => $this->validaData($request->dataPne) ? $request->dataPne : null,                    
-                    'valor'         => $this->validaData($request->dataValor) ? $request->dataValor : null,                 
-                    'valor_inicial' => $this->validaData($request->dataValorInicial) ? $request->dataValorInicial : null,                 
-                    'data_registro' => $this->validaData($request->dataRegistro) ? $request->dataRegistro : null, 
-                    'active' => 1,
+                $arr[] = array(          
+                    'titulo'        => $this->validaData($request->dataTitulo,"string"),                    
+                    'descricao'     => $this->validaData($request->dataDescricao,"string"), 
+                    'indicador_id'  => $this->validaData($request->dataIndicadores,"integer"),                  
+                    'objetivo_id'   => $this->validaData($request->dataObjetivos,"integer"),                   
+                    'eixo_id'       => $this->validaData($request->dataEixos,"integer"),                   
+                    'ods_id'        => $this->validaData($request->dataOds,"integer"),                    
+                    'pne_id'        => $this->validaData($request->dataPne,"integer"),                    
+                    'valor'         => $this->validaData($request->dataValor,"integer"),                 
+                    'valor_inicial' => $this->validaData($request->dataValorInicial,"integer"),                 
+                    'data_registro' => $this->validaData($request->dataRegistro,"date"), 
+                    'active' => 1, //#hardcoded
                 );
 
-                $updateMetas = $metas->adminAddData($arr);
-                if($updateMetas){
-                    $message = "Meta ".$updateMetas." adicionada com sucesso";
+                $data = $metas->adminAddData($arr);
+                if($data){
+                    $message = "Meta ".$data." adicionada com sucesso";
                 }
 
             }else{
                 $message = null;
+
+                $data["indicadores"] = $idcSelect;
+                $data["objetivos"]   = $objSelect;
+                $data["eixos"]       = $eixoSelect;
+                $data["ods"]         = $odsSelect;
+                $data["pne"]         = $pneSelect;
             }
+
             $this->contentView = array(
                 "header_title" => " | Metas (add)",
                 "title" => "Metas",
                 "content" => "add",
-                "results" => [],
+                "results" => $data,
                 "url" => $request->url(),
                 "message" => $message
             );

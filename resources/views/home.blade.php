@@ -20,9 +20,11 @@
                                     <div class="col-6"> 
                                         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                             <option selected>Escolha o ODS</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            @if (count($results['ods'])>=1)
+                                                @foreach ($results['ods'] as $ods)
+                                                    <option value="{{$ods['id']}}">{{$ods['titulo']}}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
 
                                         <button type="button" class="btn btn-light">filtrar</button>
@@ -32,18 +34,22 @@
                                     <div class="col-6">
                                         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                             <option selected>Escolha o objetivo ouse</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            @if (count($results['objetivos'])>=1)
+                                                @foreach ($results['objetivos'] as $obj)
+                                                    <option value="{{$obj['id']}}">{{$obj['titulo']}}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                         <button type="button" class="btn btn-light">filtrar</button>
                                     </div>
                                     <div class="col-6">
                                         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                                             <option selected>Escolha o ano de referência</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            @if (count($results['anos'])>=1)
+                                                @foreach ($results['anos'] as $anos)
+                                                    <option value="{{$anos['id']}}">{{$anos['titulo']}}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
 
                                         <button type="button" class="btn btn-light">filtrar</button>
@@ -84,7 +90,7 @@
                                                     </div>
                                                     <div class="objetivo">
                                                         <small>Objetivo Ouse</small>
-                                                        <p>{{$metas["titulo"]}}</p>
+                                                        <p>{{$metas["objetivos"]["titulo"]}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="meta-buttons">
@@ -109,25 +115,25 @@
                                             <div class="card-body border-0">
                                                 <div class="dados">
                                                     <small>Indicador</small>
-                                                    <h5 class="card-title">{{$metas["indicadores"][0]["titulo"] ?? 'sem registro'}}</h5>
+                                                    <h5 class="card-title">{{$metas["indicadores"]["titulo"] ?? 'sem registro'}}</h5>
                                                     <div class="card-text">
                                                         <small>Ano referência</small>
-                                                        <p>2021</p>
+                                                        <p>{{$metas["indicadores_anos"]["ano"] ?? '--'}}</p>
                                                     </div>
                                                     <div class="card-text">
                                                         <small>Meta do indicador</small>
-                                                        <p>{{$metas["indicadores"][0]["valor_final"] ?? '4200'}}</p>
+                                                        <p>{{$metas["indicadores"]["valor_meta"] ?? '--'}}</p>
                                                     </div>
                                                     <div class="card-text">
                                                         <small>Valor do indicador</small>
-                                                        <p>{{$metas["indicadores"][0]["valor"] ?? '3290'}}</p>
+                                                        <p>{{$metas["indicadores_anos"]["valor"] ?? '--'}}</p>
                                                     </div>
                                                     <div class="andamento">
-                                                        <span>{{$metas["indicadores"][0]["valor_inicial"] ?? '50'}}%</span>
+                                                        <span>{{round($metas["desempenho"])  ?? '00'}}%</span>
                                                         <span>Andamento geral</span>
                                                     </div>
                                                 </div>
-                                                <div class="grafico" id="{{$metas['id']}}" data-grafico="[{{$metas["indicadores"][0]["valor_atual"]}},{{$metas["indicadores"][0]["valor_meta"]}}]" >
+                                                <div class="grafico" id="{{$metas['id']}}" data-grafico="[{{$metas["indicadores"]["valor_atual"] }},{{$metas["indicadores"]["valor_meta"]}}]" >
                                                     <canvas id="homeChart-{{$metas['id']}}" width="100%" height="60%"></canvas>
                                                 </div>
                                             </div>

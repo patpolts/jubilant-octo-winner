@@ -25,6 +25,10 @@
                           <tr>
                             <th scope="col">id</th>      
                             <th scope="col">titulo</th>       
+                            <th scope="col">descrição</th>     
+                            <th scope="col">justificativa</th>  
+                            <th scope="col">data</th>  
+                            <th scope="col">ações</th>  
                                       
                                       
                           </tr>
@@ -35,6 +39,9 @@
                                     <tr>
                                         <th scope="row">{{$item["id"]}}</th>
                                         <td>{{$item['titulo']}}</td>   
+                                        <td>{{$item['descricao']}}</td>   
+                                        <td>{{$item['justificativa']}}</td>   
+                                        <td>{{$item['data_registro']}}</td>  
                                         <td>
                                             <a href="{{route('objetivos_editar',$item['id'])}}"> editar </a>
                                         </td>

@@ -82,8 +82,8 @@ Route::post('/grandetema/editar/{grandeTemaId}', [GrandesTemasController::class,
 Route::get('/eixos', [EixosController::class, 'view'])->middleware(['auth'])->name('eixos');
 Route::get('/eixos/adicionar', [EixosController::class, 'add'])->middleware(['auth'])->name('eixos_adicionar');
 Route::post('/eixos/adicionar', [EixosController::class, 'add'])->middleware(['auth'])->name('eixos_adicionar');
-Route::get('/eixos/editar/{grandeTemaId}', [EixosController::class, 'edit'])->middleware(['auth'])->name('eixos_editar');
-Route::post('/eixos/editar/{grandeTemaId}', [EixosController::class, 'edit'])->middleware(['auth'])->name('eixos_editar');
+Route::get('/eixos/editar/{eixosId}', [EixosController::class, 'edit'])->middleware(['auth'])->name('eixos_editar');
+Route::post('/eixos/editar/{eixosId}', [EixosController::class, 'edit'])->middleware(['auth'])->name('eixos_editar');
 #Ods
 Route::get('/ods', [OdsController::class, 'view'])->middleware(['auth'])->name('ods');
 Route::get('/ods/adicionar', [OdsController::class, 'add'])->middleware(['auth'])->name('ods_adicionar');

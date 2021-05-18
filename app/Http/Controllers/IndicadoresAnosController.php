@@ -18,19 +18,32 @@ class IndicadoresAnosController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
-    public function view( IndicadoresAnos $indicadoresAnos)
+    public function view( IndicadoresAnos $indicadoresAnos, Indicadores $indicadores)
     {
-        $data = $indicadoresAnos->adminViewData();
-        if($data){
-            $indicadores = $data;
-        }else{
-            $indicadores = [];
+        $idca = $indicadoresAnos->adminViewData();
+        if($idca){
+            $idcSelect = $indicadores->getSelectData(); 
+            foreach ($idca as  $value) {
+                $idc = $indicadores->getById($value->indicador_id); 
+                $arr[] = array(                
+                    'id'            => $value->id,
+                    'indicador'     => $idc["titulo"],
+                    'titulo'        => $value->titulo,
+                    'ano'           => $value->ano,
+                    'valor'         => $value->valor,
+                    'data_registro' => $value->data_registro,
+                    'active' => 1,
+                );
+            }
         }
+
+            $data["indicadores"] = $idcSelect;
+            $data["indicadores_anos"] = $arr;
             $this->contentView = array(
                 "header_title" => " | Indicadores Anos(view)",
                 "title" => "Indicadores Anos",
                 "content" => "view",
-                "results" => $indicadores,
+                "results" => $data ?? array(),
                 "message" => null,
             );
             return view('admin.indicadores_anos', $this->contentView);
@@ -40,41 +53,39 @@ class IndicadoresAnosController extends Controller
     public function add(Request $request, Indicadores $indicadores, IndicadoresAnos $indicadoresAnos)
     {
         
+         $indicadorSelect = $indicadores->getSelectData();
          if($request->isMethod('post') && $request->input('_token')){
 
             $this->validate($request,[
-                'titulo' => 'max:255|required|string',
-                'ano' => 'required|integer|max:4',
-                'valor' => 'required|integer|max:4',
+                'dataTitulo' => 'max:255|required|string',
             ]);
 
             $arr[] = array(                
-                'indicador_id' => $request->dataIndicador,
-                'titulo'        => $request->dataTitulo,
-                'ano'           => $request->dataAno,
-                'valor'         => $request->dataValor,
-                'data_registro' => $request->dataRegistro,
+                'indicador_id' => $this->validaData($request->dataIndicador,"integer"),
+                'titulo'        => $this->validaData($request->dataTitulo,"string"),
+                'ano'           => $this->validaData($request->dataAno,"ano"),
+                'valor'         => $this->validaData($request->dataValor,"integer"),
+                'data_registro' => $this->validaData($request->dataRegistro,"date"),
                 'active' => 1,
             );
-            $add = $indicadoresAnos->indicadoresAnosAdd($arr);
+            $add = $indicadoresAnos->add($arr);
 
             if($add){
-                $message = "Ano ".$add." adicionado com sucesso";
-            }else{
-                $message = "Erro ao adicionar ano";
+                $message = "Ano  adicionado com sucesso";
             }
 
          }else{
-
-            $indicadorSelect = $indicadores->getSelectData();
+            $message = null;
 
          }
+
+         $data["indicadores"] = $indicadorSelect;
 
          $this->contentView = array(
             "header_title" => " | Indicadores -> Anos (add)",
             "title"        => "Indicadores -> Anos",
             "content"      => "edit",
-            "results"      => $indicadorSelect ?? [],
+            "results"      => $data ?? [],
             "url"          => $request->url(),
             "message"      => $message ?? null,
         );
